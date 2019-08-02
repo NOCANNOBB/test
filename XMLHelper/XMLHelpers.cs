@@ -40,8 +40,8 @@ namespace XMLHelper
                 XmlDocument xmlDoc = new XmlDocument();
                 XmlReaderSettings settings = new XmlReaderSettings();
                 settings.IgnoreComments = true;//忽略文档里面的注释
-                XmlReader reader = XmlReader.Create(ConfigName, settings);
-                xmlDoc.Load(reader);
+                XmlReader reader1 = XmlReader.Create(ConfigName, settings);
+                xmlDoc.Load(reader1);
 
                 XmlNode xn = xmlDoc.SelectSingleNode(RootName);
                 // 得到根节点的所有子节点
