@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5108D10A-B794-488A-99CF-15B738DAC4AB}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PRO190726</RootNamespace>
+    <AssemblyName>PRO190726</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v15.2.Core, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v15.2.Core, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmChannelSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChannelSet.Designer.cs">
+      <DependentUpon>frmChannelSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExpermentSM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExpermentSM.Designer.cs">
+      <DependentUpon>frmExpermentSM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExpermentTH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExpermentTH.Designer.cs">
+      <DependentUpon>frmExpermentTH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExpermentTypeChose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExpermentTypeChose.Designer.cs">
+      <DependentUpon>frmExpermentTypeChose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmJSMod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmJSMod.Designer.cs">
+      <DependentUpon>frmJSMod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmYHExperienceSM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmYHExperienceSM.Designer.cs">
+      <DependentUpon>frmYHExperienceSM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmYHExperienceTH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmYHExperienceTH.Designer.cs">
+      <DependentUpon>frmYHExperienceTH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmYLSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmYLSelect.Designer.cs">
+      <DependentUpon>frmYLSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="frmProjectInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProjectInfo.Designer.cs">
+      <DependentUpon>frmProjectInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmChannelSet.resx">
+      <DependentUpon>frmChannelSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExpermentSM.resx">
+      <DependentUpon>frmExpermentSM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExpermentTH.resx">
+      <DependentUpon>frmExpermentTH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExpermentTypeChose.resx">
+      <DependentUpon>frmExpermentTypeChose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmJSMod.resx">
+      <DependentUpon>frmJSMod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmYHExperienceSM.resx">
+      <DependentUpon>frmYHExperienceSM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmYHExperienceTH.resx">
+      <DependentUpon>frmYHExperienceTH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmYLSelect.resx">
+      <DependentUpon>frmYLSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProjectInfo.resx">
+      <DependentUpon>frmProjectInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_128px_1181757_easyicon.net.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_802px_1161619_easyicon.net.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Close_252px_1183468_easyicon.net.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Define\Define.csproj">
+      <Project>{f0294db3-e727-4594-ac52-b91d4a7b2866}</Project>
+      <Name>Define</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DLLProjectInfo\DLLProjectInfo.csproj">
+      <Project>{07af22c5-7e8b-4d1d-b207-9f06919ddc08}</Project>
+      <Name>DLLProjectInfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XMLHelper\XMLHelper.csproj">
+      <Project>{cd220a41-9101-45dd-9204-bc50466d75f0}</Project>
+      <Name>XMLHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ProjectConfig.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
