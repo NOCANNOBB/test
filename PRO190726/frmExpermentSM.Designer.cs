@@ -52,9 +52,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cbTLSetType = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cbJsMode = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbYLType = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -119,9 +119,9 @@
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.comboBox4);
             this.panel2.Controls.Add(this.label7);
-            this.panel2.Controls.Add(this.comboBox3);
+            this.panel2.Controls.Add(this.cbTLSetType);
             this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.comboBox2);
+            this.panel2.Controls.Add(this.cbJsMode);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.cmbYLType);
             this.panel2.Controls.Add(this.label4);
@@ -139,6 +139,7 @@
             this.lbSave.Size = new System.Drawing.Size(29, 12);
             this.lbSave.TabIndex = 28;
             this.lbSave.Text = "保存";
+            this.lbSave.Click += new System.EventHandler(this.lbSave_Click);
             this.lbSave.MouseEnter += new System.EventHandler(this.lbSave_MouseEnter);
             this.lbSave.MouseLeave += new System.EventHandler(this.lbSave_MouseLeave);
             // 
@@ -343,18 +344,18 @@
             this.label7.TabIndex = 8;
             this.label7.Text = "常规使用条件：";
             // 
-            // comboBox3
+            // cbTLSetType
             // 
-            this.comboBox3.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
+            this.cbTLSetType.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbTLSetType.FormattingEnabled = true;
+            this.cbTLSetType.Items.AddRange(new object[] {
             "恒定应力",
             "步进应力",
             "步降应力"});
-            this.comboBox3.Location = new System.Drawing.Point(648, 58);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 7;
+            this.cbTLSetType.Location = new System.Drawing.Point(648, 58);
+            this.cbTLSetType.Name = "cbTLSetType";
+            this.cbTLSetType.Size = new System.Drawing.Size(121, 21);
+            this.cbTLSetType.TabIndex = 7;
             // 
             // label6
             // 
@@ -367,14 +368,15 @@
             this.label6.TabIndex = 6;
             this.label6.Text = "应力施加方式：";
             // 
-            // comboBox2
+            // cbJsMode
             // 
-            this.comboBox2.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(379, 58);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 5;
+            this.cbJsMode.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbJsMode.FormattingEnabled = true;
+            this.cbJsMode.Location = new System.Drawing.Point(379, 58);
+            this.cbJsMode.Name = "cbJsMode";
+            this.cbJsMode.Size = new System.Drawing.Size(121, 21);
+            this.cbJsMode.TabIndex = 5;
+            this.cbJsMode.Click += new System.EventHandler(this.comboBox2_Click);
             // 
             // label5
             // 
@@ -528,9 +530,9 @@
         private System.Windows.Forms.Label lbExp;
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cbTLSetType;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cbJsMode;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbYLType;
         private System.Windows.Forms.Label label4;

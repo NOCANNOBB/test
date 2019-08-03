@@ -36,6 +36,7 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbSave = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,12 +101,22 @@
             this.Column5.HeaderText = "每周期采样点";
             this.Column5.Name = "Column5";
             // 
+            // lbSave
+            // 
+            this.lbSave.AutoSize = true;
+            this.lbSave.Location = new System.Drawing.Point(707, 40);
+            this.lbSave.Name = "lbSave";
+            this.lbSave.Size = new System.Drawing.Size(53, 12);
+            this.lbSave.TabIndex = 3;
+            this.lbSave.Text = "保存配置";
+            // 
             // frmChannelSet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Teal;
             this.ClientSize = new System.Drawing.Size(856, 689);
+            this.Controls.Add(this.lbSave);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lbOut);
             this.Controls.Add(this.lbIn);
@@ -129,5 +140,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.Label lbSave;
     }
 }

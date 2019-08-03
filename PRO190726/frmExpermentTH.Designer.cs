@@ -64,9 +64,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cbJsMode = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbYLType = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lbSubtitle = new System.Windows.Forms.Label();
             this.lbtitle = new System.Windows.Forms.Label();
@@ -139,6 +139,11 @@
             this.comboBox8.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox8.ForeColor = System.Drawing.Color.Navy;
             this.comboBox8.FormattingEnabled = true;
+            this.comboBox8.Items.AddRange(new object[] {
+            "全数截尾",
+            "定时截尾",
+            "定数截尾",
+            "尾序贯截尾"});
             this.comboBox8.Location = new System.Drawing.Point(655, 232);
             this.comboBox8.Name = "comboBox8";
             this.comboBox8.Size = new System.Drawing.Size(121, 21);
@@ -250,9 +255,9 @@
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.comboBox3);
             this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.comboBox2);
+            this.panel2.Controls.Add(this.cbJsMode);
             this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.comboBox1);
+            this.panel2.Controls.Add(this.cmbYLType);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.lbSubtitle);
             this.panel2.Location = new System.Drawing.Point(12, 39);
@@ -330,6 +335,7 @@
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(75, 21);
             this.comboBox6.TabIndex = 19;
+            this.comboBox6.Text = "相对湿度";
             // 
             // label11
             // 
@@ -360,6 +366,7 @@
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(121, 21);
             this.comboBox7.TabIndex = 16;
+            this.comboBox7.Text = "温度";
             // 
             // label12
             // 
@@ -401,6 +408,7 @@
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(75, 21);
             this.comboBox5.TabIndex = 12;
+            this.comboBox5.Text = "相对湿度";
             // 
             // label8
             // 
@@ -431,6 +439,7 @@
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(121, 21);
             this.comboBox4.TabIndex = 9;
+            this.comboBox4.Text = "温度";
             // 
             // label7
             // 
@@ -448,6 +457,10 @@
             this.comboBox3.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox3.ForeColor = System.Drawing.Color.Navy;
             this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "恒定应力",
+            "步进应力",
+            "步降应力"});
             this.comboBox3.Location = new System.Drawing.Point(655, 46);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(121, 21);
@@ -464,15 +477,15 @@
             this.label6.TabIndex = 6;
             this.label6.Text = "应力施加方式：";
             // 
-            // comboBox2
+            // cbJsMode
             // 
-            this.comboBox2.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox2.ForeColor = System.Drawing.Color.Navy;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(386, 46);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 5;
+            this.cbJsMode.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbJsMode.ForeColor = System.Drawing.Color.Navy;
+            this.cbJsMode.FormattingEnabled = true;
+            this.cbJsMode.Location = new System.Drawing.Point(386, 46);
+            this.cbJsMode.Name = "cbJsMode";
+            this.cbJsMode.Size = new System.Drawing.Size(121, 21);
+            this.cbJsMode.TabIndex = 5;
             // 
             // label5
             // 
@@ -485,15 +498,16 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "加速模型：";
             // 
-            // comboBox1
+            // cmbYLType
             // 
-            this.comboBox1.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox1.ForeColor = System.Drawing.Color.Navy;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(160, 46);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 3;
+            this.cmbYLType.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbYLType.ForeColor = System.Drawing.Color.Navy;
+            this.cmbYLType.FormattingEnabled = true;
+            this.cmbYLType.Location = new System.Drawing.Point(160, 46);
+            this.cmbYLType.Name = "cmbYLType";
+            this.cmbYLType.Size = new System.Drawing.Size(121, 21);
+            this.cmbYLType.TabIndex = 3;
+            this.cmbYLType.Click += new System.EventHandler(this.cmbYLType_Click);
             // 
             // label4
             // 
@@ -618,9 +632,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cbJsMode;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbYLType;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbSubtitle;
         private System.Windows.Forms.Label lbtitle;

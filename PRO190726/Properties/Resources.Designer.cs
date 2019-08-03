@@ -79,5 +79,15 @@ namespace PRO190726.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap player_icons_40px_1137045_easyicon_net {
+            get {
+                object obj = ResourceManager.GetObject("player-icons_40px_1137045_easyicon.net", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DLLStruct;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,8 @@ namespace Define
     public class ProDefine {
         public static string NowProjectName = "";
 
+
+        public static SMExpermentParam g_SMExpermentParam = new SMExpermentParam();
 
         public static uint ClearBit(uint value, int BitInDWORD)
         {

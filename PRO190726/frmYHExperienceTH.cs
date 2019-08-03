@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Define;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -46,6 +47,9 @@ namespace PRO190726
 
         }
 
+
+        private int YLReturnValue = 0;
+        private int JSModReturnValue = 0;
         private void lbSave_MouseEnter(object sender, EventArgs e)
         {
 
@@ -75,6 +79,70 @@ namespace PRO190726
         private void lbCreateExp_MouseLeave(object sender, EventArgs e)
         {
             this.lbCreateExp.ForeColor = Color.Lavender;//
+        }
+
+        private void cmbYLType_Click(object sender, EventArgs e)
+        {
+            int ValueParam = GetYLValue(this.cmbYLType.Text.Trim());
+            frmYLSelect frmYL = new frmYLSelect(ValueParam);
+            frmYL.ShowDialog();
+            if (frmYL.DialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                int returnValue = frmYL.returnValue;
+                YLReturnValue = returnValue;
+                SetYLValue(returnValue);
+
+            }
+        }
+
+        private int GetYLValue(string YLText)
+        {
+            int returnValue = 0;
+            if (YLText.Contains("温度"))
+            {
+                returnValue = ProDefine.SetBit(returnValue, 0);
+            }
+            if (YLText.Contains("湿度"))
+            {
+                returnValue = ProDefine.SetBit(returnValue, 1);
+            }
+
+            if (YLText.Contains("震动"))
+            {
+                returnValue = ProDefine.SetBit(returnValue, 2);
+            }
+            if (YLText.Contains("电应力"))
+            {
+                returnValue = ProDefine.SetBit(returnValue, 3);
+            }
+            return returnValue;
+        }
+
+        private void SetYLValue(int ValueParam)
+        {
+            string YLText = "";
+            if (ProDefine.GetBit(ValueParam, 0))
+            {
+                YLText += "温度+";
+            }
+            if (ProDefine.GetBit(ValueParam, 1))
+            {
+                YLText += "湿度+";
+            }
+            if (ProDefine.GetBit(ValueParam, 2))
+            {
+                YLText += "震动+";
+            }
+            if (ProDefine.GetBit(ValueParam, 2))
+            {
+                YLText += "电应力+";
+            }
+            if (YLText != "")
+            {
+                YLText = YLText.Substring(0, YLText.Length - 1);
+            }
+
+            this.cmbYLType.Text = YLText;
         }
     }
 }

@@ -29,6 +29,10 @@ namespace PRO190726
             this.lbOut.Font = new Font("FontAwesome", 14,FontStyle.Bold);
             this.lbOut.ForeColor = Color.LightCyan;
 
+            this.lbSave.Text = "\uf0c7 保存配置";
+            this.lbSave.Font = new Font("FontAwesome", 14, FontStyle.Bold);
+            this.lbSave.ForeColor = Color.LightCyan;
+
         }
     }
 }

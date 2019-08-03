@@ -82,6 +82,12 @@
     <Compile Include="frmJSMod.Designer.cs">
       <DependentUpon>frmJSMod.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmOutputSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOutputSet.Designer.cs">
+      <DependentUpon>frmOutputSet.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmYHExperienceSM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmJSMod.resx">
       <DependentUpon>frmJSMod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOutputSet.resx">
+      <DependentUpon>frmOutputSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmYHExperienceSM.resx">
       <DependentUpon>frmYHExperienceSM.cs</DependentUpon>
@@ -192,6 +201,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Images\player-icons_40px_1137045_easyicon.net.png" />
     <Content Include="ProjectConfig.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

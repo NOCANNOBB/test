@@ -18,6 +18,13 @@ namespace PRO190726
             InitUI();
         }
 
+        public frmJSMod(int ValueParam)
+        {
+            returnValue = ValueParam;
+            InitializeComponent();
+            InitUI();
+        }
+
         private void InitUI()
         {
 
@@ -41,9 +48,12 @@ namespace PRO190726
             this.lbOK.ForeColor = Color.LightCyan;
         }
 
+        public int returnValue = 0; 
         private void lbOK_Click(object sender, EventArgs e)
         {
 
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

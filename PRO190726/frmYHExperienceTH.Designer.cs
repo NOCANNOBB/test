@@ -62,7 +62,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbYLType = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
@@ -205,10 +205,11 @@
             this.comboBox6.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox6.ForeColor = System.Drawing.Color.Navy;
             this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(517, 232);
+            this.comboBox6.Location = new System.Drawing.Point(502, 232);
             this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(75, 21);
+            this.comboBox6.Size = new System.Drawing.Size(90, 21);
             this.comboBox6.TabIndex = 19;
+            this.comboBox6.Text = "相对湿度";
             // 
             // label11
             // 
@@ -239,6 +240,7 @@
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(121, 21);
             this.comboBox7.TabIndex = 16;
+            this.comboBox7.Text = "温度";
             // 
             // label12
             // 
@@ -346,10 +348,11 @@
             this.comboBox5.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox5.ForeColor = System.Drawing.Color.Navy;
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(517, 192);
+            this.comboBox5.Location = new System.Drawing.Point(502, 192);
             this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(75, 21);
+            this.comboBox5.Size = new System.Drawing.Size(90, 21);
             this.comboBox5.TabIndex = 12;
+            this.comboBox5.Text = "相对湿度";
             // 
             // label8
             // 
@@ -380,6 +383,7 @@
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(121, 21);
             this.comboBox4.TabIndex = 9;
+            this.comboBox4.Text = "温度";
             // 
             // label7
             // 
@@ -413,15 +417,16 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "加速模型：";
             // 
-            // comboBox1
+            // cmbYLType
             // 
-            this.comboBox1.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox1.ForeColor = System.Drawing.Color.Navy;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(152, 85);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(141, 21);
-            this.comboBox1.TabIndex = 3;
+            this.cmbYLType.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbYLType.ForeColor = System.Drawing.Color.Navy;
+            this.cmbYLType.FormattingEnabled = true;
+            this.cmbYLType.Location = new System.Drawing.Point(152, 85);
+            this.cmbYLType.Name = "cmbYLType";
+            this.cmbYLType.Size = new System.Drawing.Size(141, 21);
+            this.cmbYLType.TabIndex = 3;
+            this.cmbYLType.Click += new System.EventHandler(this.cmbYLType_Click);
             // 
             // label4
             // 
@@ -467,7 +472,7 @@
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.comboBox2);
             this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.comboBox1);
+            this.panel2.Controls.Add(this.cmbYLType);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.lbSubtitle);
             this.panel2.Location = new System.Drawing.Point(23, 40);
@@ -594,7 +599,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbYLType;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label lbSubtitle;

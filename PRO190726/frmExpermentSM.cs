@@ -47,6 +47,9 @@ namespace PRO190726
         
         }
 
+
+        private int YLReturnValue = 0;
+        private int JSModReturnValue = 0;
         private void lbSave_MouseEnter(object sender, EventArgs e)
         {
 
@@ -90,6 +93,7 @@ namespace PRO190726
             frmYL.ShowDialog();
             if (frmYL.DialogResult == System.Windows.Forms.DialogResult.OK) {
                 int returnValue = frmYL.returnValue;
+                YLReturnValue = returnValue;
                 SetYLValue(returnValue);
 
             }
@@ -137,6 +141,36 @@ namespace PRO190726
             }
             
             this.cmbYLType.Text = YLText;
+        }
+
+        private void lbSave_Click(object sender, EventArgs e)
+        {
+            ProDefine.g_SMExpermentParam.YLType = YLReturnValue;
+            ProDefine.g_SMExpermentParam.JSMode = JSModReturnValue;
+            ProDefine.g_SMExpermentParam.YLSetType = cbTLSetType.SelectedIndex;
+            //ProDefine.g_SMExpermentParam.CGTemperature = 
+        }
+
+        private void comboBox2_Click(object sender, EventArgs e)
+        {
+            int ValueParam = GetJSModeValue(this.cmbYLType.Text.Trim());
+            frmJSMod frmJS = new frmJSMod(ValueParam);
+            frmJS.ShowDialog();
+            if (frmJS.DialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                int returnValue = frmJS.returnValue;
+                YLReturnValue = returnValue;
+                SetYLValue(returnValue);
+
+            }
+        }
+
+        private int GetJSModeValue(string text) {
+            return 0;
+        }
+
+        private void SetYLModValue(int ValueParam) {
+            this.cbJsMode.Text = "待接入";
         }
 
         
