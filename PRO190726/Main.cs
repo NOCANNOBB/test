@@ -178,7 +178,7 @@ namespace PRO190726
                 m_Pro = new DoProjectInfo();
             }
             List<ProjectInfo> m_ProList = m_Pro.GetProjectInfos();
-
+            if (m_ProList == null) { return; }
             foreach (var info in m_ProList) {
                 InsertListView(this.lsProject,info.ProjectName);
             }
@@ -259,6 +259,8 @@ namespace PRO190726
         private frmYHExperienceSM frmYHSM = null;
         private frmYHExperienceTH frmYHTH = null;
         private frmChannelSet frmCHS = null;
+
+        private frmOutputSet frmOutputs = null;
      
 
         private bool IsRightClick = false;
@@ -511,6 +513,17 @@ namespace PRO190726
             frmCHS = new  frmChannelSet();
             ShowForm(frmCHS);
             this.lbTypeShow.Text = "\uf06e 实验检测--通道设置";
+        }
+
+        private void 输出信号配置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmOutputs != null) {
+                frmOutputs.Dispose();
+                frmOutputs = null;
+            }
+            frmOutputs = new frmOutputSet();
+            ShowForm(frmOutputs);
+            this.lbTypeShow.Text = "\uf06e 实验检测--输出信号配置";
         }
 
 

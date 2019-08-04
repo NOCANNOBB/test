@@ -195,6 +195,10 @@
       <Project>{07af22c5-7e8b-4d1d-b207-9f06919ddc08}</Project>
       <Name>DLLProjectInfo</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DLLStruct\DLLStruct.csproj">
+      <Project>{bb07b757-1fbd-4cdd-a21c-21ef359c007d}</Project>
+      <Name>DLLStruct</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XMLHelper\XMLHelper.csproj">
       <Project>{cd220a41-9101-45dd-9204-bc50466d75f0}</Project>
       <Name>XMLHelper</Name>
@@ -202,6 +206,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\player-icons_40px_1137045_easyicon.net.png" />
+    <None Include="Images\微信截图_20190804075341.png" />
     <Content Include="ProjectConfig.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

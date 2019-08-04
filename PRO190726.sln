@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLLProjectInfo", "DLLProjec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLLStruct", "DLLStruct\DLLStruct.csproj", "{BB07B757-1FBD-4CDD-A21C-21EF359C007D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GridProject", "D:\迅雷下载\dx_sample_C#\GridProject.csproj", "{55D2EDDB-8AFE-40BE-8055-04D1979219EB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,16 +83,6 @@ Global
 		{BB07B757-1FBD-4CDD-A21C-21EF359C007D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BB07B757-1FBD-4CDD-A21C-21EF359C007D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BB07B757-1FBD-4CDD-A21C-21EF359C007D}.Release|x86.ActiveCfg = Release|Any CPU
-		{55D2EDDB-8AFE-40BE-8055-04D1979219EB}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{55D2EDDB-8AFE-40BE-8055-04D1979219EB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{55D2EDDB-8AFE-40BE-8055-04D1979219EB}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{55D2EDDB-8AFE-40BE-8055-04D1979219EB}.Debug|x86.ActiveCfg = Debug|x86
-		{55D2EDDB-8AFE-40BE-8055-04D1979219EB}.Debug|x86.Build.0 = Debug|x86
-		{55D2EDDB-8AFE-40BE-8055-04D1979219EB}.Release|Any CPU.ActiveCfg = Release|x86
-		{55D2EDDB-8AFE-40BE-8055-04D1979219EB}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{55D2EDDB-8AFE-40BE-8055-04D1979219EB}.Release|Mixed Platforms.Build.0 = Release|x86
-		{55D2EDDB-8AFE-40BE-8055-04D1979219EB}.Release|x86.ActiveCfg = Release|x86
-		{55D2EDDB-8AFE-40BE-8055-04D1979219EB}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

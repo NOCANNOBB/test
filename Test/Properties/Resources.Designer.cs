@@ -69,5 +69,25 @@ namespace Test.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 微信截图_20190804075341 {
+            get {
+                object obj = ResourceManager.GetObject("微信截图_20190804075341", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 微信截图_201908040753411 {
+            get {
+                object obj = ResourceManager.GetObject("微信截图_201908040753411", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

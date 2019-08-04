@@ -90,6 +90,12 @@
   <ItemGroup>
     <None Include="Resources\player-icons_40px_1137045_easyicon.net.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\微信截图_20190804075341.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\微信截图_201908040753411.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
