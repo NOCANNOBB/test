@@ -547,7 +547,7 @@
             this.panel3.Controls.Add(this.lbExpSave);
             this.panel3.Controls.Add(this.listView1);
             this.panel3.Controls.Add(this.lbExp);
-            this.panel3.Location = new System.Drawing.Point(12, 401);
+            this.panel3.Location = new System.Drawing.Point(12, 377);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(862, 278);
             this.panel3.TabIndex = 6;

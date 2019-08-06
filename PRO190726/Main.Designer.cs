@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lb_Close = new System.Windows.Forms.Label();
             this.lb_Small = new System.Windows.Forms.Label();
             this.lb_Max = new System.Windows.Forms.Label();
@@ -64,13 +65,15 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbTypeShow = new System.Windows.Forms.Label();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.打开项目ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.删除项目ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.保存项目ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设置为分析项目ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.寿命实验数据处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.退化实验数据处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -253,8 +256,8 @@
             this.实验检测ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.通道设置ToolStripMenuItem,
             this.输出信号配置ToolStripMenuItem,
-            this.实验ToolStripMenuItem,
-            this.标准数据与故障报警设置ToolStripMenuItem});
+            this.标准数据与故障报警设置ToolStripMenuItem,
+            this.实验ToolStripMenuItem});
             this.实验检测ToolStripMenuItem.Name = "实验检测ToolStripMenuItem";
             this.实验检测ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.实验检测ToolStripMenuItem.Text = "实验检测";
@@ -278,15 +281,20 @@
             this.实验ToolStripMenuItem.Name = "实验ToolStripMenuItem";
             this.实验ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.实验ToolStripMenuItem.Text = "实验";
+            this.实验ToolStripMenuItem.Click += new System.EventHandler(this.实验ToolStripMenuItem_Click);
             // 
             // 标准数据与故障报警设置ToolStripMenuItem
             // 
             this.标准数据与故障报警设置ToolStripMenuItem.Name = "标准数据与故障报警设置ToolStripMenuItem";
             this.标准数据与故障报警设置ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.标准数据与故障报警设置ToolStripMenuItem.Text = "标准数据与故障报警设置";
+            this.标准数据与故障报警设置ToolStripMenuItem.Click += new System.EventHandler(this.标准数据与故障报警设置ToolStripMenuItem_Click);
             // 
             // 数据处理ToolStripMenuItem
             // 
+            this.数据处理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.寿命实验数据处理ToolStripMenuItem,
+            this.退化实验数据处理ToolStripMenuItem});
             this.数据处理ToolStripMenuItem.Name = "数据处理ToolStripMenuItem";
             this.数据处理ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.数据处理ToolStripMenuItem.Text = "数据处理";
@@ -352,9 +360,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.Teal;
-            this.panel2.Location = new System.Drawing.Point(213, 143);
+            this.panel2.Location = new System.Drawing.Point(213, 123);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(895, 615);
+            this.panel2.Size = new System.Drawing.Size(895, 635);
             this.panel2.TabIndex = 6;
             // 
             // lbDataTitle
@@ -406,7 +414,7 @@
             // lbTypeShow
             // 
             this.lbTypeShow.AutoSize = true;
-            this.lbTypeShow.Location = new System.Drawing.Point(220, 111);
+            this.lbTypeShow.Location = new System.Drawing.Point(220, 93);
             this.lbTypeShow.Name = "lbTypeShow";
             this.lbTypeShow.Size = new System.Drawing.Size(41, 12);
             this.lbTypeShow.TabIndex = 11;
@@ -452,7 +460,7 @@
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackColor = System.Drawing.Color.LightCyan;
-            this.pictureBox2.Location = new System.Drawing.Point(213, 133);
+            this.pictureBox2.Location = new System.Drawing.Point(212, 113);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(895, 10);
             this.pictureBox2.TabIndex = 12;
@@ -468,6 +476,18 @@
             this.pictureBox1.Size = new System.Drawing.Size(1321, 54);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // 寿命实验数据处理ToolStripMenuItem
+            // 
+            this.寿命实验数据处理ToolStripMenuItem.Name = "寿命实验数据处理ToolStripMenuItem";
+            this.寿命实验数据处理ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.寿命实验数据处理ToolStripMenuItem.Text = "寿命实验数据处理";
+            // 
+            // 退化实验数据处理ToolStripMenuItem
+            // 
+            this.退化实验数据处理ToolStripMenuItem.Name = "退化实验数据处理ToolStripMenuItem";
+            this.退化实验数据处理ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.退化实验数据处理ToolStripMenuItem.Text = "退化实验数据处理";
             // 
             // Main
             // 
@@ -553,6 +573,8 @@
         private System.Windows.Forms.ToolStripMenuItem 输出信号配置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 实验ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 标准数据与故障报警设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 寿命实验数据处理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 退化实验数据处理ToolStripMenuItem;
     }
 }
 

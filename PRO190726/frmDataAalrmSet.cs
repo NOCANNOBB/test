@@ -10,31 +10,44 @@ using System.Windows.Forms;
 
 namespace PRO190726
 {
-    public partial class frmOutputSet : Form
+    public partial class frmDataAalrmSet : Form
     {
-        public frmOutputSet()
+        public frmDataAalrmSet()
         {
             InitializeComponent();
-
-            initUI();
+            InitUI();
         }
-        private int AddIndex = 0;
-        private void initUI (){
-            //f156
 
-            this.lbTitle.Text = "\uf00d 标况输入";
-            this.lbTitle.Font = new Font("FontAwesome", 12);
-            this.lbTitle.ForeColor = Color.White;
+        private void InitUI() {
+            this.rabBZData.Text = "\uf0ad 标准数据";
+            this.rabBZData.Font = new Font("FontAwesome", 13, FontStyle.Bold);
+            this.rabBZData.ForeColor = Color.Lavender;
+
+            this.rabAlarmData.Text = "\uf071 报警设置";
+            this.rabAlarmData.Font = new Font("FontAwesome", 13, FontStyle.Bold);
+            this.rabAlarmData.ForeColor = Color.Lavender;
 
             this.lbSave.Text = "\uf0c7  保存";
             this.lbSave.Font = new Font("FontAwesome", 12);
             this.lbSave.ForeColor = Color.White;
 
 
+            this.lbSave2.Text = "\uf0c7  保存";
+            this.lbSave2.Font = new Font("FontAwesome", 12);
+            this.lbSave2.ForeColor = Color.White;
+
+
+            this.lbYBSelect1.Text = "\uf2da  样本选择";
+            this.lbYBSelect1.Font = new Font("FontAwesome", 12);
+            this.lbYBSelect1.ForeColor = Color.White;
+
+            this.lbYBSelect.Text = "\uf2da  样本选择";
+            this.lbYBSelect.Font = new Font("FontAwesome", 12);
+            this.lbYBSelect.ForeColor = Color.White;
+
             AddIndex = this.dataGridView1.Columns.Count - 1;
-
-
-            for(int i = 0; i < 7; i++){
+            for (int i = 0; i < 7; i++)
+            {
 
                 int kindex = this.dataGridView1.Rows.Add();
                 if (kindex % 2 != 0)
@@ -54,7 +67,7 @@ namespace PRO190726
                 }
             }
         }
-
+        private int AddIndex = 0;
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if ((e.RowIndex % 2 != 0) && (e.ColumnIndex == AddIndex))
@@ -107,6 +120,12 @@ namespace PRO190726
             }
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentCell != null)
+                dataGridView1.CurrentCell.Value = comboBox1.Items[comboBox1.SelectedIndex];
+        }
+
         private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
         {
             e.DrawBackground();
@@ -114,10 +133,80 @@ namespace PRO190726
             e.Bounds, StringFormat.GenericDefault);
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void rabBZData_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.CurrentCell != null)
-                dataGridView1.CurrentCell.Value = comboBox1.Items[comboBox1.SelectedIndex];
+            if (this.rabBZData.Checked) {
+                this.panel1.Visible = true;
+                this.panel2.Visible = false;
+                //this.panel1.BringToFront();
+            }
+
         }
+
+        private void rabBZData_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rabAlarmData_Click(object sender, EventArgs e)
+        {
+            if (this.rabAlarmData.Checked) {
+                this.panel1.Visible = false;
+                this.panel2.Visible = true ;
+                //this.panel2.BringToFront();
+            }
+        }
+
+        private void lbYBSelect1_MouseEnter(object sender, EventArgs e)
+        {
+            this.lbYBSelect1.ForeColor = Color.Violet;
+        }
+
+        private void lbYBSelect1_MouseLeave(object sender, EventArgs e)
+        {
+            this.lbYBSelect1.ForeColor = Color.White;
+        }
+
+        private void lbSave2_MouseEnter(object sender, EventArgs e)
+        {
+            this.lbSave2.ForeColor = Color.Violet;
+        }
+
+        private void lbSave2_MouseLeave(object sender, EventArgs e)
+        {
+            this.lbSave2.ForeColor = Color.White;
+        }
+
+        private void lbYBSelect_Click(object sender, EventArgs e)
+        {
+            this.lbYBSelect.ForeColor = Color.White;
+        }
+
+        private void lbYBSelect_MouseEnter(object sender, EventArgs e)
+        {
+            this.lbYBSelect.ForeColor = Color.Violet;
+        }
+
+        private void lbYBSelect_MouseLeave(object sender, EventArgs e)
+        {
+            this.lbYBSelect.ForeColor = Color.White;
+        }
+
+        private void lbSave_Click(object sender, EventArgs e)
+        {
+            this.lbSave.ForeColor = Color.AliceBlue;
+        }
+
+        private void lbSave_MouseEnter(object sender, EventArgs e)
+        {
+            this.lbSave.ForeColor = Color.Violet;
+        }
+
+        private void lbSave_MouseLeave(object sender, EventArgs e)
+        {
+            this.lbSave.ForeColor = Color.White;
+        }
+
+
     }
 }

@@ -261,6 +261,8 @@ namespace PRO190726
         private frmChannelSet frmCHS = null;
 
         private frmOutputSet frmOutputs = null;
+        private frmDataAalrmSet frmDataAlarmSet = null;
+        private frmExperment frmExp = null;
      
 
         private bool IsRightClick = false;
@@ -524,6 +526,30 @@ namespace PRO190726
             frmOutputs = new frmOutputSet();
             ShowForm(frmOutputs);
             this.lbTypeShow.Text = "\uf06e 实验检测--输出信号配置";
+        }
+
+        private void 标准数据与故障报警设置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmDataAlarmSet != null)
+            {
+                frmDataAlarmSet.Dispose();
+                frmDataAlarmSet = null;
+            }
+            frmDataAlarmSet = new frmDataAalrmSet();
+            ShowForm(frmDataAlarmSet);
+            this.lbTypeShow.Text = "\uf06e 实验检测--标准数据与故障报警设置";
+        }
+
+        private void 实验ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmExp != null)
+            {
+                frmExp.Dispose();
+                frmExp = null;
+            }
+            frmExp = new frmExperment();
+            ShowForm(frmExp);
+            this.lbTypeShow.Text = "\uf06e 实验检测--实验";
         }
 
 

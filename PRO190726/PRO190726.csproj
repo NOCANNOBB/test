@@ -38,6 +38,9 @@
     <Reference Include="DevExpress.Utils.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v15.2, Version=15.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -57,6 +60,18 @@
     </Compile>
     <Compile Include="frmChannelSet.Designer.cs">
       <DependentUpon>frmChannelSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataAalrmSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataAalrmSet.Designer.cs">
+      <DependentUpon>frmDataAalrmSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExperment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExperment.Designer.cs">
+      <DependentUpon>frmExperment.cs</DependentUpon>
     </Compile>
     <Compile Include="frmExpermentSM.cs">
       <SubType>Form</SubType>
@@ -87,6 +102,18 @@
     </Compile>
     <Compile Include="frmOutputSet.Designer.cs">
       <DependentUpon>frmOutputSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTHData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTHData.Designer.cs">
+      <DependentUpon>frmTHData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSMData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSMData.Designer.cs">
+      <DependentUpon>frmSMData.cs</DependentUpon>
     </Compile>
     <Compile Include="frmYHExperienceSM.cs">
       <SubType>Form</SubType>
@@ -123,6 +150,12 @@
     <EmbeddedResource Include="frmChannelSet.resx">
       <DependentUpon>frmChannelSet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDataAalrmSet.resx">
+      <DependentUpon>frmDataAalrmSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExperment.resx">
+      <DependentUpon>frmExperment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmExpermentSM.resx">
       <DependentUpon>frmExpermentSM.cs</DependentUpon>
     </EmbeddedResource>
@@ -137,6 +170,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmOutputSet.resx">
       <DependentUpon>frmOutputSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSMData.resx">
+      <DependentUpon>frmSMData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTHData.resx">
+      <DependentUpon>frmTHData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmYHExperienceSM.resx">
       <DependentUpon>frmYHExperienceSM.cs</DependentUpon>

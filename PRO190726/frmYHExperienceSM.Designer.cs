@@ -74,7 +74,7 @@
             // lbCreateExp
             // 
             this.lbCreateExp.AutoSize = true;
-            this.lbCreateExp.Location = new System.Drawing.Point(414, 238);
+            this.lbCreateExp.Location = new System.Drawing.Point(412, 223);
             this.lbCreateExp.Name = "lbCreateExp";
             this.lbCreateExp.Size = new System.Drawing.Size(77, 12);
             this.lbCreateExp.TabIndex = 30;
@@ -120,7 +120,7 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.listView1.Location = new System.Drawing.Point(129, 51);
+            this.listView1.Location = new System.Drawing.Point(129, 44);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(636, 161);
             this.listView1.TabIndex = 3;
@@ -150,7 +150,7 @@
             // lbExpSave
             // 
             this.lbExpSave.AutoSize = true;
-            this.lbExpSave.Location = new System.Drawing.Point(305, 238);
+            this.lbExpSave.Location = new System.Drawing.Point(303, 223);
             this.lbExpSave.Name = "lbExpSave";
             this.lbExpSave.Size = new System.Drawing.Size(29, 12);
             this.lbExpSave.TabIndex = 29;
@@ -454,7 +454,7 @@
             this.panel3.Controls.Add(this.lbExpSave);
             this.panel3.Controls.Add(this.listView1);
             this.panel3.Controls.Add(this.lbExp);
-            this.panel3.Location = new System.Drawing.Point(22, 391);
+            this.panel3.Location = new System.Drawing.Point(22, 378);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1105, 278);
             this.panel3.TabIndex = 6;
