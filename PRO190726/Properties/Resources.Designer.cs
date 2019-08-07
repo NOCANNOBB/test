@@ -63,6 +63,26 @@ namespace PRO190726.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap back {
+            get {
+                object obj = ResourceManager.GetObject("back", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap back2 {
+            get {
+                object obj = ResourceManager.GetObject("back2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Close_Cover {
             get {
                 object obj = ResourceManager.GetObject("Close_Cover", resourceCulture);
@@ -76,6 +96,26 @@ namespace PRO190726.Properties {
         internal static System.Drawing.Bitmap Close_Default {
             get {
                 object obj = ResourceManager.GetObject("Close_Default", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap pannel1Back_SMDATA {
+            get {
+                object obj = ResourceManager.GetObject("pannel1Back_SMDATA", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap pannelBack_KKXPG {
+            get {
+                object obj = ResourceManager.GetObject("pannelBack_KKXPG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

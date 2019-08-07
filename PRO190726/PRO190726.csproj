@@ -91,11 +91,35 @@
     <Compile Include="frmExpermentTypeChose.Designer.cs">
       <DependentUpon>frmExpermentTypeChose.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmFBNH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFBNH.Designer.cs">
+      <DependentUpon>frmFBNH.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmJSMod.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmJSMod.Designer.cs">
       <DependentUpon>frmJSMod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmJSMXNH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmJSMXNH.Designer.cs">
+      <DependentUpon>frmJSMXNH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmKKXPG.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKKXPG.Designer.cs">
+      <DependentUpon>frmKKXPG.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmKKXYZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKKXYZ.Designer.cs">
+      <DependentUpon>frmKKXYZ.cs</DependentUpon>
     </Compile>
     <Compile Include="frmOutputSet.cs">
       <SubType>Form</SubType>
@@ -147,6 +171,18 @@
       <DependentUpon>frmProjectInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="frmTHGJNH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTHGJNH.Designer.cs">
+      <DependentUpon>frmTHGJNH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmWSMFBNH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmWSMFBNH.Designer.cs">
+      <DependentUpon>frmWSMFBNH.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmChannelSet.resx">
       <DependentUpon>frmChannelSet.cs</DependentUpon>
     </EmbeddedResource>
@@ -165,8 +201,20 @@
     <EmbeddedResource Include="frmExpermentTypeChose.resx">
       <DependentUpon>frmExpermentTypeChose.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmFBNH.resx">
+      <DependentUpon>frmFBNH.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmJSMod.resx">
       <DependentUpon>frmJSMod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmJSMXNH.resx">
+      <DependentUpon>frmJSMXNH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmKKXPG.resx">
+      <DependentUpon>frmKKXPG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmKKXYZ.resx">
+      <DependentUpon>frmKKXYZ.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOutputSet.resx">
       <DependentUpon>frmOutputSet.cs</DependentUpon>
@@ -203,6 +251,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="frmTHGJNH.resx">
+      <DependentUpon>frmTHGJNH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmWSMFBNH.resx">
+      <DependentUpon>frmWSMFBNH.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -246,6 +300,10 @@
   <ItemGroup>
     <None Include="Images\player-icons_40px_1137045_easyicon.net.png" />
     <None Include="Images\微信截图_20190804075341.png" />
+    <None Include="Images\back.png" />
+    <None Include="Images\back2.png" />
+    <None Include="Images\pannel1Back_SMDATA.png" />
+    <None Include="Images\pannelBack_KKXPG.png" />
     <Content Include="ProjectConfig.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

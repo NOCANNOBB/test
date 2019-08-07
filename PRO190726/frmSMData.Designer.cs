@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.laDataIn = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbDataIn = new System.Windows.Forms.Label();
+            this.lbHandIn = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbChart = new System.Windows.Forms.Label();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
             this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
@@ -45,18 +45,18 @@
             this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridBand6 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bandedGridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbSave = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lbSMNH = new System.Windows.Forms.Label();
+            this.lbJSNH = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lbDataResult = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -72,42 +72,50 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // laDataIn
+            // lbDataIn
             // 
-            this.laDataIn.AutoSize = true;
-            this.laDataIn.Location = new System.Drawing.Point(60, 46);
-            this.laDataIn.Name = "laDataIn";
-            this.laDataIn.Size = new System.Drawing.Size(53, 12);
-            this.laDataIn.TabIndex = 0;
-            this.laDataIn.Text = "数据导入";
+            this.lbDataIn.AutoSize = true;
+            this.lbDataIn.Location = new System.Drawing.Point(60, 46);
+            this.lbDataIn.Name = "lbDataIn";
+            this.lbDataIn.Size = new System.Drawing.Size(53, 12);
+            this.lbDataIn.TabIndex = 0;
+            this.lbDataIn.Text = "数据导入";
+            this.lbDataIn.MouseEnter += new System.EventHandler(this.lbDataIn_MouseEnter);
+            this.lbDataIn.MouseLeave += new System.EventHandler(this.lbDataIn_MouseLeave);
             // 
-            // label1
+            // lbHandIn
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(208, 46);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "手动输入";
+            this.lbHandIn.AutoSize = true;
+            this.lbHandIn.Location = new System.Drawing.Point(208, 46);
+            this.lbHandIn.Name = "lbHandIn";
+            this.lbHandIn.Size = new System.Drawing.Size(53, 12);
+            this.lbHandIn.TabIndex = 1;
+            this.lbHandIn.Text = "手动输入";
+            this.lbHandIn.MouseEnter += new System.EventHandler(this.lbHandIn_MouseEnter);
+            this.lbHandIn.MouseLeave += new System.EventHandler(this.lbHandIn_MouseLeave);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.BackgroundImage = global::PRO190726.Properties.Resources.pannel1Back_SMDATA;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel1.Controls.Add(this.lbChart);
             this.panel1.Controls.Add(this.gridControl1);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(62, 81);
+            this.panel1.Controls.Add(this.lbSave);
+            this.panel1.Location = new System.Drawing.Point(62, 79);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(751, 163);
+            this.panel1.Size = new System.Drawing.Size(763, 165);
             this.panel1.TabIndex = 2;
             // 
-            // label2
+            // lbChart
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(677, 139);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "图表";
+            this.lbChart.AutoSize = true;
+            this.lbChart.Location = new System.Drawing.Point(678, 139);
+            this.lbChart.Name = "lbChart";
+            this.lbChart.Size = new System.Drawing.Size(29, 12);
+            this.lbChart.TabIndex = 4;
+            this.lbChart.Text = "图表";
+            this.lbChart.MouseEnter += new System.EventHandler(this.lbChart_MouseEnter);
+            this.lbChart.MouseLeave += new System.EventHandler(this.lbChart_MouseLeave);
             // 
             // gridControl1
             // 
@@ -235,21 +243,25 @@
             this.bandedGridColumn6.Name = "bandedGridColumn6";
             this.bandedGridColumn6.Visible = true;
             // 
-            // label3
+            // lbSave
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(613, 139);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "保存";
+            this.lbSave.AutoSize = true;
+            this.lbSave.Location = new System.Drawing.Point(604, 139);
+            this.lbSave.Name = "lbSave";
+            this.lbSave.Size = new System.Drawing.Size(29, 12);
+            this.lbSave.TabIndex = 3;
+            this.lbSave.Text = "保存";
+            this.lbSave.MouseEnter += new System.EventHandler(this.lbSave_MouseEnter);
+            this.lbSave.MouseLeave += new System.EventHandler(this.lbSave_MouseLeave);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(60, 297);
+            this.label4.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.ForeColor = System.Drawing.Color.Blue;
+            this.label4.Location = new System.Drawing.Point(60, 294);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
+            this.label4.Size = new System.Drawing.Size(72, 16);
             this.label4.TabIndex = 5;
             this.label4.Text = "寿命分布";
             // 
@@ -274,29 +286,39 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(354, 295);
+            this.label5.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.ForeColor = System.Drawing.Color.Blue;
+            this.label5.Location = new System.Drawing.Point(354, 292);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 12);
+            this.label5.Size = new System.Drawing.Size(104, 16);
             this.label5.TabIndex = 7;
             this.label5.Text = "参数估计方法";
             // 
-            // label6
+            // lbSMNH
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(665, 295);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 12);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "寿命分布拟合";
+            this.lbSMNH.AutoSize = true;
+            this.lbSMNH.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbSMNH.Location = new System.Drawing.Point(665, 295);
+            this.lbSMNH.Name = "lbSMNH";
+            this.lbSMNH.Size = new System.Drawing.Size(104, 16);
+            this.lbSMNH.TabIndex = 9;
+            this.lbSMNH.Text = "寿命分布拟合";
+            this.lbSMNH.Click += new System.EventHandler(this.lbSMNH_Click);
+            this.lbSMNH.MouseEnter += new System.EventHandler(this.lbSMNH_MouseEnter);
+            this.lbSMNH.MouseLeave += new System.EventHandler(this.lbSMNH_MouseLeave);
             // 
-            // label7
+            // lbJSNH
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(665, 340);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(77, 12);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "加速模型拟合";
+            this.lbJSNH.AutoSize = true;
+            this.lbJSNH.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbJSNH.Location = new System.Drawing.Point(665, 340);
+            this.lbJSNH.Name = "lbJSNH";
+            this.lbJSNH.Size = new System.Drawing.Size(104, 16);
+            this.lbJSNH.TabIndex = 14;
+            this.lbJSNH.Text = "加速模型拟合";
+            this.lbJSNH.Click += new System.EventHandler(this.lbJSNH_Click);
+            this.lbJSNH.MouseEnter += new System.EventHandler(this.lbJSNH_MouseEnter);
+            this.lbJSNH.MouseLeave += new System.EventHandler(this.lbJSNH_MouseLeave);
             // 
             // comboBox3
             // 
@@ -310,9 +332,11 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(354, 340);
+            this.label8.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.ForeColor = System.Drawing.Color.Blue;
+            this.label8.Location = new System.Drawing.Point(354, 339);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 12);
+            this.label8.Size = new System.Drawing.Size(104, 16);
             this.label8.TabIndex = 12;
             this.label8.Text = "参数估计方法";
             // 
@@ -328,23 +352,27 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(60, 342);
+            this.label9.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.ForeColor = System.Drawing.Color.Blue;
+            this.label9.Location = new System.Drawing.Point(60, 339);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.Size = new System.Drawing.Size(72, 16);
             this.label9.TabIndex = 10;
             this.label9.Text = "加速模型";
             // 
-            // label10
+            // lbDataResult
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(60, 389);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(77, 12);
-            this.label10.TabIndex = 15;
-            this.label10.Text = "加速模型拟合";
+            this.lbDataResult.AutoSize = true;
+            this.lbDataResult.Location = new System.Drawing.Point(60, 389);
+            this.lbDataResult.Name = "lbDataResult";
+            this.lbDataResult.Size = new System.Drawing.Size(77, 12);
+            this.lbDataResult.TabIndex = 15;
+            this.lbDataResult.Text = "数据处理结果";
             // 
             // panel2
             // 
+            this.panel2.BackgroundImage = global::PRO190726.Properties.Resources.pannel1Back_SMDATA;
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel2.Controls.Add(this.gridControl2);
             this.panel2.Location = new System.Drawing.Point(62, 414);
             this.panel2.Name = "panel2";
@@ -407,20 +435,20 @@
             this.BackColor = System.Drawing.Color.Teal;
             this.ClientSize = new System.Drawing.Size(957, 599);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lbDataResult);
+            this.Controls.Add(this.lbJSNH);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.comboBox4);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lbSMNH);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.laDataIn);
+            this.Controls.Add(this.lbHandIn);
+            this.Controls.Add(this.lbDataIn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmSMData";
             this.Text = "frmTHData";
@@ -438,11 +466,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Label laDataIn;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbDataIn;
+        private System.Windows.Forms.Label lbHandIn;
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraGrid.GridControl gridControl1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbChart;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn1;
@@ -455,18 +483,18 @@
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand6;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn6;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbSave;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lbSMNH;
+        private System.Windows.Forms.Label lbJSNH;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lbDataResult;
         private System.Windows.Forms.Panel panel2;
         private DevExpress.XtraGrid.GridControl gridControl2;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;

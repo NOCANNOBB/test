@@ -165,6 +165,16 @@ namespace PRO190726
             this.标准数据与故障报警设置ToolStripMenuItem.Text = "\uf06a 标准数据与故障报警设置";
             this.标准数据与故障报警设置ToolStripMenuItem.Font = new Font("FontAwesome", 12);
             this.标准数据与故障报警设置ToolStripMenuItem.ForeColor = Color.CadetBlue;
+
+
+            this.寿命实验数据处理ToolStripMenuItem.Text = "\uf085 寿命实验数据处理";
+            this.寿命实验数据处理ToolStripMenuItem.Font = new Font("FontAwesome", 12);
+            this.寿命实验数据处理ToolStripMenuItem.ForeColor = Color.CadetBlue;
+
+            this.退化实验数据处理ToolStripMenuItem.Text = "\uf085 退化实验数据处理";
+            this.退化实验数据处理ToolStripMenuItem.Font = new Font("FontAwesome", 12);
+            this.退化实验数据处理ToolStripMenuItem.ForeColor = Color.CadetBlue;
+
         }
 
 
@@ -263,6 +273,11 @@ namespace PRO190726
         private frmOutputSet frmOutputs = null;
         private frmDataAalrmSet frmDataAlarmSet = null;
         private frmExperment frmExp = null;
+
+        private frmTHData frmth = null;
+        private frmSMData frmsm = null;
+
+        private frmKKXPG frmKK = null;
      
 
         private bool IsRightClick = false;
@@ -550,6 +565,42 @@ namespace PRO190726
             frmExp = new frmExperment();
             ShowForm(frmExp);
             this.lbTypeShow.Text = "\uf06e 实验检测--实验";
+        }
+
+        private void 寿命实验数据处理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmsm != null)
+            {
+                frmsm.Dispose();
+                frmsm = null;
+            }
+            frmsm = new frmSMData();
+            ShowForm(frmsm);
+            this.lbTypeShow.Text = "\uf06e 数据处理--寿命实验数据处理";
+        }
+
+        private void 退化实验数据处理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmth != null)
+            {
+                frmth.Dispose();
+                frmth = null;
+            }
+            frmth = new frmTHData();
+            ShowForm(frmth);
+            this.lbTypeShow.Text = "\uf06e 数据处理--退化实验数据处理";
+        }
+
+        private void 可靠性评估ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmKK != null)
+            {
+                frmKK.Dispose();
+                frmKK = null;
+            }
+            frmKK = new frmKKXPG();
+            ShowForm(frmKK);
+            this.lbTypeShow.Text = "\uf06e 可靠性评估";
         }
 
 

@@ -49,9 +49,11 @@
             this.实验检测ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.通道设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.输出信号配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.实验ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.标准数据与故障报警设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.实验ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.数据处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.寿命实验数据处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.退化实验数据处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.可靠性评估ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.可靠性验证ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,8 +74,6 @@
             this.设置为分析项目ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.寿命实验数据处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.退化实验数据处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -276,19 +276,19 @@
             this.输出信号配置ToolStripMenuItem.Text = "输出信号配置";
             this.输出信号配置ToolStripMenuItem.Click += new System.EventHandler(this.输出信号配置ToolStripMenuItem_Click);
             // 
-            // 实验ToolStripMenuItem
-            // 
-            this.实验ToolStripMenuItem.Name = "实验ToolStripMenuItem";
-            this.实验ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.实验ToolStripMenuItem.Text = "实验";
-            this.实验ToolStripMenuItem.Click += new System.EventHandler(this.实验ToolStripMenuItem_Click);
-            // 
             // 标准数据与故障报警设置ToolStripMenuItem
             // 
             this.标准数据与故障报警设置ToolStripMenuItem.Name = "标准数据与故障报警设置ToolStripMenuItem";
             this.标准数据与故障报警设置ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.标准数据与故障报警设置ToolStripMenuItem.Text = "标准数据与故障报警设置";
             this.标准数据与故障报警设置ToolStripMenuItem.Click += new System.EventHandler(this.标准数据与故障报警设置ToolStripMenuItem_Click);
+            // 
+            // 实验ToolStripMenuItem
+            // 
+            this.实验ToolStripMenuItem.Name = "实验ToolStripMenuItem";
+            this.实验ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.实验ToolStripMenuItem.Text = "实验";
+            this.实验ToolStripMenuItem.Click += new System.EventHandler(this.实验ToolStripMenuItem_Click);
             // 
             // 数据处理ToolStripMenuItem
             // 
@@ -299,11 +299,26 @@
             this.数据处理ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.数据处理ToolStripMenuItem.Text = "数据处理";
             // 
+            // 寿命实验数据处理ToolStripMenuItem
+            // 
+            this.寿命实验数据处理ToolStripMenuItem.Name = "寿命实验数据处理ToolStripMenuItem";
+            this.寿命实验数据处理ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.寿命实验数据处理ToolStripMenuItem.Text = "寿命实验数据处理";
+            this.寿命实验数据处理ToolStripMenuItem.Click += new System.EventHandler(this.寿命实验数据处理ToolStripMenuItem_Click);
+            // 
+            // 退化实验数据处理ToolStripMenuItem
+            // 
+            this.退化实验数据处理ToolStripMenuItem.Name = "退化实验数据处理ToolStripMenuItem";
+            this.退化实验数据处理ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.退化实验数据处理ToolStripMenuItem.Text = "退化实验数据处理";
+            this.退化实验数据处理ToolStripMenuItem.Click += new System.EventHandler(this.退化实验数据处理ToolStripMenuItem_Click);
+            // 
             // 可靠性评估ToolStripMenuItem
             // 
             this.可靠性评估ToolStripMenuItem.Name = "可靠性评估ToolStripMenuItem";
             this.可靠性评估ToolStripMenuItem.Size = new System.Drawing.Size(80, 21);
             this.可靠性评估ToolStripMenuItem.Text = "可靠性评估";
+            this.可靠性评估ToolStripMenuItem.Click += new System.EventHandler(this.可靠性评估ToolStripMenuItem_Click);
             // 
             // 可靠性验证ToolStripMenuItem
             // 
@@ -476,18 +491,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(1321, 54);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // 寿命实验数据处理ToolStripMenuItem
-            // 
-            this.寿命实验数据处理ToolStripMenuItem.Name = "寿命实验数据处理ToolStripMenuItem";
-            this.寿命实验数据处理ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.寿命实验数据处理ToolStripMenuItem.Text = "寿命实验数据处理";
-            // 
-            // 退化实验数据处理ToolStripMenuItem
-            // 
-            this.退化实验数据处理ToolStripMenuItem.Name = "退化实验数据处理ToolStripMenuItem";
-            this.退化实验数据处理ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.退化实验数据处理ToolStripMenuItem.Text = "退化实验数据处理";
             // 
             // Main
             // 

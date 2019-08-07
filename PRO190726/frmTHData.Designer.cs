@@ -35,13 +35,25 @@
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbDataResult = new System.Windows.Forms.Label();
+            this.lbChart = new System.Windows.Forms.Label();
+            this.lbSave = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.laDataIn = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
+            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBand6 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.bandedGridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.lbHandIn = new System.Windows.Forms.Label();
+            this.lbDataIn = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -59,22 +71,10 @@
             this.label13 = new System.Windows.Forms.Label();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.bandedGridView1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridView();
-            this.gridBand1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBand3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand4 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand5 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridBand6 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bandedGridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.lbJSMOD = new System.Windows.Forms.Label();
+            this.lbWSMFB = new System.Windows.Forms.Label();
+            this.lbTHGJ = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -85,15 +85,16 @@
             // 
             // panel2
             // 
+            this.panel2.BackgroundImage = global::PRO190726.Properties.Resources.pannel1Back_SMDATA;
             this.panel2.Controls.Add(this.gridControl2);
-            this.panel2.Location = new System.Drawing.Point(80, 426);
+            this.panel2.Location = new System.Drawing.Point(80, 437);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(751, 163);
             this.panel2.TabIndex = 19;
             // 
             // gridControl2
             // 
-            this.gridControl2.Location = new System.Drawing.Point(39, 17);
+            this.gridControl2.Location = new System.Drawing.Point(19, 17);
             this.gridControl2.MainView = this.gridView1;
             this.gridControl2.Name = "gridControl2";
             this.gridControl2.Size = new System.Drawing.Size(541, 100);
@@ -140,245 +141,53 @@
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 3;
             // 
-            // label10
+            // lbDataResult
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(78, 401);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(77, 12);
-            this.label10.TabIndex = 30;
-            this.label10.Text = "数据处理结果";
+            this.lbDataResult.AutoSize = true;
+            this.lbDataResult.Location = new System.Drawing.Point(78, 412);
+            this.lbDataResult.Name = "lbDataResult";
+            this.lbDataResult.Size = new System.Drawing.Size(77, 12);
+            this.lbDataResult.TabIndex = 30;
+            this.lbDataResult.Text = "数据处理结果";
             // 
-            // label2
+            // lbChart
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(699, 159);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 12);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "图表";
+            this.lbChart.AutoSize = true;
+            this.lbChart.Location = new System.Drawing.Point(665, 159);
+            this.lbChart.Name = "lbChart";
+            this.lbChart.Size = new System.Drawing.Size(29, 12);
+            this.lbChart.TabIndex = 4;
+            this.lbChart.Text = "图表";
+            this.lbChart.MouseEnter += new System.EventHandler(this.lbChart_MouseEnter);
+            this.lbChart.MouseLeave += new System.EventHandler(this.lbChart_MouseLeave);
             // 
-            // label3
+            // lbSave
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(635, 159);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 12);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "保存";
+            this.lbSave.AutoSize = true;
+            this.lbSave.Location = new System.Drawing.Point(581, 159);
+            this.lbSave.Name = "lbSave";
+            this.lbSave.Size = new System.Drawing.Size(29, 12);
+            this.lbSave.TabIndex = 3;
+            this.lbSave.Text = "保存";
+            this.lbSave.MouseEnter += new System.EventHandler(this.lbSave_MouseEnter);
+            this.lbSave.MouseLeave += new System.EventHandler(this.lbSave_MouseLeave);
             // 
             // panel1
             // 
+            this.panel1.BackgroundImage = global::PRO190726.Properties.Resources.pannel1Back_SMDATA;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Controls.Add(this.gridControl1);
             this.panel1.Controls.Add(this.label11);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.lbChart);
+            this.panel1.Controls.Add(this.lbSave);
             this.panel1.Location = new System.Drawing.Point(80, 51);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(751, 184);
             this.panel1.TabIndex = 18;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(226, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "手动输入";
-            // 
-            // laDataIn
-            // 
-            this.laDataIn.AutoSize = true;
-            this.laDataIn.Location = new System.Drawing.Point(78, 22);
-            this.laDataIn.Name = "laDataIn";
-            this.laDataIn.Size = new System.Drawing.Size(53, 12);
-            this.laDataIn.TabIndex = 16;
-            this.laDataIn.Text = "数据导入";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 53);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(53, 12);
-            this.label11.TabIndex = 5;
-            this.label11.Text = "数据名称";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(81, 255);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(53, 12);
-            this.label4.TabIndex = 31;
-            this.label4.Text = "性能参数";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(151, 250);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 32;
-            this.textBox1.Text = "三极管浮压";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(368, 250);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
-            this.textBox2.TabIndex = 34;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(298, 255);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(53, 12);
-            this.label5.TabIndex = 33;
-            this.label5.Text = "退化阈值";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(474, 255);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(11, 12);
-            this.label6.TabIndex = 35;
-            this.label6.Text = "V";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(81, 288);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 12);
-            this.label7.TabIndex = 36;
-            this.label7.Text = "性能参数";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(151, 283);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 20);
-            this.comboBox1.TabIndex = 37;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(368, 281);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(100, 20);
-            this.comboBox2.TabIndex = 39;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(274, 286);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 12);
-            this.label8.TabIndex = 38;
-            this.label8.Text = "参数估计方法";
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(368, 317);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(100, 20);
-            this.comboBox3.TabIndex = 43;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(274, 322);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(77, 12);
-            this.label9.TabIndex = 42;
-            this.label9.Text = "参数估计方法";
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(151, 319);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(100, 20);
-            this.comboBox4.TabIndex = 41;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(69, 322);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 12);
-            this.label12.TabIndex = 40;
-            this.label12.Text = "伪寿命分布";
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(368, 356);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(100, 20);
-            this.comboBox5.TabIndex = 47;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(274, 361);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(77, 12);
-            this.label13.TabIndex = 46;
-            this.label13.Text = "参数估计方法";
-            // 
-            // comboBox6
-            // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(151, 358);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(100, 20);
-            this.comboBox6.TabIndex = 45;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(81, 363);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(53, 12);
-            this.label14.TabIndex = 44;
-            this.label14.Text = "加速模型";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(575, 359);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(77, 12);
-            this.label15.TabIndex = 50;
-            this.label15.Text = "加速模型拟合";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(575, 320);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(89, 12);
-            this.label16.TabIndex = 49;
-            this.label16.Text = "为寿命分布拟合";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(575, 284);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(77, 12);
-            this.label17.TabIndex = 48;
-            this.label17.Text = "退化轨迹拟合";
-            // 
             // gridControl1
             // 
-            this.gridControl1.Location = new System.Drawing.Point(71, 16);
+            this.gridControl1.Location = new System.Drawing.Point(13, 16);
             this.gridControl1.MainView = this.bandedGridView1;
             this.gridControl1.Name = "gridControl1";
             this.gridControl1.Size = new System.Drawing.Size(541, 153);
@@ -502,15 +311,238 @@
             this.bandedGridColumn6.Name = "bandedGridColumn6";
             this.bandedGridColumn6.Visible = true;
             // 
+            // lbHandIn
+            // 
+            this.lbHandIn.AutoSize = true;
+            this.lbHandIn.Location = new System.Drawing.Point(226, 22);
+            this.lbHandIn.Name = "lbHandIn";
+            this.lbHandIn.Size = new System.Drawing.Size(53, 12);
+            this.lbHandIn.TabIndex = 17;
+            this.lbHandIn.Text = "手动输入";
+            this.lbHandIn.MouseEnter += new System.EventHandler(this.lbHandIn_MouseEnter);
+            this.lbHandIn.MouseLeave += new System.EventHandler(this.lbHandIn_MouseLeave);
+            // 
+            // lbDataIn
+            // 
+            this.lbDataIn.AutoSize = true;
+            this.lbDataIn.Location = new System.Drawing.Point(78, 22);
+            this.lbDataIn.Name = "lbDataIn";
+            this.lbDataIn.Size = new System.Drawing.Size(53, 12);
+            this.lbDataIn.TabIndex = 16;
+            this.lbDataIn.Text = "数据导入";
+            this.lbDataIn.MouseEnter += new System.EventHandler(this.lbDataIn_MouseEnter);
+            this.lbDataIn.MouseLeave += new System.EventHandler(this.lbDataIn_MouseLeave);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(81, 255);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(72, 16);
+            this.label4.TabIndex = 31;
+            this.label4.Text = "性能参数";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(159, 251);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 32;
+            this.textBox1.Text = "三极管浮压";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(442, 253);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.TabIndex = 34;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(356, 257);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(72, 16);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "退化阈值";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(546, 257);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(16, 16);
+            this.label6.TabIndex = 35;
+            this.label6.Text = "V";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(81, 288);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(72, 16);
+            this.label7.TabIndex = 36;
+            this.label7.Text = "性能参数";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(159, 284);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(100, 20);
+            this.comboBox1.TabIndex = 37;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(442, 284);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(100, 20);
+            this.comboBox2.TabIndex = 39;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(332, 288);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(104, 16);
+            this.label8.TabIndex = 38;
+            this.label8.Text = "参数估计方法";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(442, 320);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(100, 20);
+            this.comboBox3.TabIndex = 43;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(332, 324);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(104, 16);
+            this.label9.TabIndex = 42;
+            this.label9.Text = "参数估计方法";
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(159, 320);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(100, 20);
+            this.comboBox4.TabIndex = 41;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label12.Location = new System.Drawing.Point(69, 322);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(88, 16);
+            this.label12.TabIndex = 40;
+            this.label12.Text = "伪寿命分布";
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(442, 359);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(100, 20);
+            this.comboBox5.TabIndex = 47;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label13.Location = new System.Drawing.Point(332, 363);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(104, 16);
+            this.label13.TabIndex = 46;
+            this.label13.Text = "参数估计方法";
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(159, 359);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(100, 20);
+            this.comboBox6.TabIndex = 45;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label14.Location = new System.Drawing.Point(81, 363);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(72, 16);
+            this.label14.TabIndex = 44;
+            this.label14.Text = "加速模型";
+            // 
+            // lbJSMOD
+            // 
+            this.lbJSMOD.AutoSize = true;
+            this.lbJSMOD.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbJSMOD.Location = new System.Drawing.Point(670, 361);
+            this.lbJSMOD.Name = "lbJSMOD";
+            this.lbJSMOD.Size = new System.Drawing.Size(104, 16);
+            this.lbJSMOD.TabIndex = 50;
+            this.lbJSMOD.Text = "加速模型拟合";
+            this.lbJSMOD.Click += new System.EventHandler(this.label15_Click);
+            this.lbJSMOD.MouseEnter += new System.EventHandler(this.lbJSMOD_MouseEnter);
+            this.lbJSMOD.MouseLeave += new System.EventHandler(this.lbJSMOD_MouseLeave);
+            // 
+            // lbWSMFB
+            // 
+            this.lbWSMFB.AutoSize = true;
+            this.lbWSMFB.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbWSMFB.Location = new System.Drawing.Point(670, 322);
+            this.lbWSMFB.Name = "lbWSMFB";
+            this.lbWSMFB.Size = new System.Drawing.Size(120, 16);
+            this.lbWSMFB.TabIndex = 49;
+            this.lbWSMFB.Text = "伪寿命分布拟合";
+            this.lbWSMFB.Click += new System.EventHandler(this.label16_Click);
+            this.lbWSMFB.MouseEnter += new System.EventHandler(this.lbWSMFB_MouseEnter);
+            this.lbWSMFB.MouseLeave += new System.EventHandler(this.lbWSMFB_MouseLeave);
+            // 
+            // lbTHGJ
+            // 
+            this.lbTHGJ.AutoSize = true;
+            this.lbTHGJ.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbTHGJ.Location = new System.Drawing.Point(670, 286);
+            this.lbTHGJ.Name = "lbTHGJ";
+            this.lbTHGJ.Size = new System.Drawing.Size(104, 16);
+            this.lbTHGJ.TabIndex = 48;
+            this.lbTHGJ.Text = "退化轨迹拟合";
+            this.lbTHGJ.Click += new System.EventHandler(this.label17_Click);
+            this.lbTHGJ.MouseEnter += new System.EventHandler(this.lbTHGJ_MouseEnter);
+            this.lbTHGJ.MouseLeave += new System.EventHandler(this.lbTHGJ_MouseLeave);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(12, 16);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(53, 12);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "数据名称";
+            // 
             // frmTHData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Teal;
             this.ClientSize = new System.Drawing.Size(1021, 628);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.label17);
+            this.Controls.Add(this.lbJSMOD);
+            this.Controls.Add(this.lbWSMFB);
+            this.Controls.Add(this.lbTHGJ);
             this.Controls.Add(this.comboBox5);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.comboBox6);
@@ -529,13 +561,14 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lbDataResult);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.laDataIn);
+            this.Controls.Add(this.lbHandIn);
+            this.Controls.Add(this.lbDataIn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmTHData";
             this.Text = "frmSMData";
+            this.Load += new System.EventHandler(this.frmTHData_Load);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
@@ -557,13 +590,12 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbDataResult;
+        private System.Windows.Forms.Label lbChart;
+        private System.Windows.Forms.Label lbSave;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label laDataIn;
+        private System.Windows.Forms.Label lbHandIn;
+        private System.Windows.Forms.Label lbDataIn;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
@@ -581,9 +613,9 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox comboBox6;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lbJSMOD;
+        private System.Windows.Forms.Label lbWSMFB;
+        private System.Windows.Forms.Label lbTHGJ;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridView bandedGridView1;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand1;
@@ -597,5 +629,6 @@
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn5;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBand6;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumn6;
+        private System.Windows.Forms.Label label11;
     }
 }
