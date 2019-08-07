@@ -11,10 +11,19 @@ namespace DLLProjectInfo
     public class DoProjectInfo
     {
 
-        public bool SaveProjectInfo(string ProjectName,Guid guid) {
-            return XMLHelpers.InsertaNode("ProjectConfig.XML", "ProjectInfo", "ProjectName", ProjectName, "GUID", guid.ToString());
+        public int SaveProjectInfo(ProjectInfo pro) {
+
+            int returnvalue = XMLHelpers.InsertaNode("ProjectConfig.XML", pro);
+
+            XMLHelpers.CreateProjectInfo(pro);
+            return returnvalue;
+            //return XMLHelpers.InsertaNode("ProjectConfig.xml", "ProjectInfo", "ProjectName", ProjectName, "GUID", guid.ToString());
             
         }
+
+        
+
+
 
         public List<ProjectInfo> GetProjectInfos() {
 

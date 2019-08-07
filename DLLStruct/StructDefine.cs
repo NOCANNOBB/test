@@ -10,6 +10,21 @@ namespace DLLStruct
     {
     }
 
+    public class ProjectInfo {
+
+        public string ProjectName { get; set; }
+
+        public string ProductName { get; set; }
+
+        public string ProductGN { get; set; }
+
+        public string ProductUse { get; set; }
+        public string ExpTime { get; set; }
+
+        public string ExpAddress { get; set; }
+    }
+
+
     public class SMExpermentParam //寿命实验参数
     {
         public int YLType { get; set; }//应力类型

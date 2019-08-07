@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Define;
 using DLLProjectInfo;
+using XMLHelper;
 
 namespace PRO190726
 {
@@ -99,15 +100,71 @@ namespace PRO190726
             }
 
             string ProjectName = this.txtProjectName.Text.Trim();
+
+            if(ProjectName == ""){
+                MessageBox.Show("所填项不能为空");
+                this.txtProjectName.Focus();
+                return;
+            }
+
             Guid guid = Guid.NewGuid();
-            if (m_Pro.SaveProjectInfo(ProjectName, guid))
+
+            string ProductName = this.txtProductName.Text.Trim();
+             if(ProductName == ""){
+                MessageBox.Show("所填项不能为空");
+                this.txtProductName.Focus();
+                return;
+            }
+
+
+            string ProductGN = this.txtProductGN.Text.Trim();
+            if(ProductGN == ""){
+                MessageBox.Show("所填项不能为空");
+                this.txtProductGN.Focus();
+                return;
+            }
+
+            string ProductUse = this.txtProductUse.Text.Trim();
+            if(ProductUse == ""){
+                MessageBox.Show("所填项不能为空");
+                this.txtProductUse.Focus();
+                return;
+            }
+
+            string ExpTime = this.txtExpTime.Text.Trim();
+             if(ExpTime == ""){
+                MessageBox.Show("所填项不能为空");
+                this.txtExpTime.Focus();
+                return;
+            }
+
+            string ExpAddress = this.txtExpAddress.Text.Trim();
+             if(ExpTime == ""){
+                MessageBox.Show("所填项不能为空");
+                this.txtExpAddress.Focus();
+                return;
+            }
+
+            ProjectInfo pro = new ProjectInfo();
+            pro.ProjectPath =  System.IO.Directory.GetCurrentDirectory() + "\\Pro\\";
+            pro.ProjectName = ProjectName;
+            pro.ProductUse = ProductUse;
+            pro.ProductGN = ProductGN;
+            pro.ProductName = ProductName;
+            pro.ExperAddress = ExpAddress;
+            pro.ExperTime = ExpTime;
+            pro.GUID = guid;
+
+            int returnValue = m_Pro.SaveProjectInfo(pro);
+            if (returnValue == 0)
             {
                 ProDefine.NowProjectName = ProjectName;
                 m_stlb.Text = ProjectName;
                 MessageBox.Show("保存成功");
             }
-            else {
-                MessageBox.Show("保存失败");
+            else if (returnValue == -1){
+            
+                MessageBox.Show("保存失败,当前路径下存在名称为：" + ProductName + " 的项目");
             }
 
         }

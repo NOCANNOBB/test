@@ -304,7 +304,13 @@
     <None Include="Images\back2.png" />
     <None Include="Images\pannel1Back_SMDATA.png" />
     <None Include="Images\pannelBack_KKXPG.png" />
-    <Content Include="ProjectConfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\0132.png" />
+    <None Include="Images\0116.png" />
+    <Content Include="ProjectConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

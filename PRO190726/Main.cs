@@ -289,7 +289,7 @@ namespace PRO190726
             }
             if (frmPro == null)
             {
-                frmPro = new frmProjectInfo();
+                frmPro = new frmProjectInfo(this.toolStripStatusLabel1);
             }
 
             ShowForm(frmPro);
@@ -415,14 +415,14 @@ namespace PRO190726
                 }
 
                 string ProjectName = FileName;
-                Guid guid = Guid.NewGuid();
-                if (m_Pro.SaveProjectInfo(ProjectName, guid))
+               // Guid guid = Guid.NewGuid();
+               // if (m_Pro.SaveProjectInfo(ProjectName, guid))
                 {
-                    MessageBox.Show("保存成功");
+                   //// MessageBox.Show("保存成功");
                 }
-                else
+               // else
                 {
-                    MessageBox.Show("保存失败");
+                   // MessageBox.Show("保存失败");
                 }
             }
             

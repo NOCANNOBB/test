@@ -1,34 +1,45 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using XmlDAL;
 
 namespace XMLHelper
 {
     public class XMLHelpers
     {
+        public static XmlHelper m_xml = new XmlHelper();
 
-        public static bool InsertaNode(string ConfigName,string RootName,string NodeName,string NodeValue,string AttributeName,string AttributeValue) {
+        public  static string ProXMLFileName = "ProjectConfig.xml";
+
+        public static Hashtable GetHashTable(ProjectInfo pro)
+        {
+            Hashtable ht = new Hashtable();
+            ht.Add("ProjectName", pro.ProjectName);
+            ht.Add("GUID",pro.GUID.ToString());
+            ht.Add("ProjectPath", pro.ProjectPath);
+            return ht;
+        }
+        
+        public static int InsertaNode(string ConfigName,ProjectInfo pro) {
 
             try
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(ConfigName);
-                XmlNode root = doc.SelectSingleNode(RootName);
-                XmlElement xelKey = doc.CreateElement(NodeName);
-                XmlAttribute xelType = doc.CreateAttribute(AttributeName);
-                xelType.InnerText = AttributeValue;
-                xelKey.SetAttributeNode(xelType);
-                xelKey.InnerText = NodeValue;
-                root.AppendChild(xelKey);
-                doc.Save(@"ProjectConfig.xml");
-                return true;
+
+                if (m_xml.isNodeValueExist(ProXMLFileName, "ProjectName", pro.ProjectName, "Projects")) {
+                    return -1;//存在
+                }
+                Hashtable ht = GetHashTable(pro);
+                m_xml.InsertNode(ProXMLFileName, "Project", false, "Projects", null, ht);
+                return 0;
             }
             catch
             {
-                return false;
+                return -2;
             }
         }
 
@@ -89,12 +100,78 @@ namespace XMLHelper
             }
         }
 
+        private static string ProPath =  System.IO.Directory.GetCurrentDirectory() + "\\Pro\\";
+        public static void CreateProFile(ProjectInfo pro)
+        { 
+
+            
+            string FileProPath = ProPath + pro.ProjectName;
+            if (Directory.Exists(ProPath)) {
+                Directory.CreateDirectory(ProPath);
+            }
+
+            if (!File.Exists(FileProPath))
+            {
+                //File.Create(FileProPath);
+            }
+        }
+
+        public static Hashtable CreateInsertHash(ProjectInfo Pro)
+        {
+
+            try {
+                Hashtable ht = new Hashtable();
+
+                ht.Add("ProjectName", Pro.ProjectName);
+                ht.Add("GUID", Pro.GUID);
+                ht.Add("ProductGN", Pro.ProductGN);
+                ht.Add("ProductUse", Pro.ProductUse);
+                ht.Add("ProductName", Pro.ProductName);
+                ht.Add("ExperTime", Pro.ExperTime);
+                ht.Add("ExperAddress", Pro.ExperAddress);
+                return ht;
+
+            }
+            catch {
+                return null;
+            }
+        }
+
+
+
+
+        public static int CreateProjectInfo(ProjectInfo pro)
+        {
+            try {
+
+                if (File.Exists(ProPath + pro.ProjectName + ".csproj")) {
+                    return -1; //表示路径下存在当前名称的项目
+                }
+                string FileName = ProPath + pro.ProjectName + ".csproj";
+                //File.Create(ProPath + pro.ProjectName + ".csproj");
+                m_xml.CreateXmlDocument(FileName, "Project", "UTF-8");
+
+                Hashtable ht = CreateInsertHash(pro);
+
+
+                m_xml.InsertNode(FileName,"ProjectInfo",false,"Project",null,ht);
+
+
+
+                return 0;
+            }
+            catch {
+                return 0;
+            }
+        }
+
 
 
 
         public string XMLPathName = "";
 
-        public bool WriteNodeInfo(string NodeStr, string NodeValue) {
+        public static bool WriteNodeInfo(string NodeStr, string NodeValue)
+        {
             try {
 
 
