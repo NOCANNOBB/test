@@ -187,12 +187,21 @@ namespace PRO190726
             if (m_Pro == null) {
                 m_Pro = new DoProjectInfo();
             }
-            List<ProjectInfo> m_ProList = m_Pro.GetProjectInfos();
+            //ShowlistPro();
+        }
+        List<ProjectInfo> m_ProList = new List<ProjectInfo>();
+
+        private void ShowlistPro() {
+
+            this.lsProject.Items.Clear();
+            m_ProList.Clear();
+            m_ProList = m_Pro.GetProjectInfos();
             if (m_ProList == null) { return; }
-            foreach (var info in m_ProList) {
-                InsertListView(this.lsProject,info.ProjectName);
+            foreach (var info in m_ProList)
+            {
+                InsertListView(this.lsProject, info.ProjectName);
             }
-        } 
+        }
 
         public void InsertListView(ListView lv,string ProName)
         {
@@ -278,6 +287,8 @@ namespace PRO190726
         private frmSMData frmsm = null;
 
         private frmKKXPG frmKK = null;
+
+        private frmKKXYANZHENG frmKKYZ = null;
      
 
         private bool IsRightClick = false;
@@ -405,7 +416,7 @@ namespace PRO190726
         private void 打开项目ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog file = new OpenFileDialog();
-            file.Filter = "sln files(*.sln)|*.sln|All files(*.*)|*.*";
+            file.Filter = "csproj files(*.csproj)|*.csproj|All files(*.*)|*.*";
             if (file.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                 string FileName = file.SafeFileName;
 
@@ -415,6 +426,18 @@ namespace PRO190726
                 }
 
                 string ProjectName = FileName;
+                string ProjectPathName = file.FileName;
+
+                ProjectInfo pro = m_Pro.GetProjectInfo(ProjectPathName);
+
+
+                int returnvalue = m_Pro.AddProjectInfo(pro);
+
+                if (returnvalue == -1) {
+                    MessageBox.Show("项目列表中存在当前名称的项目，添加失败");
+                    return;
+                }
+
                // Guid guid = Guid.NewGuid();
                // if (m_Pro.SaveProjectInfo(ProjectName, guid))
                 {
@@ -424,7 +447,9 @@ namespace PRO190726
                 {
                    // MessageBox.Show("保存失败");
                 }
+                ShowlistPro();
             }
+            
             
         }
 
@@ -435,10 +460,17 @@ namespace PRO190726
                 return;
             }
 
-            if (MessageBox.Show("确定删除 项目" + this.lsProject.SelectedItems[0].Text, "提示", MessageBoxButtons.YesNo) == DialogResult.Yes) { 
-                //DoRemoce
+            if (MessageBox.Show("确定删除 项目" + this.lsProject.SelectedItems[0].Text, "提示", MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                int SelIndex = this.lsProject.SelectedItems[0].Index;
+                DoDlePro(SelIndex);
             }
         }
+
+        private void DoDlePro(int SelIndex) {
+            m_Pro.DelProFromList(m_ProList[SelIndex]);
+            ShowlistPro();
+        }
+
 
         private void 设置为分析项目ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -601,6 +633,18 @@ namespace PRO190726
             frmKK = new frmKKXPG();
             ShowForm(frmKK);
             this.lbTypeShow.Text = "\uf06e 可靠性评估";
+        }
+
+        private void 可靠性验证ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmKKYZ != null)
+            {
+                frmKKYZ.Dispose();
+                frmKKYZ = null;
+            }
+            frmKKYZ = new frmKKXYANZHENG();
+            ShowForm(frmKKYZ);
+            this.lbTypeShow.Text = "\uf06e 可靠性验证";
         }
 
 

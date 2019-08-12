@@ -21,25 +21,48 @@ namespace DLLProjectInfo
             
         }
 
-        
+        public int AddProjectInfo(ProjectInfo pro)
+        {
+            int returnvalue = XMLHelpers.InsertaNode("ProjectConfig.XML", pro);
+            return returnvalue;
+        }
+
+
+        public ProjectInfo GetProjectInfo(string ProjectPath) {
+            try {
+                ProjectInfo pro = new ProjectInfo();
+                string ProductName = XMLHelpers.ReadProNodeValue(ProjectPath, "Project", "ProductName");
+                string Guidstr = XMLHelpers.ReadProNodeValue(ProjectPath, "Project", "GUID");
+                string ProductGN = XMLHelpers.ReadProNodeValue(ProjectPath, "Project", "ProductGN");
+                string ProjectName = XMLHelpers.ReadProNodeValue(ProjectPath, "Project", "ProjectName");
+                string ProductUse = XMLHelpers.ReadProNodeValue(ProjectPath, "Project", "ProductUse");
+                string ExperAddress = XMLHelpers.ReadProNodeValue(ProjectPath, "Project", "ExperAddress");
+                string ExperTime = XMLHelpers.ReadProNodeValue(ProjectPath, "Project", "ExperTime");
+
+                pro.ProductName = ProductName;
+                pro.ProductGN = ProductGN;
+                pro.GUID = Guid.Parse(Guidstr);
+                pro.ProductUse = ProductUse;
+                pro.ProjectName = ProjectName;
+                pro.ProjectPath = ProjectPath;
+                pro.ExperAddress = ExperAddress;
+                pro.ExperTime = ExperTime;
+
+                return pro;
+            }
+            catch {
+                return null;
+            }
+        }
 
 
 
         public List<ProjectInfo> GetProjectInfos() {
 
             try {
-                List<string> ProNameList = XMLHelpers.ReadNode("ProjectConfig.XML", "ProjectInfo", "ProjectName");
 
-                List<string> GUIDNameList = XMLHelpers.ReadNodeAttribute("ProjectConfig.XML", "ProjectInfo", "GUID");
-
-                List<ProjectInfo> ProList = new List<ProjectInfo>();
-                for (int i = 0; i < ProNameList.Count; i++) {
-                    ProjectInfo pro = new ProjectInfo();
-
-                    pro.GUID = new Guid(GUIDNameList[i]);
-                    pro.ProjectName = ProNameList[i];
-                    ProList.Add(pro);
-                }
+                List<ProjectInfo> ProList = XMLHelpers.ReadProListNodeValue("ProjectConfig.XML", "Projects");
+               
                 return ProList;
             
             }
@@ -49,5 +72,10 @@ namespace DLLProjectInfo
         
             
         }
+
+        public void DelProFromList(ProjectInfo pro) {
+            XMLHelpers.DelFromProList("ProjectConfig.XML", "Projects", pro.ProjectName);
+        }
+
     }
 }

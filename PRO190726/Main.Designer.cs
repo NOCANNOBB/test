@@ -89,7 +89,7 @@
             this.lb_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Close.AutoSize = true;
             this.lb_Close.BackColor = System.Drawing.SystemColors.Highlight;
-            this.lb_Close.Location = new System.Drawing.Point(1295, 6);
+            this.lb_Close.Location = new System.Drawing.Point(1337, 6);
             this.lb_Close.Name = "lb_Close";
             this.lb_Close.Size = new System.Drawing.Size(23, 12);
             this.lb_Close.TabIndex = 1;
@@ -103,7 +103,7 @@
             this.lb_Small.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Small.AutoSize = true;
             this.lb_Small.BackColor = System.Drawing.SystemColors.Highlight;
-            this.lb_Small.Location = new System.Drawing.Point(1227, 6);
+            this.lb_Small.Location = new System.Drawing.Point(1269, 6);
             this.lb_Small.Name = "lb_Small";
             this.lb_Small.Size = new System.Drawing.Size(23, 12);
             this.lb_Small.TabIndex = 2;
@@ -117,7 +117,7 @@
             this.lb_Max.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Max.AutoSize = true;
             this.lb_Max.BackColor = System.Drawing.SystemColors.Highlight;
-            this.lb_Max.Location = new System.Drawing.Point(1261, 6);
+            this.lb_Max.Location = new System.Drawing.Point(1303, 6);
             this.lb_Max.Name = "lb_Max";
             this.lb_Max.Size = new System.Drawing.Size(23, 12);
             this.lb_Max.TabIndex = 3;
@@ -325,6 +325,7 @@
             this.可靠性验证ToolStripMenuItem.Name = "可靠性验证ToolStripMenuItem";
             this.可靠性验证ToolStripMenuItem.Size = new System.Drawing.Size(80, 21);
             this.可靠性验证ToolStripMenuItem.Text = "可靠性验证";
+            this.可靠性验证ToolStripMenuItem.Click += new System.EventHandler(this.可靠性验证ToolStripMenuItem_Click);
             // 
             // 帮助ToolStripMenuItem
             // 
@@ -341,7 +342,7 @@
             this.tabControl1.Location = new System.Drawing.Point(2, 85);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(212, 678);
+            this.tabControl1.Size = new System.Drawing.Size(212, 658);
             this.tabControl1.TabIndex = 6;
             // 
             // tabPage1
@@ -352,7 +353,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(204, 652);
+            this.tabPage1.Size = new System.Drawing.Size(204, 632);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             // 
@@ -362,7 +363,7 @@
             this.lsProject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lsProject.Location = new System.Drawing.Point(3, 3);
             this.lsProject.Name = "lsProject";
-            this.lsProject.Size = new System.Drawing.Size(196, 644);
+            this.lsProject.Size = new System.Drawing.Size(196, 624);
             this.lsProject.TabIndex = 0;
             this.lsProject.UseCompatibleStateImageBehavior = false;
             this.lsProject.View = System.Windows.Forms.View.List;
@@ -377,7 +378,7 @@
             this.panel2.BackColor = System.Drawing.Color.Teal;
             this.panel2.Location = new System.Drawing.Point(213, 123);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(895, 635);
+            this.panel2.Size = new System.Drawing.Size(937, 615);
             this.panel2.TabIndex = 6;
             // 
             // lbDataTitle
@@ -393,9 +394,9 @@
             // 
             this.listView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView2.Location = new System.Drawing.Point(1112, 110);
+            this.listView2.Location = new System.Drawing.Point(1154, 110);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(211, 653);
+            this.listView2.Size = new System.Drawing.Size(211, 633);
             this.listView2.TabIndex = 8;
             this.listView2.UseCompatibleStateImageBehavior = false;
             // 
@@ -404,7 +405,7 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.Azure;
             this.panel3.Controls.Add(this.lbDataTitle);
-            this.panel3.Location = new System.Drawing.Point(1112, 60);
+            this.panel3.Location = new System.Drawing.Point(1154, 60);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 30);
             this.panel3.TabIndex = 9;
@@ -414,9 +415,9 @@
             this.statusStrip1.BackColor = System.Drawing.Color.Azure;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 766);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 746);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1324, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1366, 22);
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -477,7 +478,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.LightCyan;
             this.pictureBox2.Location = new System.Drawing.Point(212, 113);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(895, 10);
+            this.pictureBox2.Size = new System.Drawing.Size(937, 10);
             this.pictureBox2.TabIndex = 12;
             this.pictureBox2.TabStop = false;
             // 
@@ -488,7 +489,7 @@
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Highlight;
             this.pictureBox1.Location = new System.Drawing.Point(2, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1321, 54);
+            this.pictureBox1.Size = new System.Drawing.Size(1363, 54);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -497,7 +498,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(1324, 788);
+            this.ClientSize = new System.Drawing.Size(1366, 768);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.lbTypeShow);
             this.Controls.Add(this.statusStrip1);
