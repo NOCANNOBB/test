@@ -10,41 +10,47 @@ namespace DLLStruct
     {
     }
 
-    public class ProjectInfo {
-
-        public string ProjectName { get; set; }
-
-        public string ProductName { get; set; }
-
-        public string ProductGN { get; set; }
-
-        public string ProductUse { get; set; }
-        public string ExpTime { get; set; }
-
-        public string ExpAddress { get; set; }
-    }
+   
 
 
     public class SMExpermentParam //寿命实验参数
     {
+        public Guid GUID { get; set; }
+
         public int YLType { get; set; }//应力类型
 
         public int JSMode { get; set; }//加速模型
 
         public int YLSetType { get; set; }//应力施加方式
 
-        public float CGTemperature { get; set; }//常规使用温度
+        public string CGTemperature { get; set; }//常规使用温度
 
-        public float CGXDSD { get; set; }//相对湿度
+        public string CGXDSD { get; set; }//相对湿度
 
-        public float CPJXTemperature { get; set; }//极限温度
+        public string CPJXTemperature { get; set; }//极限温度
 
-        public float CPJXXDSD { get; set; }
+        public string CPJXXDSD { get; set; }
 
-        public int YLNumber { get; set; }
+        public string YLNumber { get; set; }
 
-        public int YBNumber { get; set; }
+        public string YBNumber { get; set; }
 
         public int JWType { get; set; }
+
+        public int ExpermentType { get; set; }
+
+        public string CGZD { get; set; }
+
+        public string CGDYL { get; set; }
+
+        public string JXZD { get; set; }
+
+        public string JXDYL { get; set; }
+
+
+
+        public string XNTHCS { get; set; }// 性能退化参数
+        public string THYZ { get; set; }//退化阈值
+
     }
 }

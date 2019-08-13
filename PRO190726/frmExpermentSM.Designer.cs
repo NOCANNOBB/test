@@ -32,25 +32,25 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbSave = new System.Windows.Forms.Label();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
+            this.cmbJW = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtYBNumber = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtYLNumber = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.txtJXSD = new System.Windows.Forms.TextBox();
+            this.cmbJXSD = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.txtJX = new System.Windows.Forms.TextBox();
+            this.cmbJX = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.txtCGSD = new System.Windows.Forms.TextBox();
+            this.cmbSD = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.txtCG = new System.Windows.Forms.TextBox();
+            this.cmbCG = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cbTLSetType = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -62,15 +62,24 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.lbCreateExp = new System.Windows.Forms.Label();
             this.lbexpSave = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lbExp = new System.Windows.Forms.Label();
+            this.txtJXZD = new System.Windows.Forms.TextBox();
+            this.cmbJZZD = new System.Windows.Forms.ComboBox();
+            this.txtZD = new System.Windows.Forms.TextBox();
+            this.cmbZD = new System.Windows.Forms.ComboBox();
+            this.txtJXDYL = new System.Windows.Forms.TextBox();
+            this.cmbJXDYL = new System.Windows.Forms.ComboBox();
+            this.txtDYL = new System.Windows.Forms.TextBox();
+            this.cmbDYL = new System.Windows.Forms.ComboBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // lbtitle
@@ -98,26 +107,34 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.CadetBlue;
+            this.panel2.Controls.Add(this.txtJXDYL);
+            this.panel2.Controls.Add(this.cmbJXDYL);
+            this.panel2.Controls.Add(this.txtDYL);
+            this.panel2.Controls.Add(this.cmbDYL);
+            this.panel2.Controls.Add(this.txtJXZD);
+            this.panel2.Controls.Add(this.cmbJZZD);
+            this.panel2.Controls.Add(this.txtZD);
+            this.panel2.Controls.Add(this.cmbZD);
             this.panel2.Controls.Add(this.lbSave);
-            this.panel2.Controls.Add(this.comboBox8);
+            this.panel2.Controls.Add(this.cmbJW);
             this.panel2.Controls.Add(this.label15);
-            this.panel2.Controls.Add(this.textBox6);
+            this.panel2.Controls.Add(this.txtYBNumber);
             this.panel2.Controls.Add(this.label14);
-            this.panel2.Controls.Add(this.textBox5);
+            this.panel2.Controls.Add(this.txtYLNumber);
             this.panel2.Controls.Add(this.label13);
             this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.textBox3);
-            this.panel2.Controls.Add(this.comboBox6);
+            this.panel2.Controls.Add(this.txtJXSD);
+            this.panel2.Controls.Add(this.cmbJXSD);
             this.panel2.Controls.Add(this.label11);
-            this.panel2.Controls.Add(this.textBox4);
-            this.panel2.Controls.Add(this.comboBox7);
+            this.panel2.Controls.Add(this.txtJX);
+            this.panel2.Controls.Add(this.cmbJX);
             this.panel2.Controls.Add(this.label12);
             this.panel2.Controls.Add(this.label9);
-            this.panel2.Controls.Add(this.textBox2);
-            this.panel2.Controls.Add(this.comboBox5);
+            this.panel2.Controls.Add(this.txtCGSD);
+            this.panel2.Controls.Add(this.cmbSD);
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.textBox1);
-            this.panel2.Controls.Add(this.comboBox4);
+            this.panel2.Controls.Add(this.txtCG);
+            this.panel2.Controls.Add(this.cmbCG);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.cbTLSetType);
             this.panel2.Controls.Add(this.label6);
@@ -143,19 +160,19 @@
             this.lbSave.MouseEnter += new System.EventHandler(this.lbSave_MouseEnter);
             this.lbSave.MouseLeave += new System.EventHandler(this.lbSave_MouseLeave);
             // 
-            // comboBox8
+            // cmbJW
             // 
-            this.comboBox8.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Items.AddRange(new object[] {
+            this.cmbJW.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbJW.FormattingEnabled = true;
+            this.cmbJW.Items.AddRange(new object[] {
             "全数截尾",
             "定时截尾",
             "定数截尾",
             "尾序贯截尾"});
-            this.comboBox8.Location = new System.Drawing.Point(648, 244);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(121, 21);
-            this.comboBox8.TabIndex = 27;
+            this.cmbJW.Location = new System.Drawing.Point(648, 244);
+            this.cmbJW.Name = "cmbJW";
+            this.cmbJW.Size = new System.Drawing.Size(121, 21);
+            this.cmbJW.TabIndex = 27;
             // 
             // label15
             // 
@@ -168,13 +185,13 @@
             this.label15.TabIndex = 26;
             this.label15.Text = "实验截尾方式：";
             // 
-            // textBox6
+            // txtYBNumber
             // 
-            this.textBox6.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox6.Location = new System.Drawing.Point(380, 246);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 21);
-            this.textBox6.TabIndex = 25;
+            this.txtYBNumber.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtYBNumber.Location = new System.Drawing.Point(380, 246);
+            this.txtYBNumber.Name = "txtYBNumber";
+            this.txtYBNumber.Size = new System.Drawing.Size(100, 21);
+            this.txtYBNumber.TabIndex = 25;
             // 
             // label14
             // 
@@ -187,13 +204,13 @@
             this.label14.TabIndex = 24;
             this.label14.Text = "样本总量：";
             // 
-            // textBox5
+            // txtYLNumber
             // 
-            this.textBox5.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox5.Location = new System.Drawing.Point(153, 246);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(121, 21);
-            this.textBox5.TabIndex = 23;
+            this.txtYLNumber.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtYLNumber.Location = new System.Drawing.Point(153, 246);
+            this.txtYLNumber.Name = "txtYLNumber";
+            this.txtYLNumber.Size = new System.Drawing.Size(121, 21);
+            this.txtYLNumber.TabIndex = 23;
             // 
             // label13
             // 
@@ -211,58 +228,58 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label10.ForeColor = System.Drawing.Color.Navy;
-            this.label10.Location = new System.Drawing.Point(685, 183);
+            this.label10.Location = new System.Drawing.Point(523, 183);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(21, 14);
             this.label10.TabIndex = 21;
             this.label10.Text = "％";
             // 
-            // textBox3
+            // txtJXSD
             // 
-            this.textBox3.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox3.Location = new System.Drawing.Point(579, 179);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 21);
-            this.textBox3.TabIndex = 20;
+            this.txtJXSD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtJXSD.Location = new System.Drawing.Point(460, 182);
+            this.txtJXSD.Name = "txtJXSD";
+            this.txtJXSD.Size = new System.Drawing.Size(54, 21);
+            this.txtJXSD.TabIndex = 20;
             // 
-            // comboBox6
+            // cmbJXSD
             // 
-            this.comboBox6.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(489, 179);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(75, 21);
-            this.comboBox6.TabIndex = 19;
-            this.comboBox6.Text = "相对湿度";
+            this.cmbJXSD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbJXSD.FormattingEnabled = true;
+            this.cmbJXSD.Location = new System.Drawing.Point(379, 182);
+            this.cmbJXSD.Name = "cmbJXSD";
+            this.cmbJXSD.Size = new System.Drawing.Size(75, 21);
+            this.cmbJXSD.TabIndex = 19;
+            this.cmbJXSD.Text = "相对湿度";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label11.ForeColor = System.Drawing.Color.Navy;
-            this.label11.Location = new System.Drawing.Point(414, 185);
+            this.label11.Location = new System.Drawing.Point(340, 185);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(21, 14);
             this.label11.TabIndex = 18;
             this.label11.Text = "℃";
             // 
-            // textBox4
+            // txtJX
             // 
-            this.textBox4.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox4.Location = new System.Drawing.Point(312, 181);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 21);
-            this.textBox4.TabIndex = 17;
+            this.txtJX.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtJX.Location = new System.Drawing.Point(280, 181);
+            this.txtJX.Name = "txtJX";
+            this.txtJX.Size = new System.Drawing.Size(54, 21);
+            this.txtJX.TabIndex = 17;
             // 
-            // comboBox7
+            // cmbJX
             // 
-            this.comboBox7.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(153, 181);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(121, 21);
-            this.comboBox7.TabIndex = 16;
-            this.comboBox7.Text = "温度";
+            this.cmbJX.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbJX.FormattingEnabled = true;
+            this.cmbJX.Location = new System.Drawing.Point(153, 181);
+            this.cmbJX.Name = "cmbJX";
+            this.cmbJX.Size = new System.Drawing.Size(121, 21);
+            this.cmbJX.TabIndex = 16;
+            this.cmbJX.Text = "温度";
             // 
             // label12
             // 
@@ -280,58 +297,58 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label9.ForeColor = System.Drawing.Color.Navy;
-            this.label9.Location = new System.Drawing.Point(685, 128);
+            this.label9.Location = new System.Drawing.Point(523, 128);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(21, 14);
             this.label9.TabIndex = 14;
             this.label9.Text = "％";
             // 
-            // textBox2
+            // txtCGSD
             // 
-            this.textBox2.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox2.Location = new System.Drawing.Point(579, 125);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
-            this.textBox2.TabIndex = 13;
+            this.txtCGSD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCGSD.Location = new System.Drawing.Point(460, 124);
+            this.txtCGSD.Name = "txtCGSD";
+            this.txtCGSD.Size = new System.Drawing.Size(54, 21);
+            this.txtCGSD.TabIndex = 13;
             // 
-            // comboBox5
+            // cmbSD
             // 
-            this.comboBox5.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(489, 125);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(75, 21);
-            this.comboBox5.TabIndex = 12;
-            this.comboBox5.Text = "相对湿度";
+            this.cmbSD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbSD.FormattingEnabled = true;
+            this.cmbSD.Location = new System.Drawing.Point(379, 124);
+            this.cmbSD.Name = "cmbSD";
+            this.cmbSD.Size = new System.Drawing.Size(75, 21);
+            this.cmbSD.TabIndex = 12;
+            this.cmbSD.Text = "相对湿度";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label8.ForeColor = System.Drawing.Color.Navy;
-            this.label8.Location = new System.Drawing.Point(414, 129);
+            this.label8.Location = new System.Drawing.Point(340, 129);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(21, 14);
             this.label8.TabIndex = 11;
             this.label8.Text = "℃";
             // 
-            // textBox1
+            // txtCG
             // 
-            this.textBox1.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(312, 125);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 10;
+            this.txtCG.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtCG.Location = new System.Drawing.Point(280, 125);
+            this.txtCG.Name = "txtCG";
+            this.txtCG.Size = new System.Drawing.Size(54, 21);
+            this.txtCG.TabIndex = 10;
             // 
-            // comboBox4
+            // cmbCG
             // 
-            this.comboBox4.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(153, 124);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(121, 21);
-            this.comboBox4.TabIndex = 9;
-            this.comboBox4.Text = "温度";
+            this.cmbCG.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbCG.FormattingEnabled = true;
+            this.cmbCG.Location = new System.Drawing.Point(153, 124);
+            this.cmbCG.Name = "cmbCG";
+            this.cmbCG.Size = new System.Drawing.Size(121, 21);
+            this.cmbCG.TabIndex = 9;
+            this.cmbCG.Text = "温度";
             // 
             // label7
             // 
@@ -424,9 +441,9 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.CadetBlue;
+            this.panel3.Controls.Add(this.dataGridView1);
             this.panel3.Controls.Add(this.lbCreateExp);
             this.panel3.Controls.Add(this.lbexpSave);
-            this.panel3.Controls.Add(this.listView1);
             this.panel3.Controls.Add(this.lbExp);
             this.panel3.Location = new System.Drawing.Point(12, 376);
             this.panel3.Name = "panel3";
@@ -436,7 +453,7 @@
             // lbCreateExp
             // 
             this.lbCreateExp.AutoSize = true;
-            this.lbCreateExp.Location = new System.Drawing.Point(414, 238);
+            this.lbCreateExp.Location = new System.Drawing.Point(423, 214);
             this.lbCreateExp.Name = "lbCreateExp";
             this.lbCreateExp.Size = new System.Drawing.Size(77, 12);
             this.lbCreateExp.TabIndex = 30;
@@ -447,47 +464,13 @@
             // lbexpSave
             // 
             this.lbexpSave.AutoSize = true;
-            this.lbexpSave.Location = new System.Drawing.Point(305, 238);
+            this.lbexpSave.Location = new System.Drawing.Point(305, 214);
             this.lbexpSave.Name = "lbexpSave";
             this.lbexpSave.Size = new System.Drawing.Size(29, 12);
             this.lbexpSave.TabIndex = 29;
             this.lbexpSave.Text = "保存";
             this.lbexpSave.MouseEnter += new System.EventHandler(this.lbexpSave_MouseEnter);
             this.lbexpSave.MouseLeave += new System.EventHandler(this.lbexpSave_MouseLeave);
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
-            this.listView1.Location = new System.Drawing.Point(129, 51);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(636, 161);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "温度(℃)";
-            this.columnHeader1.Width = 160;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "湿度(％)";
-            this.columnHeader2.Width = 133;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "实验样本量";
-            this.columnHeader3.Width = 155;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "实验时间(h)";
-            this.columnHeader4.Width = 182;
             // 
             // lbExp
             // 
@@ -497,6 +480,124 @@
             this.lbExp.Size = new System.Drawing.Size(101, 12);
             this.lbExp.TabIndex = 2;
             this.lbExp.Text = "实验方案要素设计";
+            // 
+            // txtJXZD
+            // 
+            this.txtJXZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtJXZD.Location = new System.Drawing.Point(648, 179);
+            this.txtJXZD.Name = "txtJXZD";
+            this.txtJXZD.Size = new System.Drawing.Size(54, 21);
+            this.txtJXZD.TabIndex = 32;
+            this.txtJXZD.Visible = false;
+            // 
+            // cmbJZZD
+            // 
+            this.cmbJZZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbJZZD.FormattingEnabled = true;
+            this.cmbJZZD.Location = new System.Drawing.Point(567, 180);
+            this.cmbJZZD.Name = "cmbJZZD";
+            this.cmbJZZD.Size = new System.Drawing.Size(75, 21);
+            this.cmbJZZD.TabIndex = 31;
+            this.cmbJZZD.Text = "震动";
+            this.cmbJZZD.Visible = false;
+            // 
+            // txtZD
+            // 
+            this.txtZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtZD.Location = new System.Drawing.Point(648, 124);
+            this.txtZD.Name = "txtZD";
+            this.txtZD.Size = new System.Drawing.Size(54, 21);
+            this.txtZD.TabIndex = 30;
+            this.txtZD.Visible = false;
+            // 
+            // cmbZD
+            // 
+            this.cmbZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbZD.FormattingEnabled = true;
+            this.cmbZD.Location = new System.Drawing.Point(567, 124);
+            this.cmbZD.Name = "cmbZD";
+            this.cmbZD.Size = new System.Drawing.Size(75, 21);
+            this.cmbZD.TabIndex = 29;
+            this.cmbZD.Text = "震动";
+            this.cmbZD.Visible = false;
+            // 
+            // txtJXDYL
+            // 
+            this.txtJXDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtJXDYL.Location = new System.Drawing.Point(813, 176);
+            this.txtJXDYL.Name = "txtJXDYL";
+            this.txtJXDYL.Size = new System.Drawing.Size(54, 21);
+            this.txtJXDYL.TabIndex = 36;
+            this.txtJXDYL.Visible = false;
+            // 
+            // cmbJXDYL
+            // 
+            this.cmbJXDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbJXDYL.FormattingEnabled = true;
+            this.cmbJXDYL.Location = new System.Drawing.Point(732, 175);
+            this.cmbJXDYL.Name = "cmbJXDYL";
+            this.cmbJXDYL.Size = new System.Drawing.Size(75, 21);
+            this.cmbJXDYL.TabIndex = 35;
+            this.cmbJXDYL.Text = "电应力";
+            this.cmbJXDYL.Visible = false;
+            // 
+            // txtDYL
+            // 
+            this.txtDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtDYL.Location = new System.Drawing.Point(813, 125);
+            this.txtDYL.Name = "txtDYL";
+            this.txtDYL.Size = new System.Drawing.Size(54, 21);
+            this.txtDYL.TabIndex = 34;
+            this.txtDYL.Visible = false;
+            // 
+            // cmbDYL
+            // 
+            this.cmbDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbDYL.FormattingEnabled = true;
+            this.cmbDYL.Location = new System.Drawing.Point(732, 125);
+            this.cmbDYL.Name = "cmbDYL";
+            this.cmbDYL.Size = new System.Drawing.Size(75, 21);
+            this.cmbDYL.TabIndex = 33;
+            this.cmbDYL.Text = "电应力";
+            this.cmbDYL.Visible = false;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4});
+            this.dataGridView1.Location = new System.Drawing.Point(176, 40);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(644, 150);
+            this.dataGridView1.TabIndex = 31;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "温度(℃)";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 150;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "湿度(％)";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 150;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "实验样本量";
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 150;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "实验时间(h)";
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 150;
             // 
             // frmExpermentSM
             // 
@@ -516,6 +617,7 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -528,7 +630,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lbSubtitle;
         private System.Windows.Forms.Label lbExp;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox cmbCG;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cbTLSetType;
         private System.Windows.Forms.Label label6;
@@ -536,31 +638,39 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbYLType;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox8;
+        private System.Windows.Forms.ComboBox cmbJW;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtYBNumber;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtYLNumber;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.TextBox txtJXSD;
+        private System.Windows.Forms.ComboBox cmbJXSD;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.TextBox txtJX;
+        private System.Windows.Forms.ComboBox cmbJX;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox5;
+        private System.Windows.Forms.TextBox txtCGSD;
+        private System.Windows.Forms.ComboBox cmbSD;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCG;
         private System.Windows.Forms.Label lbSave;
         private System.Windows.Forms.Label lbCreateExp;
         private System.Windows.Forms.Label lbexpSave;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.TextBox txtJXDYL;
+        private System.Windows.Forms.ComboBox cmbJXDYL;
+        private System.Windows.Forms.TextBox txtDYL;
+        private System.Windows.Forms.ComboBox cmbDYL;
+        private System.Windows.Forms.TextBox txtJXZD;
+        private System.Windows.Forms.ComboBox cmbJZZD;
+        private System.Windows.Forms.TextBox txtZD;
+        private System.Windows.Forms.ComboBox cmbZD;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }

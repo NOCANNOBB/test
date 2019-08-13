@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XMLHelper;
 
 namespace Define
 {
@@ -16,7 +17,7 @@ namespace Define
 
     public class ProDefine {
         public static string NowProjectName = "";
-
+        public static ProjectInfo g_MyProject = null;
 
         public static SMExpermentParam g_SMExpermentParam = new SMExpermentParam();
 

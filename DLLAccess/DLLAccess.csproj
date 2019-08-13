@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{07AF22C5-7E8B-4D1D-B207-9F06919DDC08}</ProjectGuid>
+    <ProjectGuid>{B7291064-3C19-4848-9DFE-3850FB231C45}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DLLProjectInfo</RootNamespace>
-    <AssemblyName>DLLProjectInfo</AssemblyName>
+    <RootNamespace>DLLAccess</RootNamespace>
+    <AssemblyName>DLLAccess</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,26 +39,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Project.cs" />
+    <Compile Include="AccessHelper.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Define\Define.csproj">
-      <Project>{f0294db3-e727-4594-ac52-b91d4a7b2866}</Project>
-      <Name>Define</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DLLAccess\DLLAccess.csproj">
-      <Project>{b7291064-3c19-4848-9dfe-3850fb231c45}</Project>
-      <Name>DLLAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DLLStruct\DLLStruct.csproj">
-      <Project>{bb07b757-1fbd-4cdd-a21c-21ef359c007d}</Project>
-      <Name>DLLStruct</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XMLHelper\XMLHelper.csproj">
-      <Project>{cd220a41-9101-45dd-9204-bc50466d75f0}</Project>
-      <Name>XMLHelper</Name>
-    </ProjectReference>
+    <COMReference Include="ADODB">
+      <Guid>{2A75196C-D9EB-4129-B803-931327F72D5C}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="ADOX">
+      <Guid>{00000600-0000-0010-8000-00AA006D2EA4}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

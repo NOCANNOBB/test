@@ -47,6 +47,10 @@
       <Project>{bb07b757-1fbd-4cdd-a21c-21ef359c007d}</Project>
       <Name>DLLStruct</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XMLHelper\XMLHelper.csproj">
+      <Project>{cd220a41-9101-45dd-9204-bc50466d75f0}</Project>
+      <Name>XMLHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

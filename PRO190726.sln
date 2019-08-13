@@ -18,6 +18,8 @@ Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Setup2", "Setup2\Setup2.isp
 		{5108D10A-B794-488A-99CF-15B738DAC4AB} = {5108D10A-B794-488A-99CF-15B738DAC4AB}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DLLAccess", "DLLAccess\DLLAccess.csproj", "{B7291064-3C19-4848-9DFE-3850FB231C45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -217,6 +219,31 @@ Global
 		{08F13541-3731-464B-88CC-668FB8CC09E7}.SingleImage|Mixed Platforms.Build.0 = SingleImage
 		{08F13541-3731-464B-88CC-668FB8CC09E7}.SingleImage|x86.ActiveCfg = SingleImage
 		{08F13541-3731-464B-88CC-668FB8CC09E7}.SingleImage|x86.Build.0 = SingleImage
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.CD_ROM|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.CD_ROM|Mixed Platforms.Build.0 = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.CD_ROM|x86.ActiveCfg = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.DVD-5|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.DVD-5|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.DVD-5|x86.ActiveCfg = Debug|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.Release|x86.ActiveCfg = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.SingleImage|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.SingleImage|Mixed Platforms.Build.0 = Release|Any CPU
+		{B7291064-3C19-4848-9DFE-3850FB231C45}.SingleImage|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

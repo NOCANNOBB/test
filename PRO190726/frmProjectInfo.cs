@@ -22,11 +22,44 @@ namespace PRO190726
         }
 
         ToolStripStatusLabel m_stlb = null;
-        public frmProjectInfo(ToolStripStatusLabel stlb)
+        ListView m_ListView = null;
+        public frmProjectInfo(ToolStripStatusLabel stlb,ListView tpView)
         {
             InitializeComponent();
             UIInit();
             m_stlb = stlb;
+            m_ListView = tpView;
+        }
+
+        public frmProjectInfo(ToolStripStatusLabel stlb, ListView tpView,ProjectInfo pro)
+        {
+            InitializeComponent();
+            UIInit();
+            m_stlb = stlb;
+            m_ListView = tpView;
+
+            
+            //Guid guid = Guid.NewGuid();
+
+            this.txtProjectName.Text = pro.ProjectName;
+
+            this.txtProductName.Text = pro.ProductName;
+           
+
+
+            this.txtProductGN.Text = pro.ProductGN;
+
+
+            txtProductUse.Text = pro.ProductUse;
+
+           
+
+            txtExpTime.Text = pro.ExperTime;
+           
+
+            this.txtExpAddress.Text = pro.ExperAddress;
+           
+
         }
 
         DoProjectInfo m_Pro = null;
@@ -107,7 +140,7 @@ namespace PRO190726
                 return;
             }
 
-            Guid guid = Guid.NewGuid();
+            
 
             string ProductName = this.txtProductName.Text.Trim();
              if(ProductName == ""){
@@ -144,28 +177,71 @@ namespace PRO190726
                 this.txtExpAddress.Focus();
                 return;
             }
-
-            ProjectInfo pro = new ProjectInfo();
-            pro.ProjectPath =  System.IO.Directory.GetCurrentDirectory() + "\\Pro\\";
-            pro.ProjectName = ProjectName;
-            pro.ProductUse = ProductUse;
-            pro.ProductGN = ProductGN;
-            pro.ProductName = ProductName;
-            pro.ExperAddress = ExpAddress;
-            pro.ExperTime = ExpTime;
-            pro.GUID = guid;
+             ProjectInfo pro = new ProjectInfo();
+             if (ProDefine.g_MyProject != null)
+             {
+                 pro.ProjectPath = System.IO.Directory.GetCurrentDirectory() + "\\Pro\\" + ProjectName;
+                 pro.ProjectName = ProjectName;
+                 pro.ProductUse = ProductUse;
+                 pro.ProductGN = ProductGN;
+                 pro.ProductName = ProductName;
+                 pro.ExperAddress = ExpAddress;
+                 pro.ExperTime = ExpTime;
+                 pro.GUID = ProDefine.g_MyProject.GUID;
+             }
+             else {
+                 Guid guid = Guid.NewGuid();
+                 
+                 pro.ProjectPath = System.IO.Directory.GetCurrentDirectory() + "\\Pro\\" + ProjectName;
+                 pro.ProjectName = ProjectName;
+                 pro.ProductUse = ProductUse;
+                 pro.ProductGN = ProductGN;
+                 pro.ProductName = ProductName;
+                 pro.ExperAddress = ExpAddress;
+                 pro.ExperTime = ExpTime;
+                 pro.GUID = guid;
+             }
+            
 
             int returnValue = m_Pro.SaveProjectInfo(pro);
             if (returnValue == 0)
             {
                 ProDefine.NowProjectName = ProjectName;
                 m_stlb.Text = ProjectName;
+                ProDefine.g_MyProject = pro;
+                InsertListView(m_ListView, ProjectName);
                 MessageBox.Show("保存成功");
             }
             else if (returnValue == -1){
-            
-                MessageBox.Show("保存失败,当前路径下存在名称为：" + ProductName + " 的项目");
+                if (MessageBox.Show("保存失败,当前路径下存在名称为：" + ProjectName + " 的项目,是否存储修改内容", "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    m_Pro.ChangeProjectInfo(pro);
+                    ProDefine.g_MyProject = pro;
+                }
+                
             }
+
+        }
+
+        public void InsertListView(ListView lv, string ProName)
+        {
+            this.m_ListView.BeginUpdate();
+            //获取文本框中的值
+            string name = ProName;
+
+            ListViewItem li = new ListViewItem();
+            //添加同一行的数据
+            li.Text = "\uf02e  " + name;
+            li.Font = new Font("FontAwesome", 14, FontStyle.Bold);
+            li.ForeColor = Color.DarkMagenta;
+            //将行对象绑定在listview对象中
+            lv.Items.Add(li);
+            this.m_ListView.EndUpdate();
+            //return lv;
+        }
+
+        private void frmProjectInfo_Load(object sender, EventArgs e)
+        {
 
         }
     }

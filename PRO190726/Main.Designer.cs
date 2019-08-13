@@ -71,7 +71,6 @@
             this.打开项目ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.删除项目ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.保存项目ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.设置为分析项目ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
@@ -140,7 +139,7 @@
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(2, 57);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(588, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(496, 25);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -161,7 +160,7 @@
             // 
             this.新建项目ToolStripMenuItem.BackColor = System.Drawing.Color.Azure;
             this.新建项目ToolStripMenuItem.Name = "新建项目ToolStripMenuItem";
-            this.新建项目ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.新建项目ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.新建项目ToolStripMenuItem.Text = "新建项目";
             this.新建项目ToolStripMenuItem.Click += new System.EventHandler(this.新建项目ToolStripMenuItem_Click);
             // 
@@ -169,7 +168,7 @@
             // 
             this.打开项目ToolStripMenuItem.BackColor = System.Drawing.Color.LightCyan;
             this.打开项目ToolStripMenuItem.Name = "打开项目ToolStripMenuItem";
-            this.打开项目ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.打开项目ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.打开项目ToolStripMenuItem.Text = "打开项目";
             this.打开项目ToolStripMenuItem.Click += new System.EventHandler(this.打开项目ToolStripMenuItem_Click);
             // 
@@ -177,7 +176,7 @@
             // 
             this.删除项目ToolStripMenuItem.BackColor = System.Drawing.Color.Azure;
             this.删除项目ToolStripMenuItem.Name = "删除项目ToolStripMenuItem";
-            this.删除项目ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.删除项目ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.删除项目ToolStripMenuItem.Text = "删除项目";
             this.删除项目ToolStripMenuItem.Click += new System.EventHandler(this.删除项目ToolStripMenuItem_Click);
             // 
@@ -185,14 +184,14 @@
             // 
             this.保存ToolStripMenuItem.BackColor = System.Drawing.Color.LightCyan;
             this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.保存ToolStripMenuItem.Text = "保存";
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.BackColor = System.Drawing.Color.Azure;
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             // 
             // 方案设计及优化ToolStripMenuItem
@@ -441,35 +440,29 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.打开项目ToolStripMenuItem1,
             this.删除项目ToolStripMenuItem1,
-            this.保存项目ToolStripMenuItem,
-            this.设置为分析项目ToolStripMenuItem});
+            this.保存项目ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(161, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
             // 
             // 打开项目ToolStripMenuItem1
             // 
             this.打开项目ToolStripMenuItem1.Name = "打开项目ToolStripMenuItem1";
             this.打开项目ToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
             this.打开项目ToolStripMenuItem1.Text = "打开项目";
+            this.打开项目ToolStripMenuItem1.Click += new System.EventHandler(this.打开项目ToolStripMenuItem1_Click);
             // 
             // 删除项目ToolStripMenuItem1
             // 
             this.删除项目ToolStripMenuItem1.Name = "删除项目ToolStripMenuItem1";
-            this.删除项目ToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
+            this.删除项目ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.删除项目ToolStripMenuItem1.Text = "删除项目";
+            this.删除项目ToolStripMenuItem1.Click += new System.EventHandler(this.删除项目ToolStripMenuItem1_Click);
             // 
             // 保存项目ToolStripMenuItem
             // 
             this.保存项目ToolStripMenuItem.Name = "保存项目ToolStripMenuItem";
             this.保存项目ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.保存项目ToolStripMenuItem.Text = "保存项目";
-            // 
-            // 设置为分析项目ToolStripMenuItem
-            // 
-            this.设置为分析项目ToolStripMenuItem.Name = "设置为分析项目ToolStripMenuItem";
-            this.设置为分析项目ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.设置为分析项目ToolStripMenuItem.Text = "设置为分析项目";
-            this.设置为分析项目ToolStripMenuItem.Click += new System.EventHandler(this.设置为分析项目ToolStripMenuItem_Click);
             // 
             // pictureBox2
             // 
@@ -566,7 +559,6 @@
         private System.Windows.Forms.ToolStripMenuItem 打开项目ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 删除项目ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 保存项目ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 设置为分析项目ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 寿命实验方案ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 实验方案设计ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 优化实验方案ToolStripMenuItem;

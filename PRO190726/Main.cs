@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Define;
+using DLLAccess;
 using DLLProjectInfo;
 using XMLHelper;
 namespace PRO190726
@@ -113,9 +114,9 @@ namespace PRO190726
             this.保存项目ToolStripMenuItem.Font = new Font("FontAwesome", 12);
             this.保存项目ToolStripMenuItem.ForeColor = Color.CadetBlue;
 
-            this.设置为分析项目ToolStripMenuItem.Text = "\uf085 设置为分析项目";
-            this.设置为分析项目ToolStripMenuItem.Font = new Font("FontAwesome", 12);
-            this.设置为分析项目ToolStripMenuItem.ForeColor = Color.CadetBlue;
+           // this.设置为分析项目ToolStripMenuItem.Text = "\uf085 设置为分析项目";
+           // this.设置为分析项目ToolStripMenuItem.Font = new Font("FontAwesome", 12);
+            //this.设置为分析项目ToolStripMenuItem.ForeColor = Color.CadetBlue;
 
 
 
@@ -187,8 +188,21 @@ namespace PRO190726
             if (m_Pro == null) {
                 m_Pro = new DoProjectInfo();
             }
-            //ShowlistPro();
+            DoConfigInit();
+            ShowlistPro();
         }
+        private string dBPath = System.IO.Directory.GetCurrentDirectory() + "\\Experment.mdb";
+        private void DoConfigInit() {
+            try {
+                AccessHelper.CreateAccessDb(dBPath);
+                AccessHelper.CreateAccessTable(dBPath, "ProjectConfig");
+                AccessHelper.CreateAccessTable(dBPath, "ExpermentParam");
+            }
+            catch { }
+        }
+
+
+
         List<ProjectInfo> m_ProList = new List<ProjectInfo>();
 
         private void ShowlistPro() {
@@ -300,7 +314,7 @@ namespace PRO190726
             }
             if (frmPro == null)
             {
-                frmPro = new frmProjectInfo(this.toolStripStatusLabel1);
+                frmPro = new frmProjectInfo(this.toolStripStatusLabel1,this.lsProject);
             }
 
             ShowForm(frmPro);
@@ -328,10 +342,7 @@ namespace PRO190726
 
         private void 方案设计及优化ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ProDefine.NowProjectName == "") {
-                MessageBox.Show("请先创建项目，或者选择默认项目");
-                return;
-            }
+            
             
         }
 
@@ -645,6 +656,41 @@ namespace PRO190726
             frmKKYZ = new frmKKXYANZHENG();
             ShowForm(frmKKYZ);
             this.lbTypeShow.Text = "\uf06e 可靠性验证";
+        }
+
+        private void 打开项目ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (this.lsProject.SelectedItems.Count <= 0) {
+                MessageBox.Show("请选择项目");
+                return;
+            }
+            int SelIndex = this.lsProject.SelectedItems[0].Index;
+            ShowlistPro();
+            
+
+            
+            ProjectInfo pro = m_ProList[SelIndex];
+
+            ProDefine.g_MyProject = pro;
+            frmProjectInfo frmpro = new frmProjectInfo(this.toolStripStatusLabel1,this.lsProject,pro);
+            ShowForm(frmpro);
+            this.toolStripStatusLabel1.Text = "当前项目：" + pro.ProjectName;
+            this.lbTypeShow.Text = "\uf06e  项目信息";
+        }
+
+        private void 删除项目ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (this.lsProject.SelectedItems.Count <= 0)
+            {
+                MessageBox.Show("请选择要删除的项目");
+                return;
+            }
+
+            if (MessageBox.Show("确定删除 项目" + this.lsProject.SelectedItems[0].Text, "提示", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                int SelIndex = this.lsProject.SelectedItems[0].Index;
+                DoDlePro(SelIndex);
+            }
         }
 
 
