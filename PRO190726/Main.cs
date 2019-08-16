@@ -188,6 +188,8 @@ namespace PRO190726
             if (m_Pro == null) {
                 m_Pro = new DoProjectInfo();
             }
+
+            ProDefine.g_SMExpermentDesin.ExpParamList = new List<DLLStruct.SMExpeDesignParam>();
             DoConfigInit();
             ShowlistPro();
         }
@@ -197,6 +199,7 @@ namespace PRO190726
                 AccessHelper.CreateAccessDb(dBPath);
                 AccessHelper.CreateAccessTable(dBPath, "ProjectConfig");
                 AccessHelper.CreateAccessTable(dBPath, "ExpermentParam");
+                AccessHelper.CreateAccessTable(dBPath, "ExpermentDesign");
             }
             catch { }
         }

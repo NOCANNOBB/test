@@ -21,6 +21,8 @@ namespace Define
 
         public static SMExpermentParam g_SMExpermentParam = new SMExpermentParam();
 
+        public static SMExpermentDesin g_SMExpermentDesin = new SMExpermentDesin();
+
         public static uint ClearBit(uint value, int BitInDWORD)
         {
             value = (uint)(value & (~(0x1 << BitInDWORD)));

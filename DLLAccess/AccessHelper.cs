@@ -113,6 +113,16 @@ namespace DLLAccess
                     colums.Insert(14, "JXZD");
                     colums.Insert(15, "JXDYL");
                 }
+                if (tbName == "ExpermentDesign")
+                {
+                    colums.Insert(0, "GUIDSTR");// 1加速 0 寿命
+                    colums.Insert(1, "Temperature");// 1加速 0 寿命
+                    colums.Insert(2, "SD");
+                    colums.Insert(3, "YBNumber");
+                    colums.Insert(4, "ExpermentTime");
+                }
+
+
                 foreach (var column in colums)
                 {
                     ADOX.ColumnClass col = new ADOX.ColumnClass

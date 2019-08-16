@@ -30,11 +30,6 @@
         {
             this.lbCreateExp = new System.Windows.Forms.Label();
             this.lbSave = new System.Windows.Forms.Label();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.listView1 = new System.Windows.Forms.ListView();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.lbExpSave = new System.Windows.Forms.Label();
@@ -66,9 +61,23 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.lbExp = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtJXDYL = new System.Windows.Forms.TextBox();
+            this.cmbJXDYL = new System.Windows.Forms.ComboBox();
+            this.txtDYL = new System.Windows.Forms.TextBox();
+            this.cmbDYL = new System.Windows.Forms.ComboBox();
+            this.txtJXZD = new System.Windows.Forms.TextBox();
+            this.cmbJZZD = new System.Windows.Forms.ComboBox();
+            this.txtZD = new System.Windows.Forms.TextBox();
+            this.cmbZD = new System.Windows.Forms.ComboBox();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // lbCreateExp
@@ -92,40 +101,6 @@
             this.lbSave.Text = "保存";
             this.lbSave.MouseEnter += new System.EventHandler(this.lbSave_MouseEnter);
             this.lbSave.MouseLeave += new System.EventHandler(this.lbSave_MouseLeave);
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "实验时间(h)";
-            this.columnHeader4.Width = 182;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "实验样本量";
-            this.columnHeader3.Width = 155;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "湿度(％)";
-            this.columnHeader2.Width = 133;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "温度(℃)";
-            this.columnHeader1.Width = 160;
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
-            this.listView1.Location = new System.Drawing.Point(129, 44);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(636, 161);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // textBox6
             // 
@@ -163,7 +138,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label10.ForeColor = System.Drawing.Color.Navy;
-            this.label10.Location = new System.Drawing.Point(727, 212);
+            this.label10.Location = new System.Drawing.Point(607, 214);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(21, 14);
             this.label10.TabIndex = 21;
@@ -174,6 +149,14 @@
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.CadetBlue;
+            this.panel2.Controls.Add(this.txtJXDYL);
+            this.panel2.Controls.Add(this.cmbJXDYL);
+            this.panel2.Controls.Add(this.txtDYL);
+            this.panel2.Controls.Add(this.cmbDYL);
+            this.panel2.Controls.Add(this.txtJXZD);
+            this.panel2.Controls.Add(this.cmbJZZD);
+            this.panel2.Controls.Add(this.txtZD);
+            this.panel2.Controls.Add(this.cmbZD);
             this.panel2.Controls.Add(this.label19);
             this.panel2.Controls.Add(this.label15);
             this.panel2.Controls.Add(this.label13);
@@ -210,7 +193,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label19.ForeColor = System.Drawing.Color.Navy;
-            this.label19.Location = new System.Drawing.Point(598, 211);
+            this.label19.Location = new System.Drawing.Point(474, 214);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(21, 14);
             this.label19.TabIndex = 32;
@@ -221,7 +204,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label15.ForeColor = System.Drawing.Color.Navy;
-            this.label15.Location = new System.Drawing.Point(598, 155);
+            this.label15.Location = new System.Drawing.Point(474, 155);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(21, 14);
             this.label15.TabIndex = 31;
@@ -232,7 +215,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label13.ForeColor = System.Drawing.Color.Navy;
-            this.label13.Location = new System.Drawing.Point(295, 214);
+            this.label13.Location = new System.Drawing.Point(235, 214);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(21, 14);
             this.label13.TabIndex = 30;
@@ -243,7 +226,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label6.ForeColor = System.Drawing.Color.Navy;
-            this.label6.Location = new System.Drawing.Point(295, 155);
+            this.label6.Location = new System.Drawing.Point(235, 155);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(21, 14);
             this.label6.TabIndex = 29;
@@ -253,7 +236,7 @@
             // 
             this.textBox3.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox3.ForeColor = System.Drawing.Color.Navy;
-            this.textBox3.Location = new System.Drawing.Point(621, 205);
+            this.textBox3.Location = new System.Drawing.Point(501, 209);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 21);
             this.textBox3.TabIndex = 20;
@@ -263,9 +246,9 @@
             this.comboBox6.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox6.ForeColor = System.Drawing.Color.Navy;
             this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(517, 206);
+            this.comboBox6.Location = new System.Drawing.Point(385, 208);
             this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(75, 21);
+            this.comboBox6.Size = new System.Drawing.Size(83, 21);
             this.comboBox6.TabIndex = 19;
             this.comboBox6.Text = "相对湿度";
             // 
@@ -274,7 +257,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label11.ForeColor = System.Drawing.Color.Navy;
-            this.label11.Location = new System.Drawing.Point(424, 212);
+            this.label11.Location = new System.Drawing.Point(322, 215);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(21, 14);
             this.label11.TabIndex = 18;
@@ -284,9 +267,9 @@
             // 
             this.textBox4.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox4.ForeColor = System.Drawing.Color.Navy;
-            this.textBox4.Location = new System.Drawing.Point(318, 207);
+            this.textBox4.Location = new System.Drawing.Point(258, 208);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 21);
+            this.textBox4.Size = new System.Drawing.Size(58, 21);
             this.textBox4.TabIndex = 17;
             // 
             // comboBox7
@@ -296,7 +279,7 @@
             this.comboBox7.FormattingEnabled = true;
             this.comboBox7.Location = new System.Drawing.Point(172, 208);
             this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(121, 21);
+            this.comboBox7.Size = new System.Drawing.Size(61, 21);
             this.comboBox7.TabIndex = 16;
             this.comboBox7.Text = "温度";
             // 
@@ -316,7 +299,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label9.ForeColor = System.Drawing.Color.Navy;
-            this.label9.Location = new System.Drawing.Point(727, 155);
+            this.label9.Location = new System.Drawing.Point(607, 157);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(21, 14);
             this.label9.TabIndex = 14;
@@ -326,7 +309,7 @@
             // 
             this.textBox2.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox2.ForeColor = System.Drawing.Color.Navy;
-            this.textBox2.Location = new System.Drawing.Point(621, 150);
+            this.textBox2.Location = new System.Drawing.Point(501, 152);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 21);
             this.textBox2.TabIndex = 13;
@@ -336,9 +319,9 @@
             this.comboBox5.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox5.ForeColor = System.Drawing.Color.Navy;
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(517, 151);
+            this.comboBox5.Location = new System.Drawing.Point(385, 150);
             this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(75, 21);
+            this.comboBox5.Size = new System.Drawing.Size(83, 21);
             this.comboBox5.TabIndex = 12;
             this.comboBox5.Text = "相对湿度";
             // 
@@ -347,7 +330,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label8.ForeColor = System.Drawing.Color.Navy;
-            this.label8.Location = new System.Drawing.Point(424, 155);
+            this.label8.Location = new System.Drawing.Point(322, 155);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(21, 14);
             this.label8.TabIndex = 11;
@@ -357,9 +340,9 @@
             // 
             this.textBox1.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.ForeColor = System.Drawing.Color.Navy;
-            this.textBox1.Location = new System.Drawing.Point(318, 150);
+            this.textBox1.Location = new System.Drawing.Point(258, 150);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.Size = new System.Drawing.Size(58, 21);
             this.textBox1.TabIndex = 10;
             // 
             // comboBox4
@@ -369,7 +352,7 @@
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Location = new System.Drawing.Point(172, 151);
             this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(121, 21);
+            this.comboBox4.Size = new System.Drawing.Size(61, 21);
             this.comboBox4.TabIndex = 9;
             this.comboBox4.Text = "温度";
             // 
@@ -450,9 +433,9 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.CadetBlue;
+            this.panel3.Controls.Add(this.dataGridView1);
             this.panel3.Controls.Add(this.lbCreateExp);
             this.panel3.Controls.Add(this.lbExpSave);
-            this.panel3.Controls.Add(this.listView1);
             this.panel3.Controls.Add(this.lbExp);
             this.panel3.Location = new System.Drawing.Point(22, 378);
             this.panel3.Name = "panel3";
@@ -479,6 +462,124 @@
             this.panel1.Size = new System.Drawing.Size(1137, 31);
             this.panel1.TabIndex = 4;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+            this.dataGridView1.Location = new System.Drawing.Point(148, 47);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(644, 150);
+            this.dataGridView1.TabIndex = 32;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "温度(℃)";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "湿度(％)";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "实验样本量";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "实验时间(h)";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 150;
+            // 
+            // txtJXDYL
+            // 
+            this.txtJXDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtJXDYL.Location = new System.Drawing.Point(944, 212);
+            this.txtJXDYL.Name = "txtJXDYL";
+            this.txtJXDYL.Size = new System.Drawing.Size(54, 21);
+            this.txtJXDYL.TabIndex = 44;
+            this.txtJXDYL.Visible = false;
+            // 
+            // cmbJXDYL
+            // 
+            this.cmbJXDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbJXDYL.FormattingEnabled = true;
+            this.cmbJXDYL.Location = new System.Drawing.Point(852, 211);
+            this.cmbJXDYL.Name = "cmbJXDYL";
+            this.cmbJXDYL.Size = new System.Drawing.Size(75, 21);
+            this.cmbJXDYL.TabIndex = 43;
+            this.cmbJXDYL.Text = "电应力";
+            this.cmbJXDYL.Visible = false;
+            // 
+            // txtDYL
+            // 
+            this.txtDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtDYL.Location = new System.Drawing.Point(944, 155);
+            this.txtDYL.Name = "txtDYL";
+            this.txtDYL.Size = new System.Drawing.Size(54, 21);
+            this.txtDYL.TabIndex = 42;
+            this.txtDYL.Visible = false;
+            // 
+            // cmbDYL
+            // 
+            this.cmbDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbDYL.FormattingEnabled = true;
+            this.cmbDYL.Location = new System.Drawing.Point(852, 154);
+            this.cmbDYL.Name = "cmbDYL";
+            this.cmbDYL.Size = new System.Drawing.Size(75, 21);
+            this.cmbDYL.TabIndex = 41;
+            this.cmbDYL.Text = "电应力";
+            this.cmbDYL.Visible = false;
+            // 
+            // txtJXZD
+            // 
+            this.txtJXZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtJXZD.Location = new System.Drawing.Point(756, 152);
+            this.txtJXZD.Name = "txtJXZD";
+            this.txtJXZD.Size = new System.Drawing.Size(54, 21);
+            this.txtJXZD.TabIndex = 40;
+            this.txtJXZD.Visible = false;
+            // 
+            // cmbJZZD
+            // 
+            this.cmbJZZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbJZZD.FormattingEnabled = true;
+            this.cmbJZZD.Location = new System.Drawing.Point(675, 212);
+            this.cmbJZZD.Name = "cmbJZZD";
+            this.cmbJZZD.Size = new System.Drawing.Size(75, 21);
+            this.cmbJZZD.TabIndex = 39;
+            this.cmbJZZD.Text = "震动";
+            this.cmbJZZD.Visible = false;
+            // 
+            // txtZD
+            // 
+            this.txtZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtZD.Location = new System.Drawing.Point(756, 212);
+            this.txtZD.Name = "txtZD";
+            this.txtZD.Size = new System.Drawing.Size(54, 21);
+            this.txtZD.TabIndex = 38;
+            this.txtZD.Visible = false;
+            // 
+            // cmbZD
+            // 
+            this.cmbZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbZD.FormattingEnabled = true;
+            this.cmbZD.Location = new System.Drawing.Point(675, 152);
+            this.cmbZD.Name = "cmbZD";
+            this.cmbZD.Size = new System.Drawing.Size(75, 21);
+            this.cmbZD.TabIndex = 37;
+            this.cmbZD.Text = "震动";
+            this.cmbZD.Visible = false;
+            // 
             // frmYHExperienceSM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -497,6 +598,7 @@
             this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -505,11 +607,6 @@
 
         private System.Windows.Forms.Label lbCreateExp;
         private System.Windows.Forms.Label lbSave;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label lbExpSave;
@@ -541,5 +638,18 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.TextBox txtJXDYL;
+        private System.Windows.Forms.ComboBox cmbJXDYL;
+        private System.Windows.Forms.TextBox txtDYL;
+        private System.Windows.Forms.ComboBox cmbDYL;
+        private System.Windows.Forms.TextBox txtJXZD;
+        private System.Windows.Forms.ComboBox cmbJZZD;
+        private System.Windows.Forms.TextBox txtZD;
+        private System.Windows.Forms.ComboBox cmbZD;
     }
 }

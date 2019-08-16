@@ -134,7 +134,7 @@ namespace PRO190726
             {
                 YLText += "震动+";
             }
-            if (ProDefine.GetBit(ValueParam, 2))
+            if (ProDefine.GetBit(ValueParam, 3))
             {
                 YLText += "电应力+";
             }
@@ -144,6 +144,50 @@ namespace PRO190726
             }
 
             this.cmbYLType.Text = YLText;
+            bool ISZD = false;
+            bool ISDYL = false;
+            string[] YLType = YLText.Split('+');
+            foreach (var info in YLType)
+            {
+                if (info == "震动")
+                {
+                    ISZD = true;
+
+                }
+                if (info == "电应力")
+                {
+                    ISDYL = true;
+                }
+            }
+            if (ISZD)
+            {
+                this.cmbZD.Visible = true;
+                this.txtZD.Visible = true;
+                this.cmbJZZD.Visible = true;
+                this.txtJXZD.Visible = true;
+            }
+            else
+            {
+                this.cmbZD.Visible = false;
+                this.txtZD.Visible = false;
+                this.cmbJZZD.Visible = false;
+                this.txtJXZD.Visible = false;
+            }
+
+            if (ISDYL)
+            {
+                this.cmbDYL.Visible = true;
+                this.txtDYL.Visible = true;
+                this.cmbJXDYL.Visible = true;
+                this.txtJXDYL.Visible = true;
+            }
+            else
+            {
+                this.cmbDYL.Visible = false;
+                this.txtDYL.Visible = false;
+                this.cmbJXDYL.Visible = false;
+                this.txtJXDYL.Visible = false;
+            }
         }
     }
 }

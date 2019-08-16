@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Define;
 using DLLProjectInfo;
+using DLLStruct;
 
 namespace PRO190726
 {
@@ -296,6 +297,58 @@ namespace PRO190726
 
         private void SetYLModValue(int ValueParam) {
             this.cbJsMode.Text = "待接入";
+        }
+
+        private void dataGridView1_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 2) {
+                int RwosCount = this.dataGridView1.Rows.Count;
+                int ColumnSum = 0;
+                for (int i = 0; i < RwosCount; i++) {
+                    if (this.dataGridView1.Rows[i].Cells[2].Value == null) {
+                        MessageBox.Show("实验样本量不能为空");
+                        return;
+                    }
+                    ColumnSum += Convert.ToInt32(this.dataGridView1.Rows[i].Cells[2].Value);
+                }
+
+                if (ColumnSum != Convert.ToInt32(ProDefine.g_SMExpermentParam.YBNumber)) {
+                    MessageBox.Show("实验样本总量需等于样本总量");
+                    
+                    return;
+                }
+            }
+        }
+
+        private void lbexpSave_Click(object sender, EventArgs e)
+        {
+            int RwosCount = this.dataGridView1.Rows.Count;
+           
+            for (int i = 0; i < RwosCount; i++)
+            {
+                SMExpeDesignParam TPParam = new SMExpeDesignParam();
+                if (this.dataGridView1.Rows[i].Cells[0].Value == null) { return; }
+                TPParam.Temperature = Convert.ToDouble(this.dataGridView1.Rows[i].Cells[0].Value);
+
+                if (this.dataGridView1.Rows[i].Cells[1].Value == null) { return; }
+                TPParam.SD = Convert.ToDouble(this.dataGridView1.Rows[i].Cells[1].Value);
+
+                if (this.dataGridView1.Rows[i].Cells[2].Value == null) { return; }
+                TPParam.YBNumber = Convert.ToInt32(this.dataGridView1.Rows[i].Cells[2].Value);
+
+                if (this.dataGridView1.Rows[i].Cells[3].Value == null) { return; }
+                TPParam.ExpermentTime = Convert.ToInt32(this.dataGridView1.Rows[i].Cells[3].Value);
+
+
+                ProDefine.g_SMExpermentDesin.ExpParamList.Add(TPParam);
+            }
+
+            m_Pro.SaveExpermentDesign();
+        }
+
+        private void lbCreateExp_Click(object sender, EventArgs e)
+        {
+
         }
 
         

@@ -10,8 +10,19 @@ namespace DLLStruct
     {
     }
 
-   
 
+    public class SMExpeDesignParam {
+        public double Temperature { get; set; }
+
+        public double SD { get; set; }
+        public int YBNumber { get; set; }
+
+        public int ExpermentTime { get; set; }
+    }
+
+    public class SMExpermentDesin {
+        public List<SMExpeDesignParam> ExpParamList { get; set; }
+    }
 
     public class SMExpermentParam //寿命实验参数
     {

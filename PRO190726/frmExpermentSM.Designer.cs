@@ -31,6 +31,14 @@
             this.lbtitle = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.txtJXDYL = new System.Windows.Forms.TextBox();
+            this.cmbJXDYL = new System.Windows.Forms.ComboBox();
+            this.txtDYL = new System.Windows.Forms.TextBox();
+            this.cmbDYL = new System.Windows.Forms.ComboBox();
+            this.txtJXZD = new System.Windows.Forms.TextBox();
+            this.cmbJZZD = new System.Windows.Forms.ComboBox();
+            this.txtZD = new System.Windows.Forms.TextBox();
+            this.cmbZD = new System.Windows.Forms.ComboBox();
             this.lbSave = new System.Windows.Forms.Label();
             this.cmbJW = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -60,22 +68,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lbSubtitle = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.lbCreateExp = new System.Windows.Forms.Label();
-            this.lbexpSave = new System.Windows.Forms.Label();
-            this.lbExp = new System.Windows.Forms.Label();
-            this.txtJXZD = new System.Windows.Forms.TextBox();
-            this.cmbJZZD = new System.Windows.Forms.ComboBox();
-            this.txtZD = new System.Windows.Forms.TextBox();
-            this.cmbZD = new System.Windows.Forms.ComboBox();
-            this.txtJXDYL = new System.Windows.Forms.TextBox();
-            this.cmbJXDYL = new System.Windows.Forms.ComboBox();
-            this.txtDYL = new System.Windows.Forms.TextBox();
-            this.cmbDYL = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbCreateExp = new System.Windows.Forms.Label();
+            this.lbexpSave = new System.Windows.Forms.Label();
+            this.lbExp = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -147,6 +147,86 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1112, 332);
             this.panel2.TabIndex = 2;
+            // 
+            // txtJXDYL
+            // 
+            this.txtJXDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtJXDYL.Location = new System.Drawing.Point(813, 176);
+            this.txtJXDYL.Name = "txtJXDYL";
+            this.txtJXDYL.Size = new System.Drawing.Size(54, 21);
+            this.txtJXDYL.TabIndex = 36;
+            this.txtJXDYL.Visible = false;
+            // 
+            // cmbJXDYL
+            // 
+            this.cmbJXDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbJXDYL.FormattingEnabled = true;
+            this.cmbJXDYL.Location = new System.Drawing.Point(732, 175);
+            this.cmbJXDYL.Name = "cmbJXDYL";
+            this.cmbJXDYL.Size = new System.Drawing.Size(75, 21);
+            this.cmbJXDYL.TabIndex = 35;
+            this.cmbJXDYL.Text = "电应力";
+            this.cmbJXDYL.Visible = false;
+            // 
+            // txtDYL
+            // 
+            this.txtDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtDYL.Location = new System.Drawing.Point(813, 125);
+            this.txtDYL.Name = "txtDYL";
+            this.txtDYL.Size = new System.Drawing.Size(54, 21);
+            this.txtDYL.TabIndex = 34;
+            this.txtDYL.Visible = false;
+            // 
+            // cmbDYL
+            // 
+            this.cmbDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbDYL.FormattingEnabled = true;
+            this.cmbDYL.Location = new System.Drawing.Point(732, 125);
+            this.cmbDYL.Name = "cmbDYL";
+            this.cmbDYL.Size = new System.Drawing.Size(75, 21);
+            this.cmbDYL.TabIndex = 33;
+            this.cmbDYL.Text = "电应力";
+            this.cmbDYL.Visible = false;
+            // 
+            // txtJXZD
+            // 
+            this.txtJXZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtJXZD.Location = new System.Drawing.Point(648, 179);
+            this.txtJXZD.Name = "txtJXZD";
+            this.txtJXZD.Size = new System.Drawing.Size(54, 21);
+            this.txtJXZD.TabIndex = 32;
+            this.txtJXZD.Visible = false;
+            // 
+            // cmbJZZD
+            // 
+            this.cmbJZZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbJZZD.FormattingEnabled = true;
+            this.cmbJZZD.Location = new System.Drawing.Point(567, 180);
+            this.cmbJZZD.Name = "cmbJZZD";
+            this.cmbJZZD.Size = new System.Drawing.Size(75, 21);
+            this.cmbJZZD.TabIndex = 31;
+            this.cmbJZZD.Text = "震动";
+            this.cmbJZZD.Visible = false;
+            // 
+            // txtZD
+            // 
+            this.txtZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtZD.Location = new System.Drawing.Point(648, 124);
+            this.txtZD.Name = "txtZD";
+            this.txtZD.Size = new System.Drawing.Size(54, 21);
+            this.txtZD.TabIndex = 30;
+            this.txtZD.Visible = false;
+            // 
+            // cmbZD
+            // 
+            this.cmbZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cmbZD.FormattingEnabled = true;
+            this.cmbZD.Location = new System.Drawing.Point(567, 124);
+            this.cmbZD.Name = "cmbZD";
+            this.cmbZD.Size = new System.Drawing.Size(75, 21);
+            this.cmbZD.TabIndex = 29;
+            this.cmbZD.Text = "震动";
+            this.cmbZD.Visible = false;
             // 
             // lbSave
             // 
@@ -450,117 +530,6 @@
             this.panel3.Size = new System.Drawing.Size(1112, 278);
             this.panel3.TabIndex = 3;
             // 
-            // lbCreateExp
-            // 
-            this.lbCreateExp.AutoSize = true;
-            this.lbCreateExp.Location = new System.Drawing.Point(423, 214);
-            this.lbCreateExp.Name = "lbCreateExp";
-            this.lbCreateExp.Size = new System.Drawing.Size(77, 12);
-            this.lbCreateExp.TabIndex = 30;
-            this.lbCreateExp.Text = "生成实验方案";
-            this.lbCreateExp.MouseEnter += new System.EventHandler(this.lbCreateExp_MouseEnter);
-            this.lbCreateExp.MouseLeave += new System.EventHandler(this.lbCreateExp_MouseLeave);
-            // 
-            // lbexpSave
-            // 
-            this.lbexpSave.AutoSize = true;
-            this.lbexpSave.Location = new System.Drawing.Point(305, 214);
-            this.lbexpSave.Name = "lbexpSave";
-            this.lbexpSave.Size = new System.Drawing.Size(29, 12);
-            this.lbexpSave.TabIndex = 29;
-            this.lbexpSave.Text = "保存";
-            this.lbexpSave.MouseEnter += new System.EventHandler(this.lbexpSave_MouseEnter);
-            this.lbexpSave.MouseLeave += new System.EventHandler(this.lbexpSave_MouseLeave);
-            // 
-            // lbExp
-            // 
-            this.lbExp.AutoSize = true;
-            this.lbExp.Location = new System.Drawing.Point(18, 10);
-            this.lbExp.Name = "lbExp";
-            this.lbExp.Size = new System.Drawing.Size(101, 12);
-            this.lbExp.TabIndex = 2;
-            this.lbExp.Text = "实验方案要素设计";
-            // 
-            // txtJXZD
-            // 
-            this.txtJXZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtJXZD.Location = new System.Drawing.Point(648, 179);
-            this.txtJXZD.Name = "txtJXZD";
-            this.txtJXZD.Size = new System.Drawing.Size(54, 21);
-            this.txtJXZD.TabIndex = 32;
-            this.txtJXZD.Visible = false;
-            // 
-            // cmbJZZD
-            // 
-            this.cmbJZZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cmbJZZD.FormattingEnabled = true;
-            this.cmbJZZD.Location = new System.Drawing.Point(567, 180);
-            this.cmbJZZD.Name = "cmbJZZD";
-            this.cmbJZZD.Size = new System.Drawing.Size(75, 21);
-            this.cmbJZZD.TabIndex = 31;
-            this.cmbJZZD.Text = "震动";
-            this.cmbJZZD.Visible = false;
-            // 
-            // txtZD
-            // 
-            this.txtZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtZD.Location = new System.Drawing.Point(648, 124);
-            this.txtZD.Name = "txtZD";
-            this.txtZD.Size = new System.Drawing.Size(54, 21);
-            this.txtZD.TabIndex = 30;
-            this.txtZD.Visible = false;
-            // 
-            // cmbZD
-            // 
-            this.cmbZD.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cmbZD.FormattingEnabled = true;
-            this.cmbZD.Location = new System.Drawing.Point(567, 124);
-            this.cmbZD.Name = "cmbZD";
-            this.cmbZD.Size = new System.Drawing.Size(75, 21);
-            this.cmbZD.TabIndex = 29;
-            this.cmbZD.Text = "震动";
-            this.cmbZD.Visible = false;
-            // 
-            // txtJXDYL
-            // 
-            this.txtJXDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtJXDYL.Location = new System.Drawing.Point(813, 176);
-            this.txtJXDYL.Name = "txtJXDYL";
-            this.txtJXDYL.Size = new System.Drawing.Size(54, 21);
-            this.txtJXDYL.TabIndex = 36;
-            this.txtJXDYL.Visible = false;
-            // 
-            // cmbJXDYL
-            // 
-            this.cmbJXDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cmbJXDYL.FormattingEnabled = true;
-            this.cmbJXDYL.Location = new System.Drawing.Point(732, 175);
-            this.cmbJXDYL.Name = "cmbJXDYL";
-            this.cmbJXDYL.Size = new System.Drawing.Size(75, 21);
-            this.cmbJXDYL.TabIndex = 35;
-            this.cmbJXDYL.Text = "电应力";
-            this.cmbJXDYL.Visible = false;
-            // 
-            // txtDYL
-            // 
-            this.txtDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtDYL.Location = new System.Drawing.Point(813, 125);
-            this.txtDYL.Name = "txtDYL";
-            this.txtDYL.Size = new System.Drawing.Size(54, 21);
-            this.txtDYL.TabIndex = 34;
-            this.txtDYL.Visible = false;
-            // 
-            // cmbDYL
-            // 
-            this.cmbDYL.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.cmbDYL.FormattingEnabled = true;
-            this.cmbDYL.Location = new System.Drawing.Point(732, 125);
-            this.cmbDYL.Name = "cmbDYL";
-            this.cmbDYL.Size = new System.Drawing.Size(75, 21);
-            this.cmbDYL.TabIndex = 33;
-            this.cmbDYL.Text = "电应力";
-            this.cmbDYL.Visible = false;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -574,6 +543,7 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(644, 150);
             this.dataGridView1.TabIndex = 31;
+            this.dataGridView1.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellLeave);
             // 
             // Column1
             // 
@@ -599,12 +569,45 @@
             this.Column4.Name = "Column4";
             this.Column4.Width = 150;
             // 
+            // lbCreateExp
+            // 
+            this.lbCreateExp.AutoSize = true;
+            this.lbCreateExp.Location = new System.Drawing.Point(423, 214);
+            this.lbCreateExp.Name = "lbCreateExp";
+            this.lbCreateExp.Size = new System.Drawing.Size(77, 12);
+            this.lbCreateExp.TabIndex = 30;
+            this.lbCreateExp.Text = "生成实验方案";
+            this.lbCreateExp.Click += new System.EventHandler(this.lbCreateExp_Click);
+            this.lbCreateExp.MouseEnter += new System.EventHandler(this.lbCreateExp_MouseEnter);
+            this.lbCreateExp.MouseLeave += new System.EventHandler(this.lbCreateExp_MouseLeave);
+            // 
+            // lbexpSave
+            // 
+            this.lbexpSave.AutoSize = true;
+            this.lbexpSave.Location = new System.Drawing.Point(305, 214);
+            this.lbexpSave.Name = "lbexpSave";
+            this.lbexpSave.Size = new System.Drawing.Size(29, 12);
+            this.lbexpSave.TabIndex = 29;
+            this.lbexpSave.Text = "保存";
+            this.lbexpSave.Click += new System.EventHandler(this.lbexpSave_Click);
+            this.lbexpSave.MouseEnter += new System.EventHandler(this.lbexpSave_MouseEnter);
+            this.lbexpSave.MouseLeave += new System.EventHandler(this.lbexpSave_MouseLeave);
+            // 
+            // lbExp
+            // 
+            this.lbExp.AutoSize = true;
+            this.lbExp.Location = new System.Drawing.Point(18, 10);
+            this.lbExp.Name = "lbExp";
+            this.lbExp.Size = new System.Drawing.Size(101, 12);
+            this.lbExp.TabIndex = 2;
+            this.lbExp.Text = "实验方案要素设计";
+            // 
             // frmExpermentSM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Teal;
-            this.ClientSize = new System.Drawing.Size(1136, 742);
+            this.ClientSize = new System.Drawing.Size(1136, 704);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

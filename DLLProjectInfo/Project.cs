@@ -16,6 +16,7 @@ namespace DLLProjectInfo
     {
         public static string ProjectInfoDBName = "ProjectConfig";
         public static string ExperParmaDBName = "ExpermentParam";
+        public static string ExperDesignDBName = "ExpermentDesign";
         public int SaveProjectInfo(ProjectInfo pro) {
 
             try {
@@ -268,6 +269,31 @@ namespace DLLProjectInfo
                         ProDefine.g_SMExpermentParam.JXZD = dt.Rows[0][14].ToString();
                         ProDefine.g_SMExpermentParam.JXDYL = dt.Rows[0][15].ToString();
                         //ProDefine.g_SMExpermentParam.GUID = ProDefine.g_MyProject.GUID;
+                    }
+                }
+            }
+            catch { }
+        }
+
+
+        public void SaveExpermentDesign() {
+            try {
+                string SQL = "select * from " + ExperDesignDBName + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'" ;
+
+                DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
+
+                if (dt != null) {
+                    if (dt.Rows.Count > 0)
+                    {
+                        SQL = "delete from " + ExperDesignDBName + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                        AccessHelper.ExcuteSql(SQL);
+                        
+                    }
+                    foreach (var info in ProDefine.g_SMExpermentDesin.ExpParamList) {
+                        SQL = "insert into " + ExperDesignDBName + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.Temperature + "','" + info.SD + "','"
+                            + info.YBNumber + "','" + info.ExpermentTime + "')";
+                        AccessHelper.ExcuteSql(SQL);
+
                     }
                 }
             }
