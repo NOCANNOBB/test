@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F5B2B1FB-326F-4B97-AE5D-0CAAFA4D55B4}</ProjectGuid>
+    <RootNamespace>GM_Lib</RootNamespace>
+    <Keyword>MFCDLLProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.61030.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>../../Bin/Chk/GM_Lib\</OutDir>
+    <IntDir>../../Bin/Chk/GM_Lib\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>../../Bin/Free/GM_Lib\</OutDir>
+    <IntDir>../../Bin/Free/GM_Lib\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../../Include;../../CommonCpp;./CardLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>../../Bin/chk/$(ProjectName)D.dll</OutputFile>
+      <AdditionalLibraryDirectories>../../Include;../../CommonCpp;./CardLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>.\GM_Lib.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>../../Include;../../CommonCpp;./CardLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0804</Culture>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>../../Bin/Free/$(ProjectName).dll</OutputFile>
+      <AdditionalLibraryDirectories>../../Include;../../CommonCpp;./CardLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>.\GM_Lib.def</ModuleDefinitionFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="GM_Lib.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\CommonCpp\CsvFile.cpp" />
+    <ClCompile Include="..\..\CommonCpp\DelayTimer.cpp" />
+    <ClCompile Include="..\..\CommonCpp\LogFile.cpp" />
+    <ClCompile Include="..\..\CommonCpp\WRFileINI.cpp" />
+    <ClCompile Include="CardCtrl.cpp" />
+    <ClCompile Include="PXI8417_Total.cpp" />
+    <ClCompile Include="PXI8510_Total.cpp" />
+    <ClCompile Include="PXI8530_Total.cpp" />
+    <ClCompile Include="All_AI.cpp" />
+    <ClCompile Include="PXI8265_AI.cpp" />
+    <ClCompile Include="PXI8417_AI.cpp" />
+    <ClCompile Include="PXI8867_AO.cpp" />
+    <ClCompile Include="PXI8417_IR.cpp" />
+    <ClCompile Include="PXI8417_OC.cpp" />
+    <ClCompile Include="PXI8510_LvdsRecv.cpp" />
+    <ClCompile Include="PXI8510_LvdsSendFrameCircle.cpp" />
+    <ClCompile Include="PXI8530_Sync422Recv.cpp" />
+    <ClCompile Include="PXI8530_Sync422Send.cpp" />
+    <ClCompile Include="PXI8417_1PPS.cpp" />
+    <ClCompile Include="PXI8530_ASync422.cpp" />
+    <ClCompile Include="PXI8310_OHM.cpp" />
+    <ClCompile Include="PXI8530_MeasFrameCircle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GM_Lib.def" />
+    <None Include="res\GM_Lib.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GM_Lib.h" />
+    <ClInclude Include="IBaseHead.h" />
+    <ClInclude Include="ProjectDef.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="CardLib\PXI8265.h" />
+    <ClInclude Include="CardLib\PXI8310.h" />
+    <ClInclude Include="CardLib\PXI8417.h" />
+    <ClInclude Include="CardLib\PXI8510.h" />
+    <ClInclude Include="CardLib\PXI8530.h" />
+    <ClInclude Include="CardLib\PXI8867.h" />
+    <ClInclude Include="..\..\CommonCpp\CsvFile.h" />
+    <ClInclude Include="..\..\CommonCpp\DelayTimer.h" />
+    <ClInclude Include="..\..\CommonCpp\LogFile.h" />
+    <ClInclude Include="..\..\CommonCpp\my_malloc.h" />
+    <ClInclude Include="..\..\CommonCpp\shared_prt.hpp" />
+    <ClInclude Include="..\..\CommonCpp\WRFileINI.h" />
+    <ClInclude Include="CardCtrl.h" />
+    <ClInclude Include="PXI8417_Total.h" />
+    <ClInclude Include="PXI8510_Total.h" />
+    <ClInclude Include="PXI8530_Total.h" />
+    <ClInclude Include="All_AI.h" />
+    <ClInclude Include="PXI8265_AI.h" />
+    <ClInclude Include="PXI8417_AI.h" />
+    <ClInclude Include="PXI8867_AO.h" />
+    <ClInclude Include="PXI8417_IR.h" />
+    <ClInclude Include="PXI8417_OC.h" />
+    <ClInclude Include="PXI8510_LvdsRecv.h" />
+    <ClInclude Include="PXI8510_LvdsSendFrameCircle.h" />
+    <ClInclude Include="PXI8530_Sync422Recv.h" />
+    <ClInclude Include="PXI8530_Sync422Send.h" />
+    <ClInclude Include="PXI8417_1PPS.h" />
+    <ClInclude Include="PXI8530_ASync422.h" />
+    <ClInclude Include="PXI8310_OHM.h" />
+    <ClInclude Include="PXI8530_MeasFrameCircle.h" />
+    <ClInclude Include="UserDef.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GM_Lib.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

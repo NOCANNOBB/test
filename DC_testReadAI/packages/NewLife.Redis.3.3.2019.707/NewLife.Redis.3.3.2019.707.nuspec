@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>NewLife.Redis</id>
+    <version>3.3.2019.707</version>
+    <title>NewLife.Redis</title>
+    <authors>新生命开发团队</authors>
+    <owners>新生命开发团队</owners>
+    <iconUrl>http://www.newlifex.com/favicon.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Redis基础操作、列表结构、哈希结构、Set结构，经过日均100亿次调用量的项目验证</description>
+    <summary />
+    <releaseNotes>支持NET40</releaseNotes>
+    <copyright>©2002-2019 新生命开发团队</copyright>
+    <tags>新生命团队 X组件 NewLife NewLife.Redis</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0">
+        <dependency id="NewLife.Core" version="8.2.2019.706" />
+      </group>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="NewLife.Core" version="8.2.2019.706" />
+      </group>
+      <group targetFramework="Unsupported0.0">
+        <dependency id="NewLife.Core" version="8.2.2019.706" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

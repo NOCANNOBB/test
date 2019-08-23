@@ -96,6 +96,16 @@
   <ItemGroup>
     <None Include="Resources\微信截图_201908040753411.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DLLMemeryFile\DLLMemeryFile.csproj">
+      <Project>{cae2b0f4-1e9d-4376-af09-087f9c4bbd8c}</Project>
+      <Name>DLLMemeryFile</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DLLStruct\DLLStruct.csproj">
+      <Project>{bb07b757-1fbd-4cdd-a21c-21ef359c007d}</Project>
+      <Name>DLLStruct</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -13,6 +13,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DLLMemeryFile;
+using DLLStruct;
 
 namespace Test
 {
@@ -250,6 +252,32 @@ namespace Test
                 this.dataGridView1.Columns.Insert(this.dataGridView1.Columns.Count - 1,acCode);
                 AddIndex = this.dataGridView1.Columns.Count - 1;
             }
+        }
+        MemeryFile mf = null;
+        private void simpleButton4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void simpleButton5_Click(object sender, EventArgs e)
+        {
+
+            if (mf == null)
+            {
+                mf = new MemeryFile();
+            }
+            string filename = "FirstTest.data";
+            mf.CreateFile(filename);
+            mf.CreateMemoryMapFile(filename);
+
+            List<FileData> returnValue = mf.ReadFromMemFile();
+
+
+            int a = 0;
+            MessageBox.Show(a.ToString());
+
+            mf.DisposeMemoryMapFile();
+
         }
     }
 }

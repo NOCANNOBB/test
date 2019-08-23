@@ -15,6 +15,9 @@ namespace Define
         
     }
 
+
+
+
     public class ProDefine {
         public static string NowProjectName = "";
         public static ProjectInfo g_MyProject = null;

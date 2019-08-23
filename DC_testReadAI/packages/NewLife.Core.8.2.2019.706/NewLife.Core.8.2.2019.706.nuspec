@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>NewLife.Core</id>
+    <version>8.2.2019.706</version>
+    <authors>新生命开发团队</authors>
+    <owners>新生命开发团队</owners>
+    <iconUrl>http://www.newlifex.com/favicon.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>日志、网络、RPC、序列化、缓存、Windows服务、线程池</description>
+    <releaseNotes>合并NET40分支；Redis重连时也要选择Db</releaseNotes>
+    <copyright>©2002-2019 新生命开发团队</copyright>
+    <tags>新生命团队 X组件 NewLife NewLife.Core</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.0" />
+      <group targetFramework=".NETFramework4.5" />
+      <group targetFramework="Unsupported0.0" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.ServiceProcess" targetFramework=".NETFramework4.0.0" />
+      <frameworkAssembly assemblyName="System.Web" targetFramework=".NETFramework4.0.0" />
+      <frameworkAssembly assemblyName="System.Web.Extensions" targetFramework=".NETFramework4.0.0" />
+      <frameworkAssembly assemblyName="System.Windows.Forms" targetFramework=".NETFramework4.0.0" />
+      <frameworkAssembly assemblyName="System.IO.Compression" targetFramework=".NETFramework4.5" />
+      <frameworkAssembly assemblyName="System.Net.Http" targetFramework=".NETFramework4.5" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

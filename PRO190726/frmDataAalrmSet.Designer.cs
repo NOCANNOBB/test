@@ -129,7 +129,7 @@
             "恒定值",
             "循环信号",
             "不循环变化信号"});
-            this.comboBox1.Location = new System.Drawing.Point(692, 40);
+            this.comboBox1.Location = new System.Drawing.Point(692, 17);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(75, 20);
             this.comboBox1.TabIndex = 12;
@@ -139,7 +139,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::PRO190726.Properties.Resources.微信截图_20190804075341;
-            this.pictureBox2.Location = new System.Drawing.Point(618, 31);
+            this.pictureBox2.Location = new System.Drawing.Point(618, 17);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(68, 29);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -150,7 +150,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::PRO190726.Properties.Resources.player_icons_40px_1137045_easyicon_net;
-            this.pictureBox1.Location = new System.Drawing.Point(530, 31);
+            this.pictureBox1.Location = new System.Drawing.Point(530, 17);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(68, 29);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

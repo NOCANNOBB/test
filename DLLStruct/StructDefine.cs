@@ -11,6 +11,17 @@ namespace DLLStruct
     }
 
 
+    public struct FileData {
+
+        public int ChannleID { get; set; }
+
+        public double dVflot { get; set; }
+        /// <summary>
+        /// 数据类型 0 为正常数据  1为报警数据
+        /// </summary>
+        public byte DataType { get; set; }
+    }
+
     public class SMExpeDesignParam {
         public double Temperature { get; set; }
 

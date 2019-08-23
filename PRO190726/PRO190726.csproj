@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PRO190726</RootNamespace>
     <AssemblyName>PRO190726</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>F:\Expre\Setup\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -191,6 +192,12 @@
     <Compile Include="frmSMData.Designer.cs">
       <DependentUpon>frmSMData.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmYBSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmYBSelect.Designer.cs">
+      <DependentUpon>frmYBSelect.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmYHExperienceSM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -279,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTHData.resx">
       <DependentUpon>frmTHData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmYBSelect.resx">
+      <DependentUpon>frmYBSelect.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmYHExperienceSM.resx">
       <DependentUpon>frmYHExperienceSM.cs</DependentUpon>

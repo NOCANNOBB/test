@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="CardLib">
+      <UniqueIdentifier>{7fcc0261-c2d4-4f35-bb8d-5e115f7db473}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inclulde">
+      <UniqueIdentifier>{961f57c7-7c0a-470a-bfd4-7f5ceda880c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CommonCPP">
+      <UniqueIdentifier>{54e2154f-be68-4bc5-b7c5-b3494685dc43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExCtrlCard">
+      <UniqueIdentifier>{aa700577-f232-4798-9fd8-a9e924b0a345}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExCtrlCard\AI">
+      <UniqueIdentifier>{5381d7c8-3b1b-4bb1-97cc-fb0e8f30e573}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExCtrlCard\AO">
+      <UniqueIdentifier>{928da62a-551e-47a4-a047-320e6f481e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExCtrlCard\OC_IR">
+      <UniqueIdentifier>{3c4d72cf-a94b-43f4-b319-02d2faeafa2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExCtrlCard\LVDS">
+      <UniqueIdentifier>{4e1ebd24-b78a-4316-8a49-09f0cb249f31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExCtrlCard\Sync422">
+      <UniqueIdentifier>{873eaf73-9d41-42d4-8c60-544cd1684e84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExCtrlCard\1PPS">
+      <UniqueIdentifier>{488319db-8955-4753-8ad2-cab016430440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExCtrlCard\ASync422">
+      <UniqueIdentifier>{fa47182b-f1cb-431e-8966-704a644a4d7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExCtrlCard\OHM">
+      <UniqueIdentifier>{646c8601-9c23-45fd-8ad6-3eb3fd1c31ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExCtrlCard\MeasCircleFrame">
+      <UniqueIdentifier>{f0a5dc53-7d48-4224-b501-17f174ed451c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GM_Lib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CommonCpp\CsvFile.cpp">
+      <Filter>CommonCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CommonCpp\DelayTimer.cpp">
+      <Filter>CommonCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CommonCpp\LogFile.cpp">
+      <Filter>CommonCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\CommonCpp\WRFileINI.cpp">
+      <Filter>CommonCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="CardCtrl.cpp">
+      <Filter>ExCtrlCard</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8417_Total.cpp">
+      <Filter>ExCtrlCard</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8510_Total.cpp">
+      <Filter>ExCtrlCard</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8530_Total.cpp">
+      <Filter>ExCtrlCard</Filter>
+    </ClCompile>
+    <ClCompile Include="All_AI.cpp">
+      <Filter>ExCtrlCard\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8265_AI.cpp">
+      <Filter>ExCtrlCard\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8417_AI.cpp">
+      <Filter>ExCtrlCard\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8867_AO.cpp">
+      <Filter>ExCtrlCard\AO</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8417_IR.cpp">
+      <Filter>ExCtrlCard\OC_IR</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8417_OC.cpp">
+      <Filter>ExCtrlCard\OC_IR</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8510_LvdsRecv.cpp">
+      <Filter>ExCtrlCard\LVDS</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8510_LvdsSendFrameCircle.cpp">
+      <Filter>ExCtrlCard\LVDS</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8530_Sync422Recv.cpp">
+      <Filter>ExCtrlCard\Sync422</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8530_Sync422Send.cpp">
+      <Filter>ExCtrlCard\Sync422</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8417_1PPS.cpp">
+      <Filter>ExCtrlCard\1PPS</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8530_ASync422.cpp">
+      <Filter>ExCtrlCard\ASync422</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8310_OHM.cpp">
+      <Filter>ExCtrlCard\OHM</Filter>
+    </ClCompile>
+    <ClCompile Include="PXI8530_MeasFrameCircle.cpp">
+      <Filter>ExCtrlCard\MeasCircleFrame</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GM_Lib.def">
+      <Filter>源文件</Filter>
+    </None>
+    <None Include="res\GM_Lib.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GM_Lib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CardLib\PXI8265.h">
+      <Filter>CardLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CardLib\PXI8310.h">
+      <Filter>CardLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CardLib\PXI8417.h">
+      <Filter>CardLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CardLib\PXI8510.h">
+      <Filter>CardLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CardLib\PXI8530.h">
+      <Filter>CardLib</Filter>
+    </ClInclude>
+    <ClInclude Include="CardLib\PXI8867.h">
+      <Filter>CardLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CommonCpp\CsvFile.h">
+      <Filter>CommonCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CommonCpp\DelayTimer.h">
+      <Filter>CommonCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CommonCpp\LogFile.h">
+      <Filter>CommonCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CommonCpp\my_malloc.h">
+      <Filter>CommonCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CommonCpp\shared_prt.hpp">
+      <Filter>CommonCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\CommonCpp\WRFileINI.h">
+      <Filter>CommonCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="CardCtrl.h">
+      <Filter>ExCtrlCard</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8417_Total.h">
+      <Filter>ExCtrlCard</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8510_Total.h">
+      <Filter>ExCtrlCard</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8530_Total.h">
+      <Filter>ExCtrlCard</Filter>
+    </ClInclude>
+    <ClInclude Include="All_AI.h">
+      <Filter>ExCtrlCard\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8265_AI.h">
+      <Filter>ExCtrlCard\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8417_AI.h">
+      <Filter>ExCtrlCard\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8867_AO.h">
+      <Filter>ExCtrlCard\AO</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8417_IR.h">
+      <Filter>ExCtrlCard\OC_IR</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8417_OC.h">
+      <Filter>ExCtrlCard\OC_IR</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8510_LvdsRecv.h">
+      <Filter>ExCtrlCard\LVDS</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8510_LvdsSendFrameCircle.h">
+      <Filter>ExCtrlCard\LVDS</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8530_Sync422Recv.h">
+      <Filter>ExCtrlCard\Sync422</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8530_Sync422Send.h">
+      <Filter>ExCtrlCard\Sync422</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8417_1PPS.h">
+      <Filter>ExCtrlCard\1PPS</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8530_ASync422.h">
+      <Filter>ExCtrlCard\ASync422</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8310_OHM.h">
+      <Filter>ExCtrlCard\OHM</Filter>
+    </ClInclude>
+    <ClInclude Include="PXI8530_MeasFrameCircle.h">
+      <Filter>ExCtrlCard\MeasCircleFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="IBaseHead.h">
+      <Filter>Inclulde</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectDef.h">
+      <Filter>Inclulde</Filter>
+    </ClInclude>
+    <ClInclude Include="UserDef.h">
+      <Filter>Inclulde</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GM_Lib.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+</Project>
