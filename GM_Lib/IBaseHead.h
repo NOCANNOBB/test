@@ -8,18 +8,10 @@ typedef void (WINAPI *PFN_ReleaseIBase)(void* pData);
 class ILogInfo;
 class IBaseCard;
 class IBaseAI;
-class IBaseOutDC;
-class IBaseIR;
-class IBaseOC;
-class IBase1PPS;
-class IBaseOHM;
-class IBaseASync422;
-class IBaseRecvSync422;
-class IBaseSendSync422;
-class IBaseLvdsSend;
-class IBaseLvdsRecv;
-class IBaseMeasFrameCircle;
-class IBaseLvdsSendFrameCircleData;
+class IBaseDO;
+class IBaseOutAO;
+class IBaseCNT;
+
 
 class IExCardCtrl
 {
@@ -30,19 +22,17 @@ public:
 	virtual DWORD GetVersion() = NULL;
 
 	virtual IBaseAI* GetBaseAI(void) = NULL;
-	virtual IBaseOutDC* GetBaseOutDC(void) = NULL;
-	virtual IBaseIR* GetIR(void) = NULL;
-	virtual IBaseOC* GetOC(void) = NULL;
-	virtual IBase1PPS* GetGPS(void) = NULL;
-	virtual IBaseOHM* GetOHM(void) = NULL;
-	virtual IBaseRecvSync422* GetSync422Recv(void) = NULL;
-	virtual IBaseSendSync422* GetSync422Send(void) = NULL;
-	virtual IBaseASync422* GetASync(void) = NULL;
-	virtual IBaseLvdsSend* GetBseLvdsSend(void) = NULL;
-	virtual IBaseLvdsRecv* GetBseLvdsRecv(void) = NULL;
-	virtual IBaseMeasFrameCircle*	GetMeasCircleFrame(void) = NULL;
-	virtual IBaseLvdsSendFrameCircleData*	GetBseLvdsSendFrameCircleData() = NULL;
+	
+	virtual IBaseDO* GetBaseDO(void) = NULL;
+
+	virtual IBaseCNT* GetBaseCNT(void)=NULL;
+
+	virtual IBaseOutAO* GetBaseOutAO(void) = NULL;
+
 };
+
+
+
 
 class IBaseCard
 {
@@ -73,6 +63,33 @@ public:
 	// 这里输入的是电压值，单位是V
 	virtual BOOL WriteDC(ULONG ulChan, double dfVolt) = NULL;
 };
+
+
+
+//--------------------------------------------------------------
+//DIO 基础类
+class IBaseDO : public IBaseCard
+{
+public:
+	// 这里输入的是电压值，单位是V
+	virtual BOOL WriteDO(ULONG ulChan, BOOL boolVlaue) = NULL;
+	virtual BOOL ReadDO(ULONG ulChan,BOOL* boolValue) = NULL;
+
+	virtual BOOL WriteDO(ULONG ulChan, byte boolVlaue[]) = NULL;
+	virtual BOOL ReadDO(ULONG ulChan,byte boolValue[]) = NULL;
+};
+
+
+//--------------------------------------------------------------
+//CNT 基础类
+class IBaseCNT : public IBaseCard
+{
+public:
+	// 获取频率，占空比
+	virtual BOOL GetdfFreqAnddfdfDutyCycle(ULONG ulChan, double* dfFreq,double* dfdfDutyCycle = NULL) = NULL;
+	
+};
+
 //--------------------------------------------------------------
 // IR OC
 class IBaseIR: public IBaseCard
@@ -84,10 +101,10 @@ public:
 	virtual BOOL ClrIRSts(ULONG ulChann) = NULL;
 };
 
-class IBaseOC: public IBaseCard
+class IBaseOutAO: public IBaseCard
 {
 public:
-	virtual BOOL SetOC(ULONG ulChan, double pulseWidthMS) = NULL;
+	virtual BOOL WriteAO(ULONG ulChan, double pulseWidthMS) = NULL;
 };
 //--------------------------------------------------------------
 // 秒脉冲

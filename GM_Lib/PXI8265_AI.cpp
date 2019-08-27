@@ -1,7 +1,6 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#include "WRFileINI.h"
 #include "ProjectDef.h"
 #include "PXI8265_AI.h"
 #include "PXI8265.h"
@@ -20,34 +19,11 @@ using namespace std;
 
 #define PXI8265_SINGLE_LEN		(100)
 
-CPXI8265_AI::CPXI8265_AI():m_logFile(EXCARD_LOGNAME)
+CPXI8265_AI::CPXI8265_AI()
 {
 	m_pIErrLog = NULL;
 
-	PDEV_AI psDevAI;
-
-	for (ULONG cardNum=0; cardNum<PXI8265_CARD_COUNT; cardNum++)
-	{
-		psDevAI = &m_sDevAI[cardNum];
-		psDevAI->cardLgcID	= cardNum;
-		psDevAI->bThreadRun = FALSE;
-
-		InitHandle(psDevAI->hDev);
-		InitHandle(psDevAI->hThreadReadAI);
-		InitHandle(psDevAI->hThreadProcessing);
-
-		for (ULONG i=0; i<PXI8265_SEG_MAX; i++)
-		{
-			psDevAI->sArrSegAI[i].readArray		= new LONG [PXI8265_SINGLE_LEN*PXI8265_CHAN_COUNT + 10];
-			psDevAI->sArrSegAI[i].arrayLen		= PXI8265_SINGLE_LEN * PXI8265_CHAN_COUNT;
-		}
-
-		// 开辟电压 有效值空间
-		psDevAI->vcVolt.resize(PXI8265_CHAN_COUNT);
-		psDevAI->vcVoltRMS.resize(PXI8265_CHAN_COUNT);
-		psDevAI->pClass  = this;
-	}
-
+	
 	m_bIsStart			= FALSE;
 	m_bCreateSuccess	= FALSE;
 }
@@ -55,7 +31,6 @@ CPXI8265_AI::CPXI8265_AI():m_logFile(EXCARD_LOGNAME)
 CPXI8265_AI::~CPXI8265_AI()
 {
 	Release();
-
 	PDEV_AI psDevAI;
 
 	for (ULONG cardNum=0; cardNum<PXI8265_CARD_COUNT; cardNum++)
@@ -69,7 +44,6 @@ CPXI8265_AI::~CPXI8265_AI()
 			psDevAI->sArrSegAI[i].arrayLen	= 0;
 		}
 	}
-
 }
 // 由小到大排序
 bool CompareLess(CPXI8265_AI::DEV_AI& __left, CPXI8265_AI::DEV_AI& __right)
@@ -79,66 +53,12 @@ bool CompareLess(CPXI8265_AI::DEV_AI& __left, CPXI8265_AI::DEV_AI& __right)
 
 BOOL CPXI8265_AI::Create(void)
 {
-	m_hMutex = CreateMutex(NULL, FALSE, MUTEX_IAD);
-	if (GetLastError() == ERROR_ALREADY_EXISTS)
-	{
-		DelEvent(m_hMutex);
-
-		_WriteLog("已经创建，不可以重复创建");
-		return FALSE;
-	}
-
-	PDEV_AI			psDevAI;
-
-	for (ULONG cardNum=0; cardNum<PXI8265_CARD_COUNT; cardNum++)
-	{
-		psDevAI = &m_sDevAI[cardNum];
-
-		if (_IsErrChk(PXI8265_DeviceOpen(cardNum, &psDevAI->hDev), cardNum)) goto errorExit;
-		PXI8265_GetDevicePXISolt(psDevAI->hDev, &psDevAI->cardSlotID);
-	}
-
-	std::sort(m_sDevAI, m_sDevAI+PXI8265_CARD_COUNT, CompareLess);
-
-	m_bCreateSuccess = TRUE;
+	m_sDevAI[0].hDev = m_hDevice;
 	return TRUE;
-errorExit:
-
-	for (ULONG cardNum=0; cardNum<PXI8265_CARD_COUNT; cardNum++)
-	{
-		psDevAI = &m_sDevAI[cardNum];
-
-		if (!IsHandleInvalid(psDevAI->hDev))
-		{
-			PXI8265_DeviceClose(psDevAI->hDev);
-			InitHandle(psDevAI->hDev);
-		}
-	}
-
-	return FALSE;
 }
 
 BOOL CPXI8265_AI::Release(void)
 {
-	if (!m_bCreateSuccess) return TRUE;
-
-	DelEvent(m_hMutex);
-
-	Stop(0);
-
-	PDEV_AI			psDevAI;
-	for (ULONG cardNum=0; cardNum<PXI8265_CARD_COUNT; cardNum++)
-	{
-		psDevAI = &m_sDevAI[cardNum];
-
-		if (!IsHandleInvalid(psDevAI->hDev))
-		{
-			PXI8265_DeviceClose(psDevAI->hDev);
-			InitHandle(psDevAI->hDev);
-		}
-	}
-
-	m_bCreateSuccess	= FALSE;
 	return TRUE;
 }
 
@@ -165,7 +85,7 @@ BOOL CPXI8265_AI::Init(void)
 							PXI8265_CHAN_COUNT - 1,
 							PXI8265_AI_B_5_V,
 							PXI8265_AI_RSE);
-		if (_IsErrChk(lResult, psDevAI->cardSlotID)) goto errorExit;
+		if (_IsErrChk(lResult,0)) goto errorExit;
 
 		lResult = PXI8265_AI_CfgTiming(
 							psDevAI->hDev,
@@ -173,7 +93,7 @@ BOOL CPXI8265_AI::Init(void)
 							1000,		// 目前的最大频率 5200 * 48 = 249600
 							PXI8265_ContSamps,
 							400000); // 开辟1M空间
-		if (_IsErrChk(lResult, psDevAI->cardSlotID)) goto errorExit;
+		if (_IsErrChk(lResult, 0)) goto errorExit;
 	}
 	return TRUE;
 
@@ -295,7 +215,7 @@ void CPXI8265_AI::_WriteLog(LPCSTR lpszInfo, ...)
 	}
 	else 
 	{
-		m_logFile.WriteInfo(strWriteText);
+		m_logFile.WriteLog(strWriteText);
 	}
 }
 //------------------------------------------------------------------------

@@ -77,9 +77,9 @@ public:
 			if (m_pExCardCtrl)
 			{
 				SetErrorLogNULL(m_pExCardCtrl->GetBaseAI());
-				SetErrorLogNULL(m_pExCardCtrl->GetBaseOutDC());
-				SetErrorLogNULL(m_pExCardCtrl->GetBseLvdsSend());
-				SetErrorLogNULL(m_pExCardCtrl->GetBseLvdsRecv());
+				SetErrorLogNULL(m_pExCardCtrl->GetBaseCNT());
+				SetErrorLogNULL(m_pExCardCtrl->GetBaseDO());
+				SetErrorLogNULL(m_pExCardCtrl->GetBaseOutAO());
 
 				m_pExCardCtrl->ReleaseLibrary();
 				m_pExCardCtrl = NULL;

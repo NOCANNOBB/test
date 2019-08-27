@@ -43,8 +43,8 @@
     <_ProjectFileVersion>11.0.61030.0</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>../../Bin/Chk/GM_Lib\</OutDir>
-    <IntDir>../../Bin/Chk/GM_Lib\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -74,7 +74,7 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <OutputFile>../../Bin/chk/$(ProjectName)D.dll</OutputFile>
+      <OutputFile>$(OutDir)$(ProjectName).dll</OutputFile>
       <AdditionalLibraryDirectories>../../Include;../../CommonCpp;./CardLib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>.\GM_Lib.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -115,75 +115,53 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="All_AI.cpp" />
+    <ClCompile Include="AO_ALL.cpp" />
+    <ClCompile Include="CNT_ALL.cpp" />
+    <ClCompile Include="DO_All.cpp" />
     <ClCompile Include="GM_Lib.cpp" />
+    <ClCompile Include="PXI6416_DO.cpp" />
+    <ClCompile Include="PXI6435D_CNT.cpp" />
+    <ClCompile Include="PXI6860_AO.cpp" />
+    <ClCompile Include="PXI8265_AI.cpp" />
+    <ClCompile Include="PXI8265_Total.cpp" />
+    <ClCompile Include="PXI8265_AO.cpp" />
+    <ClCompile Include="PXI8265_CNT.cpp" />
+    <ClCompile Include="PXI8265_DO.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\CommonCpp\CsvFile.cpp" />
-    <ClCompile Include="..\..\CommonCpp\DelayTimer.cpp" />
-    <ClCompile Include="..\..\CommonCpp\LogFile.cpp" />
-    <ClCompile Include="..\..\CommonCpp\WRFileINI.cpp" />
     <ClCompile Include="CardCtrl.cpp" />
-    <ClCompile Include="PXI8417_Total.cpp" />
-    <ClCompile Include="PXI8510_Total.cpp" />
-    <ClCompile Include="PXI8530_Total.cpp" />
-    <ClCompile Include="All_AI.cpp" />
-    <ClCompile Include="PXI8265_AI.cpp" />
-    <ClCompile Include="PXI8417_AI.cpp" />
-    <ClCompile Include="PXI8867_AO.cpp" />
-    <ClCompile Include="PXI8417_IR.cpp" />
-    <ClCompile Include="PXI8417_OC.cpp" />
-    <ClCompile Include="PXI8510_LvdsRecv.cpp" />
-    <ClCompile Include="PXI8510_LvdsSendFrameCircle.cpp" />
-    <ClCompile Include="PXI8530_Sync422Recv.cpp" />
-    <ClCompile Include="PXI8530_Sync422Send.cpp" />
-    <ClCompile Include="PXI8417_1PPS.cpp" />
-    <ClCompile Include="PXI8530_ASync422.cpp" />
-    <ClCompile Include="PXI8310_OHM.cpp" />
-    <ClCompile Include="PXI8530_MeasFrameCircle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GM_Lib.def" />
     <None Include="res\GM_Lib.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="All_AI.h" />
+    <ClInclude Include="AO_ALL.h" />
+    <ClInclude Include="CardLib\PXI6416.h" />
+    <ClInclude Include="CardLib\PXI6435D.h" />
+    <ClInclude Include="CardLib\PXI6860.h" />
+    <ClInclude Include="CardLib\PXI8265.h" />
+    <ClInclude Include="CNT_ALL.h" />
+    <ClInclude Include="DO_All.h" />
     <ClInclude Include="GM_Lib.h" />
     <ClInclude Include="IBaseHead.h" />
     <ClInclude Include="ProjectDef.h" />
+    <ClInclude Include="PXI6416_DO.h" />
+    <ClInclude Include="PXI6435D_CNT.h" />
+    <ClInclude Include="PXI6860_AO.h" />
+    <ClInclude Include="PXI8265_AI.h" />
+    <ClInclude Include="PXI8265_Total.h" />
+    <ClInclude Include="PXI8265_AO.h" />
+    <ClInclude Include="PXI8265_CNT.h" />
+    <ClInclude Include="PXI8265_DO.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="CardLib\PXI8265.h" />
-    <ClInclude Include="CardLib\PXI8310.h" />
-    <ClInclude Include="CardLib\PXI8417.h" />
-    <ClInclude Include="CardLib\PXI8510.h" />
-    <ClInclude Include="CardLib\PXI8530.h" />
-    <ClInclude Include="CardLib\PXI8867.h" />
-    <ClInclude Include="..\..\CommonCpp\CsvFile.h" />
-    <ClInclude Include="..\..\CommonCpp\DelayTimer.h" />
-    <ClInclude Include="..\..\CommonCpp\LogFile.h" />
-    <ClInclude Include="..\..\CommonCpp\my_malloc.h" />
-    <ClInclude Include="..\..\CommonCpp\shared_prt.hpp" />
-    <ClInclude Include="..\..\CommonCpp\WRFileINI.h" />
     <ClInclude Include="CardCtrl.h" />
-    <ClInclude Include="PXI8417_Total.h" />
-    <ClInclude Include="PXI8510_Total.h" />
-    <ClInclude Include="PXI8530_Total.h" />
-    <ClInclude Include="All_AI.h" />
-    <ClInclude Include="PXI8265_AI.h" />
-    <ClInclude Include="PXI8417_AI.h" />
-    <ClInclude Include="PXI8867_AO.h" />
-    <ClInclude Include="PXI8417_IR.h" />
-    <ClInclude Include="PXI8417_OC.h" />
-    <ClInclude Include="PXI8510_LvdsRecv.h" />
-    <ClInclude Include="PXI8510_LvdsSendFrameCircle.h" />
-    <ClInclude Include="PXI8530_Sync422Recv.h" />
-    <ClInclude Include="PXI8530_Sync422Send.h" />
-    <ClInclude Include="PXI8417_1PPS.h" />
-    <ClInclude Include="PXI8530_ASync422.h" />
-    <ClInclude Include="PXI8310_OHM.h" />
-    <ClInclude Include="PXI8530_MeasFrameCircle.h" />
     <ClInclude Include="UserDef.h" />
   </ItemGroup>
   <ItemGroup>

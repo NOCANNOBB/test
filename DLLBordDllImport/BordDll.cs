@@ -12,6 +12,31 @@ namespace DLLBordDllImport
         [DllImport("BordDLL.dll")]
         public static extern bool DoInit();
 
+        [DllImport("BordDLL.dll")]
+        public static extern bool StartChannel(ulong ulChan);
+
+        [DllImport("BordDLL.dll")]
+        public static extern void GetAIDataFromBord(ulong ulChan, ref double AIData);
+
+        [DllImport("BordDLL.dll")]
+        public static extern void WriteDOData(ulong ulChan, Boolean wDoData);
+
+        [DllImport("BordDLL.dll")]
+        public static extern void WriteDOData_1(ulong ulChan, byte[] wData);
+
+        [DllImport("BordDLL.dll")]
+        public static extern void ReadDOData(ulong ulChan, ref Boolean rDoData);
+
+        [DllImport("BordDLL.dll")]
+        public static extern void ReadDOData_1(ulong ulChan, byte[] RData);
+
+
+        [DllImport("BordDLL.dll")]
+        public static extern void GetCNTData(ulong ulChan, ref double dfFreq, ref double dfDutyCycle);
+
+        [DllImport("BordDLL.dll")]
+        public static extern void WriteAOData(ulong ulChan, ref double wAOData);
+
 
         [DllImport("BordDLL.dll")]
         public static extern void GetDataFromBord(int Bordi,ref double BordBuffer);

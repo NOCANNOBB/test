@@ -43,7 +43,7 @@ namespace DLLMemeryFile
         /// </summary>
         private MemoryMappedViewAccessor  accessor;
         /// <summary>
-        /// 创建内存映射文件
+        /// 创建内存映射文件,循环调用，解决映射文件增长问题
         /// </summary>
         public void CreateWriteMemoryMapFile(string FileName,long NewSize)
         {
@@ -56,7 +56,7 @@ namespace DLLMemeryFile
                 memoryFile = MemoryMappedFile.CreateFromFile(FileName, FileMode.Open, "MyFile", NowNewSize);
                 
            
-                //访问全部文件
+                //访问上次结束，到本次添加的文件文件部分
                 accessor = memoryFile.CreateViewAccessor(LastFileSize,NewSize);
                 //InitFileContent();
             }

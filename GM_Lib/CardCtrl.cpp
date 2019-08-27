@@ -8,54 +8,44 @@
 CCardCtrlATPLib::CCardCtrlATPLib(void)
 {
 	m_pILogInfo = NULL;
-	m_pPXI8265_AI = NULL;
-	m_pPXI8867_AO = NULL;
-	m_pPXI8417 = NULL;
-	m_pPXI8510 = NULL;
-	m_pPXI8530 = NULL;
-	m_pPXI8310 = NULL;
-	Init_PointClass(m_aiALL);
+	
+	m_pXI6416_DO = NULL;
+	m_pXI6435D_CNT = NULL;
+	m_pXI8265_AI = NULL;
+	m_pCPXI8265_Total = NULL;
+	Init_PointClass(m_doALL);
+	Init_PointClass(m_CntALL);
+		Init_PointClass(m_aiALL);
+	Init_PointClass(m_aoALL);
 }
 
 CCardCtrlATPLib::~CCardCtrlATPLib(void)
 {
-	if (m_pPXI8265_AI != NULL)
+	if (m_pXI6416_DO != NULL)
 	{
-		delete m_pPXI8265_AI;
-		m_pPXI8265_AI = NULL;
+		delete m_pXI6416_DO;
+		m_pXI6416_DO = NULL;
 	}
-
-	if (m_pPXI8867_AO != NULL)
+	if (m_pXI6435D_CNT != NULL)
 	{
-		delete m_pPXI8867_AO;
-		m_pPXI8867_AO = NULL;
+		delete m_pXI6435D_CNT;
+		m_pXI6435D_CNT = NULL;
 	}
-
-	if (m_pPXI8417 != NULL)
+	if (m_pXI6860_AO != NULL)
 	{
-		delete m_pPXI8417;
-		m_pPXI8417 = NULL;
+		delete m_pXI6860_AO;
+		m_pXI6860_AO = NULL;
+	}
+	if (m_pCPXI8265_Total != NULL)
+	{
+		delete m_pCPXI8265_Total;
+		m_pCPXI8265_Total = NULL;
 	}
 	
-	if (m_pPXI8510 != NULL)
-	{
-		delete m_pPXI8510;
-		m_pPXI8510 = NULL;
-	}
-
-	if (m_pPXI8530 != NULL)
-	{
-		delete m_pPXI8530;
-		m_pPXI8530 = NULL;
-	}
-
-	if (m_pPXI8310 != NULL)
-	{
-		delete m_pPXI8310;
-		m_pPXI8310 = NULL;
-	}
-
+	Delete_PointClass(m_doALL);
+	Delete_PointClass(m_CntALL);
 	Delete_PointClass(m_aiALL);
+	Delete_PointClass(m_aoALL);
 }
 
 IExCardCtrl* __stdcall CCardCtrlATPLib::CreateLibrary()
@@ -78,111 +68,67 @@ IBaseAI* CCardCtrlATPLib::GetBaseAI(void)
 	if (m_aiALL == NULL)
 	{
 		New_PointClass(m_aiALL, CAI_All);
-		New_PointClass(m_pPXI8265_AI, CPXI8265_AI);
-		New_PointClass(m_pPXI8417, CPXI8417_Total);
+		New_PointClass(m_pCPXI8265_Total,CPXI8265_Total)
+		//New_PointClass(m_pXI6416_DO, PXI6416_DO);
+		//New_PointClass(m_pPXI8417, CPXI8417_Total);
 
-		m_aiALL->Push_IBaseAI(static_cast<IBaseAI*>(m_pPXI8265_AI));// 2*48 + 1*16
-		m_aiALL->Push_IBaseAI(static_cast<IBaseAI*>(m_pPXI8417));
+		m_aiALL->Push_IBaseAI(static_cast<IBaseAI*>(m_pCPXI8265_Total));// 2*48 + 1*16
+		//m_doALL->Push_IBaseDIO(static_cast<m_doALL*>(m_pPXI8417));
 	}
 
 	return static_cast<IBaseAI*>(m_aiALL);
 }
 
-IBaseOutDC* CCardCtrlATPLib::GetBaseOutDC(void)
-{
-	if (m_pPXI8867_AO == NULL)
+IBaseOutAO* CCardCtrlATPLib::GetBaseOutAO(void){
+	
+	
+	if (m_aoALL == NULL)
 	{
-		m_pPXI8867_AO = new CPXI8867_AO;
-	}
-	return static_cast<IBaseOutDC*>(m_pPXI8867_AO);
-}
-
-IBaseIR* CCardCtrlATPLib::GetIR(void)
-{
-	if (m_pPXI8417 == NULL)
-	{
-		m_pPXI8417 = new CPXI8417_Total;
-	}
-	return static_cast<IBaseIR*>(m_pPXI8417);;
-}
-
-IBaseOC* CCardCtrlATPLib::GetOC(void)
-{
-	if (m_pPXI8417 == NULL)
-	{
-		m_pPXI8417 = new CPXI8417_Total;
-	}
-	return static_cast<IBaseOC*>(m_pPXI8417 );;
-}
-
-IBaseLvdsRecv* CCardCtrlATPLib::GetBseLvdsRecv(void)
-{
-	if (m_pPXI8510 == NULL)
-	{
-		m_pPXI8510 = new CPXI8510_Total;
+		New_PointClass(m_aoALL, CAO_ALL);
+		New_PointClass(m_pXI6860_AO,CPXI6860_AO)
+		New_PointClass(m_pCPXI8265_Total,CPXI8265_Total)
+			//New_PointClass(m_pXI6416_DO, PXI6416_DO);
+			//New_PointClass(m_pPXI8417, CPXI8417_Total);
+			m_aoALL->Push_IBaseAO(static_cast<IBaseOutAO*>(m_pXI6860_AO));
+			m_aoALL->Push_IBaseAO(static_cast<IBaseOutAO*>(m_pCPXI8265_Total));// 2*48 + 1*16
+		//m_doALL->Push_IBaseDIO(static_cast<m_doALL*>(m_pPXI8417));
 	}
 
-	return static_cast<IBaseLvdsRecv*>(m_pPXI8510);
+	return static_cast<IBaseOutAO*>(m_aoALL);
 }
 
-IBase1PPS* CCardCtrlATPLib::GetGPS(void)
-{
-	if (m_pPXI8417 == NULL)
+
+IBaseDO * CCardCtrlATPLib::GetBaseDO(void){
+
+	if (m_doALL == NULL)
 	{
-		m_pPXI8417 = new CPXI8417_Total;
-	}
-	return static_cast<IBase1PPS*>(m_pPXI8417 );;
-}
+		New_PointClass(m_doALL, CDO_All);
+		New_PointClass(m_pXI6416_DO, PXI6416_DO);
+		
+		New_PointClass(m_pCPXI8265_Total, CPXI8265_Total);
 
-IBaseOHM* CCardCtrlATPLib::GetOHM(void)
-{
-	New_PointClass(m_pPXI8310, CPXI8310_OHM);
-
-	return static_cast<IBaseOHM*>(m_pPXI8310);
-}
-
-IBaseRecvSync422* CCardCtrlATPLib::GetSync422Recv(void)
-{
-	if (m_pPXI8530 == NULL)
-	{
-		m_pPXI8530 = new CPXI8530_Total;
+		m_doALL->Push_IBaseDO(static_cast<IBaseDO*>(m_pXI6416_DO));// 2*48 + 1*16
+		m_doALL->Push_IBaseDO(static_cast<IBaseDO*>(m_pCPXI8265_Total));
 	}
 
-	return static_cast<IBaseRecvSync422*>(m_pPXI8530);
+	return static_cast<IBaseDO*>(m_doALL);
 }
 
-IBaseSendSync422* CCardCtrlATPLib::GetSync422Send(void)
-{
-	if (m_pPXI8530 == NULL)
+IBaseCNT * CCardCtrlATPLib::GetBaseCNT(void){
+	if (m_doALL == NULL)
 	{
-		m_pPXI8530 = new CPXI8530_Total;
+		New_PointClass(m_CntALL, CCNT_ALL);
+		New_PointClass(m_pXI6435D_CNT, PXI6435D_CNT);
+		New_PointClass(m_pCPXI8265_Total, CPXI8265_Total);
+		//New_PointClass(m_pPXI8417, CPXI8417_Total);
+
+		m_CntALL->Push_IBaseCNT(static_cast<IBaseCNT*>(m_pXI6435D_CNT));// 2*48 + 1*16
+		m_CntALL->Push_IBaseCNT(static_cast<IBaseCNT*>(m_pCPXI8265_Total));
 	}
 
-	return static_cast<IBaseSendSync422*>(m_pPXI8530);
+	return static_cast<IBaseCNT*>(m_CntALL);
 }
 
-IBaseMeasFrameCircle*	CCardCtrlATPLib::GetMeasCircleFrame(void)
-{
-	New_PointClass(m_pPXI8530, CPXI8530_Total);
 
-	return static_cast<IBaseMeasFrameCircle*>(m_pPXI8530);
-}
 
-IBaseLvdsSendFrameCircleData*	CCardCtrlATPLib::GetBseLvdsSendFrameCircleData()
-{
-	New_PointClass(m_pPXI8510, CPXI8510_Total);
 
-	return static_cast<IBaseLvdsSendFrameCircleData*>(m_pPXI8510);
-}
-
-IBaseASync422* CCardCtrlATPLib::GetASync(void)
-{
-	New_PointClass(m_pPXI8530, CPXI8530_Total);
-
-	return static_cast<IBaseASync422*>(m_pPXI8530);
-}
-
-IBaseLvdsSend* CCardCtrlATPLib::GetBseLvdsSend(void)
-{
-	return NULL;
-}

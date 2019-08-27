@@ -1,13 +1,14 @@
 #pragma once
 #include "IBaseHead.h"
-#include "PXI8265_AI.h"
-#include "PXI8867_AO.h"
-#include "PXI8417_Total.h"
-#include "PXI8510_Total.h"
-#include "PXI8530_Total.h"
-#include "PXI8310_OHM.h"
+#include "PXI6416_DO.h"
+#include "DO_All.h"
+#include "CNT_ALL.h"
+#include "PXI6435D_CNT.h"
+#include "PXI6860_AO.h"
 #include "All_AI.h"
-
+#include "PXI8265_AI.h"
+#include "PXI8265_Total.h"
+#include "AO_ALL.h"
 class CCardCtrlATPLib :
 	public IExCardCtrl
 {
@@ -18,18 +19,14 @@ public:
 	virtual ULONG GetVersion();
 
 	virtual IBaseAI* GetBaseAI(void);
-	virtual IBaseOutDC* GetBaseOutDC(void);
-	virtual IBaseIR* GetIR(void);
-	virtual IBaseOC* GetOC(void);
-	virtual IBase1PPS* GetGPS(void);
-	virtual IBaseOHM* GetOHM(void);
-	virtual IBaseRecvSync422* GetSync422Recv(void);
-	virtual IBaseSendSync422* GetSync422Send(void);
-	virtual IBaseASync422* GetASync(void);
-	virtual IBaseLvdsSend* GetBseLvdsSend(void);
-	virtual IBaseLvdsRecv* GetBseLvdsRecv(void);
-	virtual IBaseMeasFrameCircle*	GetMeasCircleFrame(void);
-	virtual IBaseLvdsSendFrameCircleData*	GetBseLvdsSendFrameCircleData();
+	
+	virtual IBaseDO* GetBaseDO(void);
+	virtual IBaseCNT* GetBaseCNT(void);
+
+	virtual IBaseOutAO* GetBaseOutAO(void);
+	//virtual IBaseDIO* GetDIO(void);
+
+
 
 	virtual BOOL SetLogInfo(ILogInfo* pInfo)
 	{m_pILogInfo = pInfo; return TRUE;};
@@ -40,11 +37,15 @@ public:
 	virtual ~CCardCtrlATPLib(void);
 private:
 	ILogInfo*	m_pILogInfo;
-	CPXI8265_AI*	m_pPXI8265_AI;
-	CPXI8867_AO*	m_pPXI8867_AO;
-	CPXI8417_Total* m_pPXI8417;
-	CPXI8510_Total* m_pPXI8510;
-	CPXI8530_Total* m_pPXI8530;
-	CPXI8310_OHM*	m_pPXI8310;
-	CAI_All*		m_aiALL;
+	PXI6416_DO* m_pXI6416_DO;
+	PXI6435D_CNT * m_pXI6435D_CNT;
+	CPXI6860_AO* m_pXI6860_AO;
+	
+	CPXI8265_AI* m_pXI8265_AI;
+
+	CPXI8265_Total* m_pCPXI8265_Total;
+	CDO_All*        m_doALL;
+	CCNT_ALL*		m_CntALL;
+	CAI_All*	m_aiALL;
+	CAO_ALL*	m_aoALL;
 };

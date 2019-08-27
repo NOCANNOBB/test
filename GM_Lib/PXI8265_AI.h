@@ -14,6 +14,37 @@
 #define PXI8265_CHAN_COUNT		(48)
 #define PXI8265_SEG_MAX			(16)
 
+
+
+class CLogFile_PXI8265 
+{
+public:
+	virtual BOOL WriteLog(LPCSTR lpszInfo, ...)
+	{
+		char szData[2048];
+		SYSTEMTIME TmpTime;
+
+		GetLocalTime(&TmpTime);			// 获得当地时间
+
+		va_list va;
+		va_start(va, lpszInfo);
+		wvsprintfA(szData, lpszInfo, va);
+		va_end(va);
+
+		// 出错时间
+		CString strInfo(szData);
+		CString strTimeDate;
+
+		strTimeDate.Format(_T("%d/%2.2d/%2.2d : %2.2d:%2.2d:%2.2d"),
+			TmpTime.wYear, TmpTime.wMonth, TmpTime.wDay, 
+			TmpTime.wHour, TmpTime.wMinute, TmpTime.wSecond);
+
+		printf(strInfo);
+
+		return TRUE;
+	}
+};
+
 class CPXI8265_AI : public IBaseAI  
 {
 public:
@@ -31,6 +62,7 @@ public:
 	
 	virtual void SetErrorLog(ILogInfo* log)
 	{ m_pIErrLog = log;	}
+	virtual void SetHandle(HANDLE hDevice){m_hDevice = hDevice;}
 public:
 	CPXI8265_AI();
 	virtual ~CPXI8265_AI();
@@ -51,11 +83,12 @@ private:
 	// 获得有效值
 	double	_GetArrayRMS(LONG readArray[], ULONG arrayLen);
 private:
+	HANDLE			m_hDevice;
 	BOOL		m_bCreateSuccess;
 	BOOL		m_bIsStart;
 	HANDLE		m_hMutex;
 	ILogInfo*	m_pIErrLog;
-	CLogFile	m_logFile;
+	CLogFile_PXI8265	m_logFile;
 
 	typedef struct _READ_AI_INFO
 	{

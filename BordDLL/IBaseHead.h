@@ -8,18 +8,10 @@ typedef void (WINAPI *PFN_ReleaseIBase)(void* pData);
 class ILogInfo;
 class IBaseCard;
 class IBaseAI;
-class IBaseOutDC;
-class IBaseIR;
-class IBaseOC;
-class IBase1PPS;
-class IBaseOHM;
-class IBaseASync422;
-class IBaseRecvSync422;
-class IBaseSendSync422;
-class IBaseLvdsSend;
-class IBaseLvdsRecv;
-class IBaseMeasFrameCircle;
-class IBaseLvdsSendFrameCircleData;
+class IBaseDO;
+class IBaseOutAO;
+class IBaseCNT;
+
 
 class IExCardCtrl
 {
@@ -30,19 +22,17 @@ public:
 	virtual DWORD GetVersion() = NULL;
 
 	virtual IBaseAI* GetBaseAI(void) = NULL;
-	virtual IBaseOutDC* GetBaseOutDC(void) = NULL;
-	virtual IBaseIR* GetIR(void) = NULL;
-	virtual IBaseOC* GetOC(void) = NULL;
-	virtual IBase1PPS* GetGPS(void) = NULL;
-	virtual IBaseOHM* GetOHM(void) = NULL;
-	virtual IBaseRecvSync422* GetSync422Recv(void) = NULL;
-	virtual IBaseSendSync422* GetSync422Send(void) = NULL;
-	virtual IBaseASync422* GetASync(void) = NULL;
-	virtual IBaseLvdsSend* GetBseLvdsSend(void) = NULL;
-	virtual IBaseLvdsRecv* GetBseLvdsRecv(void) = NULL;
-	virtual IBaseMeasFrameCircle*	GetMeasCircleFrame(void) = NULL;
-	virtual IBaseLvdsSendFrameCircleData*	GetBseLvdsSendFrameCircleData() = NULL;
+
+	virtual IBaseDO* GetBaseDO(void) = NULL;
+
+	virtual IBaseCNT* GetBaseCNT(void)=NULL;
+
+	virtual IBaseOutAO* GetBaseOutAO(void) = NULL;
+
 };
+
+
+
 
 class IBaseCard
 {
@@ -55,7 +45,7 @@ public:
 
 	virtual BOOL Start(ULONG ulChan=0) = NULL;
 	virtual BOOL Stop(ULONG ulChan=0) = NULL;
-	
+
 	virtual void SetErrorLog(ILogInfo* log) = NULL;
 };
 //--------------------------------------------------------------
@@ -73,6 +63,33 @@ public:
 	// 这里输入的是电压值，单位是V
 	virtual BOOL WriteDC(ULONG ulChan, double dfVolt) = NULL;
 };
+
+
+
+//--------------------------------------------------------------
+//DIO 基础类
+class IBaseDO : public IBaseCard
+{
+public:
+	// 这里输入的是电压值，单位是V
+	virtual BOOL WriteDO(ULONG ulChan, BOOL boolVlaue) = NULL;
+	virtual BOOL ReadDO(ULONG ulChan,BOOL* boolValue) = NULL;
+
+	virtual BOOL WriteDO(ULONG ulChan, byte boolVlaue[]) = NULL;
+	virtual BOOL ReadDO(ULONG ulChan,byte boolValue[]) = NULL;
+};
+
+
+//--------------------------------------------------------------
+//CNT 基础类
+class IBaseCNT : public IBaseCard
+{
+public:
+	// 获取频率，占空比
+	virtual BOOL GetdfFreqAnddfdfDutyCycle(ULONG ulChan, double* dfFreq,double* dfdfDutyCycle = NULL) = NULL;
+
+};
+
 //--------------------------------------------------------------
 // IR OC
 class IBaseIR: public IBaseCard
@@ -84,10 +101,10 @@ public:
 	virtual BOOL ClrIRSts(ULONG ulChann) = NULL;
 };
 
-class IBaseOC: public IBaseCard
+class IBaseOutAO: public IBaseCard
 {
 public:
-	virtual BOOL SetOC(ULONG ulChan, double pulseWidthMS) = NULL;
+	virtual BOOL WriteAO(ULONG ulChan, double pulseWidthMS) = NULL;
 };
 //--------------------------------------------------------------
 // 秒脉冲
@@ -145,30 +162,30 @@ public:
 	virtual BOOL SendFrame(ULONG ulChan, BYTE byWriteBuff[], ULONG ulWriteLen) = NULL;
 	// 脉冲输出配置
 	virtual BOOL CfgPulseOut(					// 首先配置脉冲输出, 再写入圈协议和帧协议
-					ULONG	ulChan,				// 通道号
-					double	circleWidth,		// 圈脉冲宽度设置 单位mS 步进0.1 参考 50~150, 范围 0.1~6553.5
-					double	circleCycle,		// 圈脉冲周期设置 单位mS 步进0.1 参考 500~3000, 范围 0.1~6553.5
-					double	frameWidth,			// 帧同步宽度设置 单位mS 步进0.01 参考 0.25~1.5, 范围 0.01~2.55
-					double	frameCycle,			// 帧同步周期设置 单位mS 最小0.01 参考 1~3, 范围 0.01~5.12
-					double	frameDelayCircle,	// 帧输出相对于圈信号延时设置 单位mS 最小0.1 参考 50~600, 范围 0.1~819.2
-					ULONG	unit1BeingPos,		// 第一组 起始位置 0 ~ 1023
-					ULONG	unit1EndPos,		// 第一组 结束位置 0 ~ 1023
-					ULONG	unit2BeingPos,		// 第二组 起始位置 0 ~ 1023
-					ULONG	unit2EndPos,		// 第二组 结束位置 0 ~ 1023
-					ULONG	unit3BeingPos,		// 第三组 起始位置 0 ~ 1023
-					ULONG	unit3EndPos,		// 第三组 结束位置 0 ~ 1023
-					ULONG	unit4BeingPos,		// 第四组 起始位置 0 ~ 1023
-					ULONG	unit4EndPos,		// 第四组 结束位置 0 ~ 1023
-					ULONG	unit5BeingPos,		// 第五组 起始位置 0 ~ 1023
-					ULONG	unit5EndPos,		// 第五组 结束位置 0 ~ 1023
-					ULONG	unit6BeingPos,		// 第六组 起始位置 0 ~ 1023
-					ULONG	unit6EndPos,		// 第六组 结束位置 0 ~ 1023
-					ULONG	unit7BeingPos,		// 第七组 起始位置 0 ~ 1023
-					ULONG	unit7EndPos) = NULL;
+		ULONG	ulChan,				// 通道号
+		double	circleWidth,		// 圈脉冲宽度设置 单位mS 步进0.1 参考 50~150, 范围 0.1~6553.5
+		double	circleCycle,		// 圈脉冲周期设置 单位mS 步进0.1 参考 500~3000, 范围 0.1~6553.5
+		double	frameWidth,			// 帧同步宽度设置 单位mS 步进0.01 参考 0.25~1.5, 范围 0.01~2.55
+		double	frameCycle,			// 帧同步周期设置 单位mS 最小0.01 参考 1~3, 范围 0.01~5.12
+		double	frameDelayCircle,	// 帧输出相对于圈信号延时设置 单位mS 最小0.1 参考 50~600, 范围 0.1~819.2
+		ULONG	unit1BeingPos,		// 第一组 起始位置 0 ~ 1023
+		ULONG	unit1EndPos,		// 第一组 结束位置 0 ~ 1023
+		ULONG	unit2BeingPos,		// 第二组 起始位置 0 ~ 1023
+		ULONG	unit2EndPos,		// 第二组 结束位置 0 ~ 1023
+		ULONG	unit3BeingPos,		// 第三组 起始位置 0 ~ 1023
+		ULONG	unit3EndPos,		// 第三组 结束位置 0 ~ 1023
+		ULONG	unit4BeingPos,		// 第四组 起始位置 0 ~ 1023
+		ULONG	unit4EndPos,		// 第四组 结束位置 0 ~ 1023
+		ULONG	unit5BeingPos,		// 第五组 起始位置 0 ~ 1023
+		ULONG	unit5EndPos,		// 第五组 结束位置 0 ~ 1023
+		ULONG	unit6BeingPos,		// 第六组 起始位置 0 ~ 1023
+		ULONG	unit6EndPos,		// 第六组 结束位置 0 ~ 1023
+		ULONG	unit7BeingPos,		// 第七组 起始位置 0 ~ 1023
+		ULONG	unit7EndPos) = NULL;
 	virtual BOOL GetCount(						// 获得帧圈计数值
-					ULONG	ulChan,				// 通道号
-					ULONG*	pCircleCnt,			// 返回圈同步计数值
-					ULONG*	pFrameCnt)=NULL;	// 返回帧同步计数值
+		ULONG	ulChan,				// 通道号
+		ULONG*	pCircleCnt,			// 返回圈同步计数值
+		ULONG*	pFrameCnt)=NULL;	// 返回帧同步计数值
 	// 选择pxitrig 输出通道
 	virtual BOOL SelMainTrig(ULONG ulChan, BOOL bOut = TRUE) = NULL;
 	// PPS信号的主备使能
@@ -189,22 +206,22 @@ class IBaseLvdsSend : public IBaseCard
 {
 public:
 	virtual BOOL Write(
-				ULONG ulChan,
-				ULONG pulWriteBuff[],
-				ULONG ulWriteLen, 
-				ULONG ulLoopNum			// 循环次数
-				) = NULL;
+		ULONG ulChan,
+		ULONG pulWriteBuff[],
+		ULONG ulWriteLen, 
+		ULONG ulLoopNum			// 循环次数
+		) = NULL;
 };
 
 class IBaseLvdsRecv : public IBaseCard
 {
 public:
 	virtual BOOL Read(
-				ULONG ulChan,
-				BYTE  pbyReadBuff[],
-				ULONG& cbSize,		// 读取个数，如果超时，返回实际数量，如果缓冲区NULL，返回内部已读数据长度
-				double dfTimeOut	// 读取超时时间
-				) = NULL;
+		ULONG ulChan,
+		BYTE  pbyReadBuff[],
+		ULONG& cbSize,		// 读取个数，如果超时，返回实际数量，如果缓冲区NULL，返回内部已读数据长度
+		double dfTimeOut	// 读取超时时间
+		) = NULL;
 };
 // 测量帧圈同步
 class IBaseMeasFrameCircle : public IBaseCard

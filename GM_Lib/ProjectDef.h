@@ -27,6 +27,9 @@
 #define MUTEX_IDAWAVE	"IBaseDAWave 1.0"
 #define MUTEX_IDO		"IBaseDO 1.0"
 #define MUTEX_IOHM		"IBaseOHM 1.0"
+#define MUTEX_IAO		"IBaseOutAO 1.0"
+#define MUTEX_IDO		"IBaseDO 1.0"
+#define MUTEX_ICNT		"IBaseCNT 1.0"
 
 #if 1
 //////////////////////////////////////////////////////////////////////////
@@ -77,9 +80,9 @@ public:
 			if (m_pExCardCtrl)
 			{
 				SetErrorLogNULL(m_pExCardCtrl->GetBaseAI());
-				SetErrorLogNULL(m_pExCardCtrl->GetBaseOutDC());
-				SetErrorLogNULL(m_pExCardCtrl->GetBseLvdsSend());
-				SetErrorLogNULL(m_pExCardCtrl->GetBseLvdsRecv());
+				SetErrorLogNULL(m_pExCardCtrl->GetBaseCNT());
+				SetErrorLogNULL(m_pExCardCtrl->GetBaseDO());
+				
 
 				m_pExCardCtrl->ReleaseLibrary();
 				m_pExCardCtrl = NULL;
