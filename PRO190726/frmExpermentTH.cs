@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DLLProjectInfo;
+using DLLStruct;
 
 namespace PRO190726
 {
@@ -214,6 +215,7 @@ namespace PRO190726
         {
             try
             {
+                ProDefine.g_SMExpermentDesin.ExpParamList.Clear();
                 m_Pro.GetExpermentInfo(ProDefine.g_MyProject.GUID.ToString());
                 if (ProDefine.g_SMExpermentParam != null)
                 {
@@ -237,6 +239,20 @@ namespace PRO190726
                     this.txtJXDYL.Text = ProDefine.g_SMExpermentParam.JXDYL;
                 }
 
+                for (int i = 0; i < ProDefine.g_SMExpermentDesin.ExpParamList.Count; i++)
+                {
+
+                    string WDNumber = ProDefine.g_SMExpermentDesin.ExpParamList[i].Temperature.ToString();
+                    string SDNumber = ProDefine.g_SMExpermentDesin.ExpParamList[i].SD.ToString();
+                    this.dataGridView1.Rows.Clear();
+                    int PerNumnber = ProDefine.g_SMExpermentDesin.ExpParamList[i].YBNumber;
+                    int ExperTime = ProDefine.g_SMExpermentDesin.ExpParamList[i].ExpermentTime;
+                    int Rindex = this.dataGridView1.Rows.Add();
+                    this.dataGridView1.Rows[Rindex].Cells[0].Value = WDNumber;
+                    this.dataGridView1.Rows[Rindex].Cells[1].Value = SDNumber;
+                    this.dataGridView1.Rows[Rindex].Cells[2].Value = PerNumnber;
+                    this.dataGridView1.Rows[Rindex].Cells[3].Value = ExperTime;
+                }
 
             }
             catch { }
@@ -309,6 +325,33 @@ namespace PRO190726
             }
             return true;
 
+        }
+
+        private void lbExpSave_Click(object sender, EventArgs e)
+        {
+            ProDefine.g_SMExpermentDesin.ExpParamList.Clear();
+            int RwosCount = this.dataGridView1.Rows.Count - 1;
+
+            for (int i = 0; i < RwosCount; i++)
+            {
+                SMExpeDesignParam TPParam = new SMExpeDesignParam();
+                if (this.dataGridView1.Rows[i].Cells[0].Value == null) { return; }
+                TPParam.Temperature = Convert.ToDouble(this.dataGridView1.Rows[i].Cells[0].Value);
+
+                if (this.dataGridView1.Rows[i].Cells[1].Value == null) { return; }
+                TPParam.SD = Convert.ToDouble(this.dataGridView1.Rows[i].Cells[1].Value);
+
+                if (this.dataGridView1.Rows[i].Cells[2].Value == null) { return; }
+                TPParam.YBNumber = Convert.ToInt32(this.dataGridView1.Rows[i].Cells[2].Value);
+
+                if (this.dataGridView1.Rows[i].Cells[3].Value == null) { return; }
+                TPParam.ExpermentTime = Convert.ToInt32(this.dataGridView1.Rows[i].Cells[3].Value);
+
+
+                ProDefine.g_SMExpermentDesin.ExpParamList.Add(TPParam);
+            }
+
+            m_Pro.SaveExpermentDesign();
         }
     }
 }

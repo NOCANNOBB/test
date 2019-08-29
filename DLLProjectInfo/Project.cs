@@ -17,6 +17,8 @@ namespace DLLProjectInfo
         public static string ProjectInfoDBName = "ProjectConfig";
         public static string ExperParmaDBName = "ExpermentParam";
         public static string ExperDesignDBName = "ExpermentDesign";
+        public static string ChannelSetDBName = "ChannelInfo";
+        public static string YBChannelInfo = "YBChannelInfo";
         public int SaveProjectInfo(ProjectInfo pro) {
 
             try {
@@ -225,15 +227,18 @@ namespace DLLProjectInfo
                 if (dt != null) {
                     if (dt.Rows.Count > 0)
                     {
-                        SQL = "update " + ExperParmaDBName + " set GUIDSTR='" + experParam.GUID.ToString() + "',ExpermentType='" + experParam.ExpermentType + "',YLType='" + experParam.YLType.ToString() + "',JSMode='"
-                            + experParam.JSMode.ToString() + "',YLSetType='" + experParam.YLSetType.ToString() + "',CGTemperature='"+ experParam.CGTemperature + "',CGXDSD='" + experParam.CGXDSD + "',CPJXTemperature='" + experParam.CPJXTemperature + "',CPJXXDSD='" + experParam.CPJXXDSD
-                            + "',YLNumber='" + experParam.YLNumber + "',YBNumber='" + experParam.YBNumber + "',JWType='" + experParam.JWType + "',CGZD='" + experParam.CGZD + "',CGDYL='" + experParam.CGDYL + "',JXZD='" + experParam.JXZD + "',JXDYL='" + experParam.JXDYL + "' where GUIDSTR='" + experParam.GUID.ToString() + "'";
+                        SQL = "delete from " + ExperParmaDBName + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                        AccessHelper.ExcuteSql(SQL);
+
+                        //SQL = "update " + ExperParmaDBName + " set GUIDSTR='" + experParam.GUID.ToString() + "',ExpermentType='" + experParam.ExpermentType + "',YLType='" + experParam.YLType.ToString() + "',JSMode='"
+                        //    + experParam.JSMode.ToString() + "',YLSetType='" + experParam.YLSetType.ToString() + "',CGTemperature='"+ experParam.CGTemperature + "',CGXDSD='" + experParam.CGXDSD + "',CPJXTemperature='" + experParam.CPJXTemperature + "',CPJXXDSD='" + experParam.CPJXXDSD
+                        //    + "',YLNumber='" + experParam.YLNumber + "',YBNumber='" + experParam.YBNumber + "',JWType='" + experParam.JWType + "',CGZD='" + experParam.CGZD + "',CGDYL='" + experParam.CGDYL + "',JXZD='" + experParam.JXZD + "',JXDYL='" + experParam.JXDYL + "' where GUIDSTR='" + experParam.GUID.ToString() + "'";
                     }
-                    else {
+                    
                         SQL = "insert into " + ExperParmaDBName + " values('" + experParam.GUID.ToString() + "','" + experParam.ExpermentType + "','" + experParam.YLType.ToString() + "','"
                             + experParam.JSMode.ToString() + "','" + experParam.YLSetType.ToString() + "','" + experParam.CGTemperature + "','" + experParam.CGXDSD + "','" + experParam.CPJXTemperature + "','" + experParam.CPJXXDSD
                             + "','" + experParam.YLNumber + "','" + experParam.YBNumber + "','" + experParam.JWType + "','" + experParam.CGZD + "','" + experParam.CGDYL + "','" + experParam.JXZD + "','" + experParam.JXDYL + "')";
-                    }
+                    
 
                     AccessHelper.ExcuteSql(SQL);
                 }
@@ -271,6 +276,26 @@ namespace DLLProjectInfo
                         //ProDefine.g_SMExpermentParam.GUID = ProDefine.g_MyProject.GUID;
                     }
                 }
+                SQL = "select * from " + ExperDesignDBName + " where GUIDSTR ='" + GUIDSTR + "'";
+                DataTable dt1 = AccessHelper.GetDataTableFromDB(SQL);
+                ProDefine.g_SMExpermentDesin.ExpParamList.Clear();
+                if (dt1 != null)
+                {
+                    if (dt1.Rows.Count > 0)
+                    {
+                        int RowsCount = dt1.Rows.Count;
+                        for (int i = 0; i < RowsCount; i++)
+                        {
+                            SMExpeDesignParam ExperDesign = new SMExpeDesignParam();
+                            ExperDesign.ExpermentTime = Convert.ToInt32(dt1.Rows[i][4].ToString());
+                            ExperDesign.SD = Convert.ToDouble(dt1.Rows[i][2].ToString());
+                            ExperDesign.Temperature = Convert.ToDouble(dt1.Rows[i][1].ToString());
+                            ExperDesign.YBNumber = Convert.ToInt32(dt1.Rows[i][3].ToString());
+                            ProDefine.g_SMExpermentDesin.ExpParamList.Add(ExperDesign);
+                        }
+
+                    }
+                }
             }
             catch { }
         }
@@ -300,5 +325,162 @@ namespace DLLProjectInfo
             catch { }
         }
 
+
+        public void SaveChannelSetInfo()
+        {
+            string SQL = "select * from " + ChannelSetDBName + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+
+            DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
+
+            if (dt != null)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    SQL = "delete from " + ChannelSetDBName + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                    AccessHelper.ExcuteSql(SQL);
+
+                }
+                foreach (var info in ProDefine.g_ChannelInfo)
+                {
+                    SQL = "insert into " + ChannelSetDBName + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.FunctionName + "','" + info.Duanzi + "','"
+                        + info.Xianhao + "','" + info.hzZQ + "','" + info.PerReadNumber + "','" + info.ChannelType + "','" + info.channelNumber + "')";
+                    AccessHelper.ExcuteSql(SQL);
+
+                }
+            }
+        }
+
+        public void GetChannelSetInfo()
+        {
+            try
+            {
+                string SQL = "select * from " + ChannelSetDBName + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
+
+                if (dt != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        ProDefine.g_ChannelInfo.Clear();
+                        for (int i = 0; i < dt.Rows.Count; i++ )
+                        {
+                            ChannelSetInfo csi = new ChannelSetInfo();
+                            csi.channelNumber = Convert.ToInt32(dt.Rows[i][7].ToString());
+                            csi.ChannelType = dt.Rows[i][6].ToString();
+                            csi.PerReadNumber = Convert.ToInt32(dt.Rows[i][5].ToString());
+                            csi.hzZQ = Convert.ToInt32(dt.Rows[i][4].ToString());
+                            csi.Xianhao = dt.Rows[i][3].ToString();
+                            csi.Duanzi = dt.Rows[i][2].ToString();
+                            csi.FunctionName = dt.Rows[i][1].ToString();
+                            csi.m_ProGuid = Guid.Parse(dt.Rows[i][0].ToString());
+                            ProDefine.g_ChannelInfo.Add(csi);
+                        }
+                    }
+
+                }
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
+
+        }
+
+        public void SaveYBChannelInfo()
+        {
+            try
+            {
+                string SQL = "select * from " + YBChannelInfo + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
+                if (dt != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        SQL = "delete from " + YBChannelInfo + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                        AccessHelper.ExcuteSql(SQL);
+                    }
+                    foreach (var info in ProDefine.g_YBsetting)
+                    {
+                        /*SQL = "insert into " + ChannelSetDBName + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.FunctionName + "','" + info.Duanzi + "','"
+                            + info.Xianhao + "','" + info.hzZQ + "','" + info.PerReadNumber + "','" + info.ChannelType + "','" + info.channelNumber + "')";
+                        AccessHelper.ExcuteSql(SQL);*/
+
+                        string YBName = info.YBName;
+                        string ChannelID = "";
+                        string GNFunction = "";
+                        string ChannelType = "";
+
+                        foreach (var info_i in info.YBList)
+                        {
+                            SQL = "insert into " + YBChannelInfo + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + YBName + "','" + info_i.GNFunction + "','"
+                            + info_i.ChannelID.ToString() + "','" + info_i.ChannelType + "')";
+                            AccessHelper.ExcuteSql(SQL);
+                        }
+
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
+        }
+
+        public void GetYBChannelInfo()
+        {
+            try
+            {
+                ProDefine.g_YBsetting.Clear();
+                string SQL = "select * from " + YBChannelInfo + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
+                if (dt != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        string LastYBName = "";
+                        YBChannelInfo ybc = null;
+                        for (int i = 0; i < dt.Rows.Count; i++ )
+                        {
+                            string YBName = dt.Rows[i][1].ToString();
+                            string GNFunction = dt.Rows[i][2].ToString();
+                            string ChannelID = dt.Rows[i][3].ToString();
+                            string ChannelType = dt.Rows[i][4].ToString();
+                            
+                            if (LastYBName !=YBName)
+                            {
+                                LastYBName = YBName;
+                                ybc = new YBChannelInfo();
+                                ybc.YBName = YBName;
+                                ybc.YBList = new List<YBSetuse>();
+                                YBSetuse ybs = new YBSetuse();
+                                ybs.GNFunction = GNFunction;
+                                ybs.ChannelType = ChannelType;
+                                ybs.ChannelID = Convert.ToInt32(ChannelID);
+                                ybc.YBList.Add(ybs);
+                                ProDefine.g_YBsetting.Add(ybc);
+                            }
+                            else
+                            {
+                                LastYBName = YBName;
+                                if (ybc != null)
+                                {
+                                    YBSetuse ybs = new YBSetuse();
+                                    ybs.GNFunction = GNFunction;
+                                    ybs.ChannelType = ChannelType;
+                                    ybs.ChannelID = Convert.ToInt32(ChannelID);
+                                    ybc.YBList.Add(ybs);
+                                }
+                            }
+                            
+                        }
+
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
+        }
     }
 }

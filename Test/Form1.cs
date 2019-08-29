@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DLLMemeryFile;
 using DLLStruct;
+using DLLNOPI;
 
 namespace Test
 {
@@ -260,24 +261,60 @@ namespace Test
         }
 
         private void simpleButton5_Click(object sender, EventArgs e)
+        { 
+        }
+
+        private void simpleButton6_Click(object sender, EventArgs e)
         {
+            string[] StrArr = new string[this.dataGridView2.Rows.Count + 1];
+            string CaptionString = "";
 
-            if (mf == null)
+            for (int i = 0; i < this.dataGridView2.Columns.Count; i++)
             {
-                mf = new MemeryFile();
+
+                CaptionString += this.dataGridView2.Columns[i].HeaderText + ",";
             }
-            string filename = "FirstTest.data";
-            mf.CreateFile(filename);
-            mf.CreateMemoryMapFile(filename);
+            CaptionString = CaptionString.Substring(0, CaptionString.Length - 1);
+            StrArr[0] = CaptionString;
 
-            List<FileData> returnValue = mf.ReadFromMemFile();
+            for (int k = 0; k < this.dataGridView2.Rows.Count; k++)
+            {
+                string RowsString = "";
+                for (int i = 0; i < this.dataGridView2.Columns.Count; i++)
+                {
 
+                    if(this.dataGridView2.Rows[k].Cells[i].Value == null){
+                        RowsString += ",";
 
-            int a = 0;
-            MessageBox.Show(a.ToString());
+                    }
+                    else{
 
-            mf.DisposeMemoryMapFile();
+                        RowsString += this.dataGridView2.Rows[k].Cells[i].Value.ToString()+",";
+                    }
+                    
+                }
+                RowsString = RowsString.Substring(0, RowsString.Length - 1);
+                StrArr[k+1] = RowsString;
+            }
+            ExcelHelper.WriteToExcel("kkk.xls", StrArr);
 
+        }
+
+        private void simpleButton7_Click(object sender, EventArgs e)
+        {
+            List<string> returnArr = ExcelHelper.ReadFromExcelFile("kkk.xls");
+
+            int RowCount = returnArr.Count;
+            int ColNum = returnArr[0].Split(',').Count();
+
+            this.dataGridView2.Rows.Clear();
+            for (int i = 1; i < RowCount; i++)
+            {
+                int kindex = this.dataGridView2.Rows.Add();
+                for(int k= 0; k < ColNum; k++){
+                    this.dataGridView2.Rows[kindex].Cells[k].Value = returnArr[i].Split(',')[k];
+                }
+            }
         }
     }
 }

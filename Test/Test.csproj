@@ -101,6 +101,10 @@
       <Project>{cae2b0f4-1e9d-4376-af09-087f9c4bbd8c}</Project>
       <Name>DLLMemeryFile</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DLLNOPI\DLLNOPI.csproj">
+      <Project>{d58b40cd-38ce-47a3-8c6b-48888a01856f}</Project>
+      <Name>DLLNOPI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DLLStruct\DLLStruct.csproj">
       <Project>{bb07b757-1fbd-4cdd-a21c-21ef359c007d}</Project>
       <Name>DLLStruct</Name>

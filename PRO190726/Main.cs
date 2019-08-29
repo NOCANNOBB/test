@@ -200,6 +200,8 @@ namespace PRO190726
                 AccessHelper.CreateAccessTable(dBPath, "ProjectConfig");
                 AccessHelper.CreateAccessTable(dBPath, "ExpermentParam");
                 AccessHelper.CreateAccessTable(dBPath, "ExpermentDesign");
+                AccessHelper.CreateAccessTable(dBPath, "ChannelInfo");
+                AccessHelper.CreateAccessTable(dBPath, "YBChannelInfo");
             }
             catch { }
         }
@@ -306,6 +308,8 @@ namespace PRO190726
         private frmKKXPG frmKK = null;
 
         private frmKKXYANZHENG frmKKYZ = null;
+
+        private frmYBSet frmYBS = null;
      
 
         private bool IsRightClick = false;
@@ -694,6 +698,17 @@ namespace PRO190726
                 int SelIndex = this.lsProject.SelectedItems[0].Index;
                 DoDlePro(SelIndex);
             }
+        }
+
+        private void 样本通道配置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmYBS != null)
+            {
+                frmYBS.Dispose();
+                frmYBS = null;
+            }
+            frmYBS = new frmYBSet();
+            ShowForm(frmYBS);
         }
 
 

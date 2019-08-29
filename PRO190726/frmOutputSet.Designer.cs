@@ -47,7 +47,7 @@
             // lbTitle
             // 
             this.lbTitle.AutoSize = true;
-            this.lbTitle.Location = new System.Drawing.Point(49, 29);
+            this.lbTitle.Location = new System.Drawing.Point(36, 40);
             this.lbTitle.Name = "lbTitle";
             this.lbTitle.Size = new System.Drawing.Size(53, 12);
             this.lbTitle.TabIndex = 0;
@@ -58,9 +58,11 @@
             this.textBox1.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.Location = new System.Drawing.Point(86, 90);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.Size = new System.Drawing.Size(241, 21);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "样本选择";
+            this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // dataGridView1
             // 
@@ -101,7 +103,7 @@
             // lbSave
             // 
             this.lbSave.AutoSize = true;
-            this.lbSave.Location = new System.Drawing.Point(728, 63);
+            this.lbSave.Location = new System.Drawing.Point(781, 37);
             this.lbSave.Name = "lbSave";
             this.lbSave.Size = new System.Drawing.Size(29, 12);
             this.lbSave.TabIndex = 3;
@@ -146,7 +148,7 @@
             this.pictureBox1.Image = global::PRO190726.Properties.Resources.player_icons_40px_1137045_easyicon_net;
             this.pictureBox1.Location = new System.Drawing.Point(232, 29);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(68, 29);
+            this.pictureBox1.Size = new System.Drawing.Size(47, 28);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;

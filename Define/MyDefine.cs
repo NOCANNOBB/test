@@ -26,6 +26,10 @@ namespace Define
 
         public static SMExpermentDesin g_SMExpermentDesin = new SMExpermentDesin();
 
+        public static List<ChannelSetInfo> g_ChannelInfo = new List<ChannelSetInfo>();
+
+        public static List<YBChannelInfo> g_YBsetting = new List<YBChannelInfo>();
+
         public static uint ClearBit(uint value, int BitInDWORD)
         {
             value = (uint)(value & (~(0x1 << BitInDWORD)));

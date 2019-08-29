@@ -121,6 +121,27 @@ namespace DLLAccess
                     colums.Insert(3, "YBNumber");
                     colums.Insert(4, "ExpermentTime");
                 }
+                if (tbName == "ChannelInfo")
+                {
+                    colums.Insert(0, "GUIDSTR");//
+                    colums.Insert(1, "FunctionName");// 
+                    colums.Insert(2, "Duanzi");
+                    colums.Insert(3, "Xianhao");
+                    colums.Insert(4, "hzZQ");
+                    colums.Insert(5, "PerReadNumber");//
+                  
+                    colums.Insert(6, "ChannelType");
+                    
+                    colums.Insert(7, "channelNumber");
+                }
+                if (tbName == "YBChannelInfo")//样本通道分配
+                {
+                    colums.Insert(0, "GUIDSTR");//
+                    colums.Insert(1, "YBName");// 
+                    colums.Insert(2, "GNFunction");
+                    colums.Insert(3, "ChannelID");
+                    colums.Insert(4, "ChannelType");
+                }
 
 
                 foreach (var column in colums)

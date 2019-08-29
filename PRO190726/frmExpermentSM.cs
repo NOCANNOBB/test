@@ -55,6 +55,7 @@ namespace PRO190726
 
         private void DoInitUI() {
             try {
+                ProDefine.g_SMExpermentDesin.ExpParamList.Clear();
                 m_Pro.GetExpermentInfo(ProDefine.g_MyProject.GUID.ToString());
                 if (ProDefine.g_SMExpermentParam != null) {
                     SetYLValue(ProDefine.g_SMExpermentParam.YLType);
@@ -76,7 +77,21 @@ namespace PRO190726
                     this.txtJXZD.Text = ProDefine.g_SMExpermentParam.JXZD;
                     this.txtJXDYL.Text = ProDefine.g_SMExpermentParam.JXDYL;
                 }
-               
+                this.dataGridView1.Rows.Clear();
+                for (int i = 0; i < ProDefine.g_SMExpermentDesin.ExpParamList.Count; i++)
+                {
+
+                    string WDNumber = ProDefine.g_SMExpermentDesin.ExpParamList[i].Temperature.ToString();
+                    string SDNumber = ProDefine.g_SMExpermentDesin.ExpParamList[i].SD.ToString();
+                    
+                    int PerNumnber = ProDefine.g_SMExpermentDesin.ExpParamList[i].YBNumber;
+                    int ExperTime = ProDefine.g_SMExpermentDesin.ExpParamList[i].ExpermentTime;
+                    int Rindex = this.dataGridView1.Rows.Add();
+                    this.dataGridView1.Rows[Rindex].Cells[0].Value = WDNumber;
+                    this.dataGridView1.Rows[Rindex].Cells[1].Value = SDNumber;
+                    this.dataGridView1.Rows[Rindex].Cells[2].Value = PerNumnber;
+                    this.dataGridView1.Rows[Rindex].Cells[3].Value = ExperTime;
+                }
 
             }
             catch { }
@@ -156,6 +171,7 @@ namespace PRO190726
         }
 
         private void SetYLValue(int ValueParam) {
+            YLReturnValue = ValueParam;
             string YLText = "";
             if(ProDefine.GetBit(ValueParam, 0)){
                 YLText += "温度+";
@@ -227,7 +243,7 @@ namespace PRO190726
                 return;
             }
 
-            ProDefine.g_SMExpermentParam.YLType = YLReturnValue;
+            ProDefine.g_SMExpermentParam.YLType = GetYLValue(this.cmbYLType.Text);
             ProDefine.g_SMExpermentParam.JSMode = JSModReturnValue;
             ProDefine.g_SMExpermentParam.YLSetType = cbTLSetType.SelectedIndex;
             ProDefine.g_SMExpermentParam.CGTemperature = this.txtCG.Text;
@@ -258,7 +274,7 @@ namespace PRO190726
 
             string WDNumber = this.txtCG.Text;
             string SDNumber = this.txtCGSD.Text;
-
+            this.dataGridView1.Rows.Clear();
             int PerNumnber = YBNumber / YLNumber;
             for (int i = 0; i < YLNumber; i++)
             {
@@ -296,6 +312,7 @@ namespace PRO190726
         }
 
         private void SetYLModValue(int ValueParam) {
+            YLReturnValue = ValueParam;
             this.cbJsMode.Text = "待接入";
         }
 
@@ -322,7 +339,8 @@ namespace PRO190726
 
         private void lbexpSave_Click(object sender, EventArgs e)
         {
-            int RwosCount = this.dataGridView1.Rows.Count;
+            ProDefine.g_SMExpermentDesin.ExpParamList.Clear();
+            int RwosCount = this.dataGridView1.Rows.Count -1;
            
             for (int i = 0; i < RwosCount; i++)
             {

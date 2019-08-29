@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.lb_Close = new System.Windows.Forms.Label();
             this.lb_Small = new System.Windows.Forms.Label();
             this.lb_Max = new System.Windows.Forms.Label();
@@ -67,12 +66,13 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbTypeShow = new System.Windows.Forms.Label();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
             this.打开项目ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.删除项目ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.保存项目ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.样本通道配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -139,7 +139,7 @@
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(2, 57);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(496, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(588, 25);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -254,6 +254,7 @@
             // 
             this.实验检测ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.通道设置ToolStripMenuItem,
+            this.样本通道配置ToolStripMenuItem,
             this.输出信号配置ToolStripMenuItem,
             this.标准数据与故障报警设置ToolStripMenuItem,
             this.实验ToolStripMenuItem});
@@ -442,26 +443,26 @@
             this.删除项目ToolStripMenuItem1,
             this.保存项目ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(125, 70);
             // 
             // 打开项目ToolStripMenuItem1
             // 
             this.打开项目ToolStripMenuItem1.Name = "打开项目ToolStripMenuItem1";
-            this.打开项目ToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
+            this.打开项目ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.打开项目ToolStripMenuItem1.Text = "打开项目";
             this.打开项目ToolStripMenuItem1.Click += new System.EventHandler(this.打开项目ToolStripMenuItem1_Click);
             // 
             // 删除项目ToolStripMenuItem1
             // 
             this.删除项目ToolStripMenuItem1.Name = "删除项目ToolStripMenuItem1";
-            this.删除项目ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.删除项目ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.删除项目ToolStripMenuItem1.Text = "删除项目";
             this.删除项目ToolStripMenuItem1.Click += new System.EventHandler(this.删除项目ToolStripMenuItem1_Click);
             // 
             // 保存项目ToolStripMenuItem
             // 
             this.保存项目ToolStripMenuItem.Name = "保存项目ToolStripMenuItem";
-            this.保存项目ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.保存项目ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.保存项目ToolStripMenuItem.Text = "保存项目";
             // 
             // pictureBox2
@@ -485,6 +486,13 @@
             this.pictureBox1.Size = new System.Drawing.Size(1363, 54);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // 样本通道配置ToolStripMenuItem
+            // 
+            this.样本通道配置ToolStripMenuItem.Name = "样本通道配置ToolStripMenuItem";
+            this.样本通道配置ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.样本通道配置ToolStripMenuItem.Text = "样本通道配置";
+            this.样本通道配置ToolStripMenuItem.Click += new System.EventHandler(this.样本通道配置ToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -571,6 +579,7 @@
         private System.Windows.Forms.ToolStripMenuItem 标准数据与故障报警设置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 寿命实验数据处理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 退化实验数据处理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 样本通道配置ToolStripMenuItem;
     }
 }
 

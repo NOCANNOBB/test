@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Define;
 
 namespace PRO190726
 {
@@ -19,6 +20,8 @@ namespace PRO190726
             initUI();
         }
         private int AddIndex = 0;
+
+
         private void initUI (){
             //f156
 
@@ -33,25 +36,27 @@ namespace PRO190726
 
             AddIndex = this.dataGridView1.Columns.Count - 1;
 
+            
+        }
 
-            for(int i = 0; i < 7; i++){
-
-                int kindex = this.dataGridView1.Rows.Add();
-                if (kindex % 2 != 0)
+        private void InitData()
+        {
+            this.dataGridView1.Rows.Clear();
+            foreach (var info in ProDefine.g_YBsetting)
+            {
+                if (this.textBox1.Text.Contains(info.YBName))
                 {
-
-                    dataGridView1.Rows[kindex].Cells["Column3"].Value = this.pictureBox1.Image;
-                    //DataGridViewImageColumn Imange = new DataGridViewImageColumn();
-                    //Imange.HeaderText = "照片";
-                    //Imange.Image = this.pictureBox1.Image;//把PictureBox上的图片赋值给图像列
-                    // Imange.ImageLayout = DataGridViewImageCellLayout.Zoom;//设置“照片”列的图像制定布局设定为缩略图
-                    //this.dataGridView1.Columns.Add(Imange);//最后添加这
-                    //this.dataGridView1.Columns["照片"].Visible = false;
+                    foreach (var info_i in info.YBList)
+                    {
+                        if (!info_i.ChannelType.Contains("O"))
+                        {
+                            int AddIndex = this.dataGridView1.Rows.Add();
+                            AddIndex = this.dataGridView1.Rows.Add();
+                            this.dataGridView1.Rows[AddIndex].Cells[0].Value = info_i.GNFunction;
+                        }
+                    }
                 }
-                else
-                {
-                    dataGridView1.Rows[kindex].Cells["Column3"].Value = pictureBox2.Image;
-                }
+                break;
             }
         }
 
@@ -118,6 +123,36 @@ namespace PRO190726
         {
             if (dataGridView1.CurrentCell != null)
                 dataGridView1.CurrentCell.Value = comboBox1.Items[comboBox1.SelectedIndex];
+        }
+
+        List<int> m_YB = new List<int>();
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+            this.textBox1.Text = "";
+            int ybNumber= Convert.ToInt32(ProDefine.g_SMExpermentParam.YBNumber);
+
+
+            frmYBSelect frmyb = new frmYBSelect();
+            frmyb.YBNumber = ybNumber;
+            frmyb.ShowDialog();
+            if (frmyb.DialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                m_YB = frmyb.returnList;
+                foreach (var info in m_YB)
+                {
+                    this.textBox1.Text += "样本" + (info +1).ToString() + ",";
+                }
+                InitData();
+            }
+            else
+            {
+                this.textBox1.Text = "样本选择";
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

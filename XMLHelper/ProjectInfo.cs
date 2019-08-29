@@ -23,6 +23,8 @@ namespace XMLHelper
         public string ExperAddress { get; set; }
 
         public string ProjectPath { get; set; }
+
+        public int ProjectType { get; set; }// 项目实验类型
     }
 
 

@@ -47,6 +47,14 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simpleButton6 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton7 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
@@ -54,6 +62,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // simpleButton1
@@ -145,7 +154,7 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            this.dataGridView1.Location = new System.Drawing.Point(166, 329);
+            this.dataGridView1.Location = new System.Drawing.Point(144, 33);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(646, 150);
@@ -216,7 +225,7 @@
             // 
             // simpleButton4
             // 
-            this.simpleButton4.Location = new System.Drawing.Point(221, 549);
+            this.simpleButton4.Location = new System.Drawing.Point(867, 85);
             this.simpleButton4.Name = "simpleButton4";
             this.simpleButton4.Size = new System.Drawing.Size(75, 23);
             this.simpleButton4.TabIndex = 10;
@@ -225,18 +234,79 @@
             // 
             // simpleButton5
             // 
-            this.simpleButton5.Location = new System.Drawing.Point(421, 549);
+            this.simpleButton5.Location = new System.Drawing.Point(867, 137);
             this.simpleButton5.Name = "simpleButton5";
             this.simpleButton5.Size = new System.Drawing.Size(75, 23);
             this.simpleButton5.TabIndex = 11;
             this.simpleButton5.Text = "duqu";
             this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column4,
+            this.Column5,
+            this.Column6,
+            this.Column7,
+            this.Column8});
+            this.dataGridView2.Location = new System.Drawing.Point(156, 363);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowTemplate.Height = 23;
+            this.dataGridView2.Size = new System.Drawing.Size(656, 150);
+            this.dataGridView2.TabIndex = 12;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "命名";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "端子";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "线号";
+            this.Column6.Name = "Column6";
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "采样周期";
+            this.Column7.Name = "Column7";
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "每周期采样点";
+            this.Column8.Name = "Column8";
+            // 
+            // simpleButton6
+            // 
+            this.simpleButton6.Location = new System.Drawing.Point(840, 363);
+            this.simpleButton6.Name = "simpleButton6";
+            this.simpleButton6.Size = new System.Drawing.Size(75, 23);
+            this.simpleButton6.TabIndex = 13;
+            this.simpleButton6.Text = "simpleButton6";
+            this.simpleButton6.Click += new System.EventHandler(this.simpleButton6_Click);
+            // 
+            // simpleButton7
+            // 
+            this.simpleButton7.Location = new System.Drawing.Point(840, 420);
+            this.simpleButton7.Name = "simpleButton7";
+            this.simpleButton7.Size = new System.Drawing.Size(75, 23);
+            this.simpleButton7.TabIndex = 14;
+            this.simpleButton7.Text = "simpleButton7";
+            this.simpleButton7.Click += new System.EventHandler(this.simpleButton7_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1033, 610);
+            this.Controls.Add(this.simpleButton7);
+            this.Controls.Add(this.simpleButton6);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.simpleButton5);
             this.Controls.Add(this.simpleButton4);
             this.Controls.Add(this.pictureBox2);
@@ -258,6 +328,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -283,6 +354,14 @@
         private System.Windows.Forms.DataGridViewImageColumn Column3;
         private DevExpress.XtraEditors.SimpleButton simpleButton4;
         private DevExpress.XtraEditors.SimpleButton simpleButton5;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private DevExpress.XtraEditors.SimpleButton simpleButton6;
+        private DevExpress.XtraEditors.SimpleButton simpleButton7;
 
     }
 }

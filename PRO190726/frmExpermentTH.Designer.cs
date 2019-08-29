@@ -74,17 +74,17 @@
             this.lbSubtitle = new System.Windows.Forms.Label();
             this.lbtitle = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.lbExp = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbExp = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbCreateExp
@@ -184,6 +184,7 @@
             this.lbExpSave.Size = new System.Drawing.Size(29, 12);
             this.lbExpSave.TabIndex = 29;
             this.lbExpSave.Text = "保存";
+            this.lbExpSave.Click += new System.EventHandler(this.lbExpSave_Click);
             this.lbExpSave.MouseEnter += new System.EventHandler(this.lbexpSave_MouseEnter);
             this.lbExpSave.MouseLeave += new System.EventHandler(this.lbexpSave_MouseLeave);
             // 
@@ -609,26 +610,6 @@
             this.panel3.Size = new System.Drawing.Size(953, 242);
             this.panel3.TabIndex = 6;
             // 
-            // lbExp
-            // 
-            this.lbExp.AutoSize = true;
-            this.lbExp.Location = new System.Drawing.Point(18, 10);
-            this.lbExp.Name = "lbExp";
-            this.lbExp.Size = new System.Drawing.Size(101, 12);
-            this.lbExp.TabIndex = 2;
-            this.lbExp.Text = "实验方案要素设计";
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.panel1.Controls.Add(this.lbtitle);
-            this.panel1.Location = new System.Drawing.Point(2, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(975, 31);
-            this.panel1.TabIndex = 4;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -667,6 +648,26 @@
             this.Column4.Name = "Column4";
             this.Column4.Width = 150;
             // 
+            // lbExp
+            // 
+            this.lbExp.AutoSize = true;
+            this.lbExp.Location = new System.Drawing.Point(18, 10);
+            this.lbExp.Name = "lbExp";
+            this.lbExp.Size = new System.Drawing.Size(101, 12);
+            this.lbExp.TabIndex = 2;
+            this.lbExp.Text = "实验方案要素设计";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panel1.Controls.Add(this.lbtitle);
+            this.panel1.Location = new System.Drawing.Point(2, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(975, 31);
+            this.panel1.TabIndex = 4;
+            // 
             // frmExpermentTH
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -683,9 +684,9 @@
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }

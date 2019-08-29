@@ -75,4 +75,51 @@ namespace DLLStruct
         public string THYZ { get; set; }//退化阈值
 
     }
+
+    public class ChannelSetInfo
+    {
+        public Guid m_ProGuid { get; set; }
+
+        public string FunctionName { get; set; }
+
+        public string Duanzi { get; set; }
+
+        public string Xianhao { get; set; }
+
+        public int hzZQ { get; set; }//数据类型 0 开关量 1 模拟量
+
+        public int PerReadNumber { get; set; }//输入输入 0 输入 1 输出
+
+        public string ChannelType { get; set; }//通道功能描述
+
+        public int channelNumber { get; set; }
+    }
+
+    public class YBSetuse
+    {
+        public string GNFunction { get; set; }
+        public int ChannelID { get; set; }
+        public string ChannelType { get; set; }
+
+    }
+
+    public class YBChannelInfo
+    {
+        public string YBName { get; set; }
+
+        public List<YBSetuse> YBList { get; set; }
+    }
+
+    public class YBSingleSetInput
+    {
+        public List<string> m_YBList { get; set; }
+
+        public string GNFunction { get; set; }
+
+        public int SetType { get; set; }// 0 恒定 1 循环信号 2 不循环变化信号
+
+        public List<double> m_ValueList { get; set; }
+
+        public List<int> m_TimeList { get; set; }
+    }
 }
