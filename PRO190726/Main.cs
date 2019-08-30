@@ -202,6 +202,9 @@ namespace PRO190726
                 AccessHelper.CreateAccessTable(dBPath, "ExpermentDesign");
                 AccessHelper.CreateAccessTable(dBPath, "ChannelInfo");
                 AccessHelper.CreateAccessTable(dBPath, "YBChannelInfo");
+                AccessHelper.CreateAccessTable(dBPath, "YBSetSignle");
+                AccessHelper.CreateAccessTable(dBPath, "YBSetOutSignle");
+                AccessHelper.CreateAccessTable(dBPath, "YBSetAlarm");
             }
             catch { }
         }

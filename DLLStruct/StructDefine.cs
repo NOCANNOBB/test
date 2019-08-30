@@ -122,4 +122,22 @@ namespace DLLStruct
 
         public List<int> m_TimeList { get; set; }
     }
+
+
+    public class YBInputFunctionValueSet
+    {
+        public string GNFunctionName { get; set; }
+
+        public int SignleType { get; set; }
+    }
+
+    public class YBAlarmSet
+    {
+        public List<string> m_YBList { get; set; }
+        public string GNFcontion { get; set; }
+        public string AlarmH { get; set; }
+        public string AlarmL { get; set; }
+        public string AlarmData { get; set; }
+        public string AlarmAbs { get; set; }
+    }
 }

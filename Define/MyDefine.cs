@@ -30,6 +30,12 @@ namespace Define
 
         public static List<YBChannelInfo> g_YBsetting = new List<YBChannelInfo>();
 
+        public static List<YBSingleSetInput> g_YBSetSignle = new List<YBSingleSetInput>();
+
+        public static List<YBSingleSetInput> g_YBSetSignleOut = new List<YBSingleSetInput>();
+
+        public static List<YBAlarmSet> g_YBAlarm = new List<YBAlarmSet>();
+
         public static uint ClearBit(uint value, int BitInDWORD)
         {
             value = (uint)(value & (~(0x1 << BitInDWORD)));

@@ -19,6 +19,9 @@ namespace DLLProjectInfo
         public static string ExperDesignDBName = "ExpermentDesign";
         public static string ChannelSetDBName = "ChannelInfo";
         public static string YBChannelInfo = "YBChannelInfo";
+        public static string YBSetSignle = "YBSetSignle";
+        public static string YBSetOutSignle = "YBSetOutSignle";
+        public static string YBSetAlarm = "YBSetAlarm";
         public int SaveProjectInfo(ProjectInfo pro) {
 
             try {
@@ -480,6 +483,282 @@ namespace DLLProjectInfo
             catch (System.Exception ex)
             {
             	
+            }
+        }
+
+        public void SaveYBSetSignel()
+        {
+            try
+            {
+                string SQL = "select * from " + YBSetSignle + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
+                if (dt != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        SQL = "delete from " + YBSetSignle + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                        AccessHelper.ExcuteSql(SQL);
+                    }
+                    foreach (var info in ProDefine.g_YBSetSignle)
+                    {
+                        string Timestr = "";
+                        string ValueStr = "";
+                        string YbStr = "";
+                        foreach (var kkk in info.m_TimeList)
+                        {
+                            Timestr = Timestr + kkk.ToString() + ",";
+                        }
+                        foreach (var kkk in info.m_ValueList)
+                        {
+                            ValueStr = ValueStr + kkk.ToString() + ",";
+                        }
+                        foreach (var kkk in info.m_YBList)
+                        {
+                            YbStr = YbStr + kkk.ToString() + ",";
+                        }
+
+                        Timestr = Timestr.Substring(0, Timestr.Length - 1);
+                        ValueStr = ValueStr.Substring(0, ValueStr.Length - 1);
+                        YbStr = YbStr.Substring(0, YbStr.Length - 1);
+
+                        SQL = "insert into " + YBSetSignle + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.GNFunction + "','" + Timestr + "','"
+                            + ValueStr + "','" + YbStr + "','" + info.SetType.ToString() + "')";
+                        AccessHelper.ExcuteSql(SQL);
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
+        }
+
+    
+
+        public void GetYBSetSignel()
+        {
+            try
+            {
+                ProDefine.g_YBSetSignle.Clear();
+                string SQL = "select * from " + YBSetSignle + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
+                if (dt != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dt.Rows.Count; i++ )
+                        {
+                            string GN = dt.Rows[i][1].ToString();
+                            string TimeList = dt.Rows[i][2].ToString();
+                            string ValueList = dt.Rows[i][3].ToString();
+                            string YBList = dt.Rows[i][4].ToString();
+                            string Settype = dt.Rows[i][5].ToString();
+                            List<int> lTimeList = new List<int>();
+                            List<double> lValueList = new List<double>();
+                            string[] TimeArr = TimeList.Split(',');
+                            foreach (var info in TimeArr)
+                            {
+                                lTimeList.Add(Convert.ToInt32(info));
+                            }
+                            string[] ValueArr = ValueList.Split(',');
+                            foreach (var info in ValueArr)
+                            {
+                                lValueList.Add(Convert.ToDouble(info));
+                            }
+                            YBSingleSetInput ybs = new YBSingleSetInput();
+                            ybs.GNFunction = GN;
+                            ybs.m_TimeList = lTimeList;
+                            ybs.m_ValueList = lValueList;
+                            ybs.m_YBList = new List<string>();
+                            ybs.m_YBList.AddRange(YBList.Split(','));
+                            ybs.SetType = Convert.ToInt32(Settype);
+                            ProDefine.g_YBSetSignle.Add(ybs);
+                        }
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
+        }
+
+        public void SaveYBSetSignelOut()
+        {
+            try
+            {
+                string SQL = "select * from " + YBSetOutSignle + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
+                if (dt != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        SQL = "delete from " + YBSetOutSignle + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                        AccessHelper.ExcuteSql(SQL);
+                    }
+                    foreach (var info in ProDefine.g_YBSetSignleOut)
+                    {
+                        string Timestr = "";
+                        string ValueStr = "";
+                        string YbStr = "";
+                        foreach (var kkk in info.m_TimeList)
+                        {
+                            Timestr = Timestr + kkk.ToString() + ",";
+                        }
+                        foreach (var kkk in info.m_ValueList)
+                        {
+                            ValueStr = ValueStr + kkk.ToString() + ",";
+                        }
+                        foreach (var kkk in info.m_YBList)
+                        {
+                            YbStr = YbStr + kkk.ToString() + ",";
+                        }
+
+                        Timestr = Timestr.Substring(0, Timestr.Length - 1);
+                        ValueStr = ValueStr.Substring(0, ValueStr.Length - 1);
+                        YbStr = YbStr.Substring(0, YbStr.Length - 1);
+
+                        SQL = "insert into " + YBSetOutSignle + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.GNFunction + "','" + Timestr + "','"
+                            + ValueStr + "','" + YbStr + "','" + info.SetType.ToString() + "')";
+                        AccessHelper.ExcuteSql(SQL);
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+
+            }
+        }
+
+
+
+        public void GetYBSetSignelOut()
+        {
+            try
+            {
+                ProDefine.g_YBSetSignle.Clear();
+                string SQL = "select * from " + YBSetOutSignle + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
+                if (dt != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            string GN = dt.Rows[i][1].ToString();
+                            string TimeList = dt.Rows[i][2].ToString();
+                            string ValueList = dt.Rows[i][3].ToString();
+                            string YBList = dt.Rows[i][4].ToString();
+                            string Settype = dt.Rows[i][5].ToString();
+                            List<int> lTimeList = new List<int>();
+                            List<double> lValueList = new List<double>();
+                            string[] TimeArr = TimeList.Split(',');
+                            foreach (var info in TimeArr)
+                            {
+                                lTimeList.Add(Convert.ToInt32(info));
+                            }
+                            string[] ValueArr = ValueList.Split(',');
+                            foreach (var info in ValueArr)
+                            {
+                                lValueList.Add(Convert.ToDouble(info));
+                            }
+                            YBSingleSetInput ybs = new YBSingleSetInput();
+                            ybs.GNFunction = GN;
+                            ybs.m_TimeList = lTimeList;
+                            ybs.m_ValueList = lValueList;
+                            ybs.m_YBList = new List<string>();
+                            ybs.m_YBList.AddRange(YBList.Split(','));
+                            ybs.SetType = Convert.ToInt32(Settype);
+                            ProDefine.g_YBSetSignleOut.Add(ybs);
+                        }
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+
+            }
+        }
+
+        public void SaveAlarm()
+        {
+            try
+            {
+                string SQL = "select * from " + YBSetAlarm + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
+                if (dt != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        SQL = "delete from " + YBSetAlarm + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                        AccessHelper.ExcuteSql(SQL);
+                    }
+                    foreach (var info in ProDefine.g_YBAlarm)
+                    {
+                        string Timestr = "";
+                        string ValueStr = "";
+                        string YbStr = "";
+                        
+                        foreach (var kkk in info.m_YBList)
+                        {
+                            YbStr = YbStr + kkk.ToString() + ",";
+                        }
+
+                        
+                        YbStr = YbStr.Substring(0, YbStr.Length - 1);
+
+                        SQL = "insert into " + YBSetAlarm + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.GNFcontion + "','" + info.AlarmH + "','"
+                            + info.AlarmL + "','" + info.AlarmData + "','" + info.AlarmAbs + "','"+ YbStr+ "')";
+                        AccessHelper.ExcuteSql(SQL);
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+
+            }
+        }
+
+
+
+        public void GetAlarm()
+        {
+            try
+            {
+                ProDefine.g_YBSetSignle.Clear();
+                string SQL = "select * from " + YBSetOutSignle + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
+                if (dt != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            string GN = dt.Rows[i][1].ToString();
+                            string AlarmH = dt.Rows[i][2].ToString();
+                            string AlarmL = dt.Rows[i][3].ToString();
+                            string AlarmData = dt.Rows[i][4].ToString();
+                            string AlarmAbs = dt.Rows[i][5].ToString();
+                            string YBList = dt.Rows[i][6].ToString();
+                            YBAlarmSet ybs = new YBAlarmSet();
+                            ybs.GNFcontion = GN;
+                            ybs.AlarmAbs = AlarmAbs;
+                            ybs.AlarmData = AlarmData;
+                            ybs.AlarmH = AlarmH;
+                            ybs.AlarmL = AlarmL;
+                            
+
+                            ybs.m_YBList = new List<string>();
+                            ybs.m_YBList.AddRange(YBList.Split(','));
+                            
+                            ProDefine.g_YBAlarm.Add(ybs);
+                        }
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+
             }
         }
     }

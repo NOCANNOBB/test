@@ -142,6 +142,36 @@ namespace DLLAccess
                     colums.Insert(3, "ChannelID");
                     colums.Insert(4, "ChannelType");
                 }
+                if (tbName == "YBSetSignle")//样本通道分配
+                {
+                    colums.Insert(0, "GUIDSTR");//
+                    colums.Insert(1, "GNFunction");// 
+                    colums.Insert(2, "TimeList");
+                    colums.Insert(3, "ValueList");
+                    colums.Insert(4, "YBList");
+                    colums.Insert(5, "SetType");
+                }
+
+                if (tbName == "YBSetOutSignle")//样本通道分配
+                {
+                    colums.Insert(0, "GUIDSTR");//
+                    colums.Insert(1, "GNFunction");// 
+                    colums.Insert(2, "TimeList");
+                    colums.Insert(3, "ValueList");
+                    colums.Insert(4, "YBList");
+                    colums.Insert(5, "SetType");
+                }
+
+                if (tbName == "YBSetAlarm")//样本通道分配
+                {
+                    colums.Insert(0, "GUIDSTR");//
+                    colums.Insert(1, "GNFunction");// 
+                    colums.Insert(2, "AlarmH");
+                    colums.Insert(3, "AlarmL");
+                    colums.Insert(4, "AlarmData");
+                    colums.Insert(5, "AlarmAbs");
+                    colums.Insert(6, "YBList");
+                }
 
 
                 foreach (var column in colums)

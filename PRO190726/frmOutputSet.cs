@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Define;
+using DLLProjectInfo;
+using DLLStruct;
 
 namespace PRO190726
 {
@@ -18,10 +20,12 @@ namespace PRO190726
             InitializeComponent();
 
             initUI();
+            m_Pro = new DoProjectInfo();
+            m_Pro.GetYBSetSignel();
         }
         private int AddIndex = 0;
 
-
+        DoProjectInfo m_Pro;
         private void initUI (){
             //f156
 
@@ -32,32 +36,69 @@ namespace PRO190726
             this.lbSave.Text = "\uf0c7  保存";
             this.lbSave.Font = new Font("FontAwesome", 12);
             this.lbSave.ForeColor = Color.White;
-
-
             AddIndex = this.dataGridView1.Columns.Count - 1;
-
-            
         }
 
         private void InitData()
         {
             this.dataGridView1.Rows.Clear();
-            foreach (var info in ProDefine.g_YBsetting)
+
+            if (this.dataGridView1.Columns.Count >3)
             {
-                if (this.textBox1.Text.Contains(info.YBName))
+                for (int i = 2; i <= this.dataGridView1.Columns.Count - 1; )
                 {
-                    foreach (var info_i in info.YBList)
+                    if (this.dataGridView1.Columns.Count <= 3)
                     {
-                        if (!info_i.ChannelType.Contains("O"))
-                        {
-                            int AddIndex = this.dataGridView1.Rows.Add();
-                            AddIndex = this.dataGridView1.Rows.Add();
-                            this.dataGridView1.Rows[AddIndex].Cells[0].Value = info_i.GNFunction;
-                        }
+                        break;
                     }
+                    this.dataGridView1.Columns.RemoveAt(i);
+
                 }
-                break;
             }
+            
+            AddIndex = this.dataGridView1.Columns.Count - 1;
+            if (ProDefine.g_YBSetSignle.Count == 0)
+            {
+                foreach (var info in ProDefine.g_YBsetting)
+                {
+                    if (this.textBox1.Text.Contains(info.YBName))
+                    {
+                        foreach (var info_i in info.YBList)
+                        {
+                            if (!info_i.ChannelType.Contains("O"))
+                            {
+                                int kAddIndex = this.dataGridView1.Rows.Add();
+                                kAddIndex = this.dataGridView1.Rows.Add();
+                                this.dataGridView1.Rows[kAddIndex].Cells[0].Value = info_i.GNFunction;
+                            }
+                        }
+                        break;
+                    }
+                    
+                }
+            }
+            else
+            {
+                foreach (var info in ProDefine.g_YBsetting)
+                {
+                    if (this.textBox1.Text.Contains(info.YBName))
+                    {
+                        foreach (var info_i in info.YBList)
+                        {
+                            if (!info_i.ChannelType.Contains("O"))
+                            {
+                                int kAddIndex = this.dataGridView1.Rows.Add();
+                                kAddIndex = this.dataGridView1.Rows.Add();
+                                this.dataGridView1.Rows[kAddIndex].Cells[0].Value = info_i.GNFunction;
+                            }
+                        }
+                        break;
+                    }
+                    
+                }
+            }
+
+            
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -69,8 +110,15 @@ namespace PRO190726
                 acCode.DataPropertyName = "acCode";
                 acCode.HeaderText = "";
                 this.dataGridView1.Columns.Insert(this.dataGridView1.Columns.Count - 1, acCode);
+                
                 AddIndex = this.dataGridView1.Columns.Count - 1;
+                for (int i = 0; i < this.dataGridView1.Rows.Count - 1; i++)
+                {
+                    this.dataGridView1.Rows[i].Cells[this.dataGridView1.Columns.Count - 2].Value = -1;
+                }
+
             }
+            
         }
 
         private void dataGridView1_CurrentCellChanged(object sender, EventArgs e)
@@ -143,6 +191,7 @@ namespace PRO190726
                     this.textBox1.Text += "样本" + (info +1).ToString() + ",";
                 }
                 InitData();
+                
             }
             else
             {
@@ -151,6 +200,180 @@ namespace PRO190726
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbSave_Click(object sender, EventArgs e)
+        {
+            List<string> YBList = GetYBList();
+
+            int tCount = this.dataGridView1.Rows.Count - 1;
+
+            int GNCount = tCount / 2;
+
+            for (int i = 0; i < GNCount; i++)
+            {
+                string GNFunction = GetGNFunctionList(i);
+                int SetType = GetTypeOfSignle(i);
+
+                List<int> TimeList;
+                List<double> VaLueList = GetValuesList(i, out TimeList);
+
+                YBSingleSetInput YBSS = new YBSingleSetInput();
+
+                YBSS.GNFunction = GNFunction;
+                YBSS.m_TimeList = TimeList;
+                YBSS.m_ValueList = VaLueList;
+                YBSS.m_YBList = YBList;
+                YBSS.SetType = SetType;
+
+                ProDefine.g_YBSetSignle.Add(YBSS);
+            }
+            
+        }
+
+        private List<double> GetValuesList(int k,out List<int> TimeList)
+        {
+            try
+            {
+                List<double> returnList = new List<double>();
+                TimeList = new List<int>();
+
+                for (int _index = 2; _index < this.dataGridView1.Columns.Count - 1; _index++ )
+                {
+                    int iCellValue = -1;
+                    object OValue = this.dataGridView1.Rows[2 * k].Cells[_index].Value;
+                    if (OValue != null)
+                    {
+                        TimeList.Add(Convert.ToInt32(OValue));
+                    }
+
+                    OValue = this.dataGridView1.Rows[2 * k + 1].Cells[_index].Value;
+                    if (OValue != null)
+                    {
+                        returnList.Add(Convert.ToDouble(OValue));
+                    }
+                    
+                }
+
+                return returnList;
+            }
+            catch (System.Exception ex)
+            {
+                TimeList = null;
+                return null;
+            }
+        }
+
+        private string GetGNFunctionList(int k)
+        {
+            try
+            {
+                string returnStr = "";
+                int tCount = this.dataGridView1.Rows.Count - 1;
+                if (this.dataGridView1.Rows[2 * k + 1].Cells[0].Value != null)
+                {
+                    returnStr = this.dataGridView1.Rows[2 * k + 1].Cells[0].Value.ToString();
+                    return returnStr;
+                }
+                return returnStr;
+            }
+            catch (System.Exception ex)
+            {
+                return "";
+            }
+            
+
+        }
+
+        private int GetTypeOfSignle(int k)
+        {
+            try
+            {
+                int returnStr = -1;
+                int tCount = this.dataGridView1.Rows.Count - 1;
+                if (this.dataGridView1.Rows[2 * k + 1].Cells[1].Value != null)
+                {
+                    string Str = (this.dataGridView1.Rows[2 * k + 1].Cells[1].Value.ToString());
+
+                    if (Str == "恒定值")
+                    {
+                        return 0;
+                    }
+                    else if (Str == "循环信号")
+                    {
+                        return 1;
+                    }
+                    else if (Str == "不循环变化信号")
+                    {
+                        return 2;
+                    }
+                    return returnStr;
+                }
+                return returnStr;
+            }
+            catch (System.Exception ex)
+            {
+                return -1;
+            }
+            
+        }
+
+
+        private List<string> GetYBList()
+        {
+            try
+            {
+                List<string> returnList = new List<string>();
+
+                string Txt = this.textBox1.Text.Trim();
+                if ((Txt == "")||(Txt == "样本选择"))
+                {
+                    return null;
+                }
+                string[] YBArr = Txt.Split(',');
+                
+
+                foreach (var info in YBArr)
+                {
+                    IsYBIsSet(info);
+                    returnList.Add(info);
+                }
+                return returnList;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
+        }
+
+        private bool IsYBIsSet(string YBName)
+        {
+            try
+            {
+                foreach (var info in ProDefine.g_YBSetSignle)
+                {
+                    if (info.m_YBList.Contains(YBName))
+                    {
+                        info.m_YBList.Remove(YBName);
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (System.Exception ex)
+            {
+                return false;
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            m_Pro.SaveYBSetSignel();
+        }
+
+        private void frmOutputSet_Load(object sender, EventArgs e)
         {
 
         }
