@@ -171,26 +171,26 @@ int PXI6416_DO::GetChCount()
 }
 
 
-BOOL PXI6416_DO::WriteDO(ULONG ulChan, BOOL boolValue){
+BOOL PXI6416_DO::WriteDO(ULONG ulChan, byte boolValue[]){
 	_IsWarningRet("WriteDO");
 	BOOL ulVal;
 	ReadDO(ulChan, &ulVal);
 
-	m_byteDO[ulChan] = boolValue!=FALSE;
+	m_byteDO[ulChan] = boolValue[0]!=0;
 
 	BOOL bRet = _IsErrChk(PXI6416_DO_Write(m_hDevice, m_byteDO, PXI6416_MAX_CHAN_DO), 0);
 
 	return bRet;
 }
 
-BOOL PXI6416_DO::ReadDO(ULONG ulChan,BOOL* boolValue){
+BOOL PXI6416_DO::ReadDO(ULONG ulChan, byte boolValue[]){
 	
 	_IsWarningRet("ReadDO");
 	BOOL bRet = _IsErrChk(PXI6416_DO_Read(m_hDevice, m_byteDO, 64), 0);
 
 	if (bRet)
 	{
-		*boolValue = m_byteDO[ulChan];
+		boolValue[0] = m_byteDO[ulChan];
 	}
 
 	return bRet;

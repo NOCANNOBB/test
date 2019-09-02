@@ -363,6 +363,14 @@
       <Project>{b7291064-3c19-4848-9dfe-3850fb231c45}</Project>
       <Name>DLLAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DLLBordDllImport\DLLBordDllImport.csproj">
+      <Project>{5b8ea4bd-5c23-44f0-8a99-5711a818d247}</Project>
+      <Name>DLLBordDllImport</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DLLMemeryFile\DLLMemeryFile.csproj">
+      <Project>{cae2b0f4-1e9d-4376-af09-087f9c4bbd8c}</Project>
+      <Name>DLLMemeryFile</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DLLNOPI\DLLNOPI.csproj">
       <Project>{d58b40cd-38ce-47a3-8c6b-48888a01856f}</Project>
       <Name>DLLNOPI</Name>

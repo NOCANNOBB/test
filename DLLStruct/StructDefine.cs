@@ -140,4 +140,21 @@ namespace DLLStruct
         public string AlarmData { get; set; }
         public string AlarmAbs { get; set; }
     }
+
+    public struct YBData
+    {
+        public string YBName { get; set; }
+
+        public int ChannID { get; set; }
+
+        public string ChannType { get; set; }
+
+        public int DTTime { get; set; }
+
+        public Object flVot { get; set; }
+
+        public string GNFunction { get; set; }
+
+        public int DataInfo { get; set; }//数据信息 0 正常信息 1 上限报警信息 2下限报警信息 4 错误数据
+    }
 }

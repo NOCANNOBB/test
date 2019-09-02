@@ -78,16 +78,16 @@ namespace DLLMemeryFile
         }
         long position = 0;
 
-        public void WriteToMemFile(List<FileData> WriteList) {
+        public void WriteToMemFile(List<YBData> WriteList) {
             try {
                 if (accessor != null) {
                     position = 0;
                     //accessor.CanWrite = true;
                     for (int i = 0; i < WriteList.Count; i++ )
                     {
-                        FileData fd = WriteList[i];
+                        YBData fd = WriteList[i];
 
-                        accessor.Write<FileData>(position, ref fd);
+                        accessor.Write<YBData>(position, ref fd);
                         //accessor.Write(position,12);
                         position += Marshal.SizeOf(fd);
                     }
@@ -139,17 +139,18 @@ namespace DLLMemeryFile
 
         public int PerSize = 0;
 
-        public List<FileData> ReadFromMemFile() {
-            List<FileData> returnList = new List<FileData>();
+        public List<YBData> ReadFromMemFile()
+        {
+            List<YBData> returnList = new List<YBData>();
             try {
-                if (accessor != null) { 
-                    FileData fd = new FileData();
+                if (accessor != null) {
+                    YBData fd = new YBData();
                     PerSize = Marshal.SizeOf(fd);
                     long TCount = accessor.Capacity / PerSize;
 
                     for (long i = 0; i < TCount; i++) {
-                        FileData fdk = new FileData();
-                        accessor.Read<FileData>(i * PerSize, out fdk);
+                        YBData fdk = new YBData();
+                        accessor.Read<YBData>(i * PerSize, out fdk);
                         returnList.Add(fdk);
 
 
