@@ -49,7 +49,7 @@ bool StartChannel(ULONG ulChan){
 
 bool DoInit(){
 
-	MessageBox(NULL,"1231231","12312312",0);
+	//MessageBox(NULL,"1231231","12312312",0);
 	g_exClassDLL.InitExternLib("GM_Lib.dll", "CreateLibrary");
 	g_pExCard = g_exClassDLL.GetExCardCtrl();
 	ASSERT(g_pExCard != NULL);

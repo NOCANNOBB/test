@@ -16,99 +16,57 @@ namespace ExperienceDemo
         public Form1()
         {
             InitializeComponent();
+            this.line1.Add(DateTime.Now.ToOADate(), 1000);
+
+            this.line1.GetVertAxis.SetMinMax(0, 1500);
+            this.line1.GetVertAxis.Increment = 100;
+            this.line1.GetHorizAxis.SetMinMax(DateTime.Now, DateTime.Now.AddSeconds(120));
+            this.line1.XValues.DateTime = true;
+            //this.line1.GetHorizAxis.Increment = 
+            //this.line1.GetHorizAxis.Increment = 1;
+            tChart1.Axes.Bottom.Labels.DateTimeFormat = "yyyy-MM-dd hh:mm:ss";
+            
+            //this.line1.DateTimeFormat = string.Format("yyyy-mm-dd hh:mm:ss");
         }
 
-        /// <summary>
-    /// 根据数据创建一个图形展现
-    /// </summary>
-    /// <param name="caption">图形标题</param>
-    /// <param name="viewType">图形类型</param>
-    /// <param name="rowIndex">图形数据的行序号</param>
-    /// <returns></returns>
-        public Series CreateSeries(string caption, ViewType viewType, Color _color)
+       
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
-            Series series = new Series(caption, viewType);
-            series.CrosshairEnabled = DevExpress.Utils.DefaultBoolean.True;
-            series.View.Color = _color;
-            //必须设置ArgumentScaleType的类型，否则显示会转换为日期格式，导致不是希望的格式显示
-            //也就是说，显示字符串的参数，必须设置类型为ScaleType.Qualitative
-            series.ArgumentScaleType = ScaleType.Qualitative;
-            //series.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;//显示标注标签
-            return series;
+            tChart1.Header.Text = "实时曲线";
+            
+           
+            timer1.Enabled = true;
         }
 
-
-        private void button1_Click(object sender, EventArgs e)
+        Random rnd = new Random();
+        private void AnimateSeries(Steema.TeeChart.TChart chart)
         {
-            string Caption = "通道：" + this.comboBox1.Text;
-            Series series1 = CreateSeries("变量1", ViewType.Line, Color.Brown);
-        }
-
-
-        /// <summary>
-/// 创建图表的第二坐标系
-/// </summary>
-/// <param name="series">Series对象</param>
-/// <returns></returns>
-        public SecondaryAxisY CreateAxisY(DevExpress.XtraCharts.ChartControl _chartCtrl, Series series)
-        {
-            SecondaryAxisY myAxis = new SecondaryAxisY(series.Name);
-            ((XYDiagram)_chartCtrl.Diagram).SecondaryAxesY.Add(myAxis);
-            ((LineSeriesView)series.View).AxisY = myAxis;
-            myAxis.Title.Text = series.Name;
-            myAxis.Title.Alignment = StringAlignment.Far; //顶部对齐
-            myAxis.Title.Visible = true; //显示标题
-            myAxis.Title.Font = new Font("宋体", 9.0f);
-
-            Color color = series.View.Color;//设置坐标的颜色和图表线条颜色一致
-
-            myAxis.Title.TextColor = color;
-            myAxis.Label.TextColor = color;
-            myAxis.Color = color;
-
-            return myAxis;
-        }
-
-        int DataRowIndex;
-        private void UpdateChart(double Values)
-        {
-            DataRowIndex = DataRowIndex + 1;
-            //曲线点数超过10后水平左移
-            if (chart.Series[0].Points.Count >= 10)
+          
+            double newX, newY;
+          
+            chart.AutoRepaint = false;
+            
+            /// <summary>
+            /// 绘画坐标点超过50个时将实时更新X时间坐标
+            /// </summary>
+            while (this.line1.Count > 150)
             {
-                for (int i = 0; i < chart.Series.Count; i++)
-                {
-                    if (chart.Series[i].Points.Count > 0)
-                        chart.Series[i].Points.RemoveAt(0);
-                }
+                this.line1.Delete(0);
+                line1.GetHorizAxis.SetMinMax(DateTime.Now.AddSeconds(-50), DateTime.Now.AddSeconds(60));
             }
-            for (int i = 0; i < 1; i++)
-            {
-                chart.Series[i].Points.Add(new SeriesPoint(DataRowIndex, Values[i]));
-            }
-            //第二坐标系归一化
-            for (int i = 0; i < chart.Series.Count; i++)
-            {
-                if (chart.Series[i].Points.Count > 0)
-                {
-                    double Min = chart.Series[i].Points[0].Values[0];
-                    double Max = chart.Series[i].Points[0].Values[0];
-                    for (int j = 1; j < chart.Series[i].Points.Count; j++)
-                    {
-                        double Value = chart.Series[i].Points[j].Values[0];
-                        if (Value < Min)
-                            Min = Value;
-                        if (Value > Max)
-                            Max = Value;
-                    }
-                    XYDiagram RealDiag = (XYDiagram)chart.Diagram;
-                    if (RealDiag != null)
-                    {
-                        RealDiag.SecondaryAxesY[i].WholeRange.MinValue = Min - 1;
-                        RealDiag.SecondaryAxesY[i].WholeRange.MaxValue = Max + 1;
-                    }
-                }
-            }
+                           
+            newX = DateTime.Now.ToOADate();
+            newY =  rnd.Next(1500);
+            line1.Add(newX,newY);
+ 
+            chart.AutoRepaint = true;
+            chart.Refresh();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            AnimateSeries(tChart1);
         }
     }
 }

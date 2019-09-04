@@ -157,4 +157,10 @@ namespace DLLStruct
 
         public int DataInfo { get; set; }//数据信息 0 正常信息 1 上限报警信息 2下限报警信息 4 错误数据
     }
+
+    public class ChannelSet
+    {
+        public string ChanleType{get;set;}
+        public int ChannelID{get;set;}
+    }
 }

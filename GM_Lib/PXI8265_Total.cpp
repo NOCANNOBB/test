@@ -42,7 +42,7 @@ BOOL CPXI8265_Total::Create()
 	m_iAdd ++;
 
 	PXI8265_DeviceOpen(0, &m_hDevice);
-
+	//m_hDevice = 0;
 	if (m_hDevice == INVALID_HANDLE_VALUE)
 	{
 		m_iAdd--;

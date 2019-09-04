@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmExperment));
             this.lbTitle = new System.Windows.Forms.Label();
             this.lbHour = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -60,7 +61,14 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer();
             this.timer2 = new System.Windows.Forms.Timer();
+            this.tChart2 = new Steema.TeeChart.TChart();
+            this.line1 = new Steema.TeeChart.Styles.Line();
+            this.timer3 = new System.Windows.Forms.Timer();
+            this.timer4 = new System.Windows.Forms.Timer();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -191,6 +199,7 @@
             this.simpleButton09.Size = new System.Drawing.Size(132, 31);
             this.simpleButton09.TabIndex = 9;
             this.simpleButton09.Text = "simpleButton9";
+            this.simpleButton09.Click += new System.EventHandler(this.GNFunctionSelect);
             // 
             // simpleButton05
             // 
@@ -199,6 +208,7 @@
             this.simpleButton05.Size = new System.Drawing.Size(132, 31);
             this.simpleButton05.TabIndex = 7;
             this.simpleButton05.Text = "simpleButton5";
+            this.simpleButton05.Click += new System.EventHandler(this.GNFunctionSelect);
             // 
             // simpleButton10
             // 
@@ -207,6 +217,7 @@
             this.simpleButton10.Size = new System.Drawing.Size(132, 31);
             this.simpleButton10.TabIndex = 8;
             this.simpleButton10.Text = "simpleButton10";
+            this.simpleButton10.Click += new System.EventHandler(this.GNFunctionSelect);
             // 
             // simpleButton04
             // 
@@ -215,6 +226,7 @@
             this.simpleButton04.Size = new System.Drawing.Size(132, 31);
             this.simpleButton04.TabIndex = 3;
             this.simpleButton04.Text = "simpleButton4";
+            this.simpleButton04.Click += new System.EventHandler(this.GNFunctionSelect);
             // 
             // simpleButton06
             // 
@@ -223,6 +235,7 @@
             this.simpleButton06.Size = new System.Drawing.Size(132, 31);
             this.simpleButton06.TabIndex = 6;
             this.simpleButton06.Text = "simpleButton6";
+            this.simpleButton06.Click += new System.EventHandler(this.GNFunctionSelect);
             // 
             // simpleButton03
             // 
@@ -231,6 +244,7 @@
             this.simpleButton03.Size = new System.Drawing.Size(132, 31);
             this.simpleButton03.TabIndex = 2;
             this.simpleButton03.Text = "simpleButton3";
+            this.simpleButton03.Click += new System.EventHandler(this.GNFunctionSelect);
             // 
             // simpleButton02
             // 
@@ -239,6 +253,7 @@
             this.simpleButton02.Size = new System.Drawing.Size(132, 31);
             this.simpleButton02.TabIndex = 1;
             this.simpleButton02.Text = "simpleButton2";
+            this.simpleButton02.Click += new System.EventHandler(this.GNFunctionSelect);
             // 
             // simpleButton07
             // 
@@ -247,6 +262,7 @@
             this.simpleButton07.Size = new System.Drawing.Size(132, 31);
             this.simpleButton07.TabIndex = 5;
             this.simpleButton07.Text = "simpleButton7";
+            this.simpleButton07.Click += new System.EventHandler(this.GNFunctionSelect);
             // 
             // simpleButton01
             // 
@@ -255,6 +271,7 @@
             this.simpleButton01.Size = new System.Drawing.Size(132, 31);
             this.simpleButton01.TabIndex = 0;
             this.simpleButton01.Text = "simpleButton1";
+            this.simpleButton01.Click += new System.EventHandler(this.GNFunctionSelect);
             // 
             // simpleButton08
             // 
@@ -263,10 +280,12 @@
             this.simpleButton08.Size = new System.Drawing.Size(132, 31);
             this.simpleButton08.TabIndex = 4;
             this.simpleButton08.Text = "simpleButton8";
+            this.simpleButton08.Click += new System.EventHandler(this.GNFunctionSelect);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel2.Controls.Add(this.listBox1);
             this.panel2.Location = new System.Drawing.Point(61, 473);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(816, 129);
@@ -275,6 +294,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.MintCream;
+            this.panel3.Controls.Add(this.tChart2);
             this.panel3.Location = new System.Drawing.Point(201, 147);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(675, 323);
@@ -362,6 +382,136 @@
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // tChart2
+            // 
+            // 
+            // 
+            // 
+            this.tChart2.Aspect.View3D = false;
+            this.tChart2.Aspect.ZOffset = 0D;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart2.Axes.Right.Visible = false;
+            this.tChart2.BackColor = System.Drawing.Color.Teal;
+            this.tChart2.Cursor = System.Windows.Forms.Cursors.Default;
+            // 
+            // 
+            // 
+            this.tChart2.Header.Lines = new string[] {
+        "曲线"};
+            // 
+            // 
+            // 
+            this.tChart2.Legend.Visible = false;
+            this.tChart2.Location = new System.Drawing.Point(3, 2);
+            this.tChart2.Name = "tChart2";
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart2.Panel.Bevel.ColorOne = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            // 
+            // 
+            // 
+            this.tChart2.Panel.Brush.Color = System.Drawing.Color.Teal;
+            this.tChart2.Series.Add(this.line1);
+            this.tChart2.Size = new System.Drawing.Size(669, 318);
+            this.tChart2.TabIndex = 2;
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.tChart2.Walls.Back.Visible = false;
+            // 
+            // 
+            // 
+            this.tChart2.Walls.Bottom.Visible = false;
+            // 
+            // 
+            // 
+            this.tChart2.Walls.Left.Visible = false;
+            // 
+            // line1
+            // 
+            // 
+            // 
+            // 
+            this.line1.Brush.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            // 
+            // 
+            // 
+            this.line1.Gradient.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(194)))), ((int)(((byte)(219)))));
+            this.line1.Gradient.MiddleColor = System.Drawing.Color.Empty;
+            this.line1.Gradient.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(102)))), ((int)(((byte)(163)))));
+            this.line1.ClickableLine = false;
+            this.line1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.line1.ColorEach = false;
+            this.line1.ColorEachLine = false;
+            this.line1.Dark3D = false;
+            // 
+            // 
+            // 
+            this.line1.LinePen.Color = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(61)))), ((int)(((byte)(98)))));
+            // 
+            // 
+            // 
+            // 
+            // 
+            // 
+            this.line1.Marks.Callout.ArrowHead = Steema.TeeChart.Styles.ArrowHeadStyles.None;
+            this.line1.Marks.Callout.ArrowHeadSize = 8;
+            // 
+            // 
+            // 
+            this.line1.Marks.Callout.Brush.Color = System.Drawing.Color.Black;
+            this.line1.Marks.Callout.Distance = 0;
+            this.line1.Marks.Callout.Draw3D = false;
+            this.line1.Marks.Callout.Length = 10;
+            this.line1.Marks.Callout.Style = Steema.TeeChart.Styles.PointerStyles.Rectangle;
+            // 
+            // 
+            // 
+            this.line1.Pointer.Dark3D = false;
+            this.line1.Pointer.Draw3D = false;
+            this.line1.Pointer.Style = Steema.TeeChart.Styles.PointerStyles.Rectangle;
+            this.line1.Title = "line1";
+            // 
+            // 
+            // 
+            this.line1.XValues.DataMember = "X";
+            // 
+            // 
+            // 
+            this.line1.YValues.DataMember = "Y";
+            // 
+            // timer3
+            // 
+            this.timer3.Interval = 500;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
+            // timer4
+            // 
+            this.timer4.Interval = 500;
+            this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
+            // 
+            // listBox1
+            // 
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(0, 0);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(816, 129);
+            this.listBox1.TabIndex = 0;
+            // 
             // frmExperment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -391,7 +541,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmExperment";
             this.Text = "frmExperment";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmExperment_FormClosed);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -436,5 +589,10 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
+        private Steema.TeeChart.Styles.Line line1;
+        private Steema.TeeChart.TChart tChart2;
+        private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Timer timer4;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

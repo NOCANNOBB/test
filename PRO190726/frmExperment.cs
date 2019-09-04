@@ -24,6 +24,7 @@ namespace PRO190726
         {
             InitializeComponent();
             InitUI();
+            DoUIInit();
             m_MemeryFile = new MemeryFile();
         }
 
@@ -58,6 +59,21 @@ namespace PRO190726
             this.lbEnd.Font = new Font("FontAwesome", 15, FontStyle.Bold);
             this.lbEnd.ForeColor = Color.White;
 
+
+            this.line1.Add(DateTime.Now.ToOADate(), 10);
+
+            this.line1.GetVertAxis.SetMinMax(-10, 10);
+            this.line1.GetVertAxis.Increment = 1;
+            this.line1.GetHorizAxis.SetMinMax(DateTime.Now, DateTime.Now.AddSeconds(120));
+            this.line1.XValues.DateTime = true;
+            //this.line1.GetHorizAxis.Increment = 
+            //this.line1.GetHorizAxis.Increment = 1;
+            tChart2.Axes.Bottom.Labels.DateTimeFormat = "yyyy-MM-dd hh:mm:ss";
+            if (!InitBords())
+            {
+               MessageBox.Show("设备初始化失败");
+               return;
+            }
             try
             {
                 if (m_ReadThread == null)
@@ -73,10 +89,8 @@ namespace PRO190726
             {
 
             }
-            if (!InitBords())
-            {
-                MessageBox.Show("设备初始化失败");
-            }
+
+           
         }
 
         private int m_ExpermentStep = 0;
@@ -155,9 +169,10 @@ namespace PRO190726
         private object m_diskLock = new object();
         private void InsertDataToList(YBData ydata)
         {
-            if (m_DataList.Count == 1024)
+            List<YBData> ChannelListData = m_DataList.Where(m => m.ChannID == ydata.ChannID && m.ChannType == ydata.ChannType).ToList();
+            if (ChannelListData.Count >= 1)
             {
-                m_DataList.RemoveAt(0);
+                m_DataList.Remove(ChannelListData.ElementAt(0));
             }
             lock (m_lock)
             {
@@ -191,34 +206,39 @@ namespace PRO190726
                                     BordDll.GetCNTData((ulong)info_i.ChannelID, ref flVolt, ref dfDuty);
                                     break;
                             }
+                            YBData ydata = new YBData();
+                            ydata.ChannID = info_i.ChannelID;
+                            ydata.ChannType = info_i.ChannelType;
+                            ydata.DTTime = EclipsTime;
+                            ydata.flVot = flVolt;
+                            ydata.YBName = info.YBName;
+                            ydata.GNFunction = info_i.GNFunction;
+
+                            int returnValue = JudageAlarmData(EclipsTime, info.YBName, info_i.GNFunction, flVolt);
+                            ydata.DataInfo = returnValue;
+                            InsertDataToList(ydata);
+                            if (returnValue == 0)
+                            {
+                                lock (m_diskLock)
+                                {
+                                    m_YBDataList.Add(ydata);
+                                }
+                            }
+                            else
+                            {
+                                lock (m_AlarmDiskLock)
+                                {
+                                    m_AlarmList.Add(ydata);
+                                }
+                                lock (m_AlarmShowLock)
+                                {
+                                    m_AlarmListShow.Add(ydata);
+                                }
+
+                            }
                         }
 
-                        YBData ydata = new YBData();
-                        ydata.ChannID = info_i.ChannelID;
-                        ydata.ChannType = info_i.ChannelType;
-                        ydata.DTTime = EclipsTime;
-                        ydata.flVot = flVolt;
-                        ydata.YBName = info.YBName;
-                        ydata.GNFunction = info_i.GNFunction;
                         
-                        int returnValue = JudageAlarmData(EclipsTime,info.YBName,info_i.GNFunction,flVolt);
-                        ydata.DataInfo = returnValue;
-                        InsertDataToList(ydata);
-                        if ( returnValue == 0)
-                        {
-                            lock (m_diskLock)
-                            {
-                                m_YBDataList.Add(ydata);
-                            }
-                        }
-                        else
-                        {
-                            lock (m_AlarmDiskLock)
-                            {
-                                m_AlarmList.Add(ydata);
-                            }
-                            
-                        }
                         
                     }
                 }
@@ -230,6 +250,7 @@ namespace PRO190726
             }
         }
         private List<YBData> m_AlarmList = new List<YBData>();
+        private List<YBData> m_AlarmListShow = new List<YBData>();
         private int JudageAlarmData(int EclipsTime,string YBName,string GNFucntion,double flVolt)
         {
             try
@@ -318,6 +339,7 @@ namespace PRO190726
 
         private List<YBData> m_YBDataList = new List<YBData>();
         private object m_AlarmDiskLock = new object();
+        private object m_AlarmShowLock = new object();
         private int WriteSizeCount = 2000;
         private void WriteDataToDisk()
         {
@@ -403,7 +425,10 @@ namespace PRO190726
                         }
                         else if (info_i.ChannelType == "DO")
                         {
-
+                            double WriteValue = GetWriteValue(eclipstime, info.YBName, info_i.GNFunction, info_i.ChannelID, info_i.ChannelType);
+                            byte[] tpByte = new byte[1];
+                            tpByte[0] = (byte)WriteValue;
+                            BordDll.WriteDOData_1((ulong)info_i.ChannelID, tpByte);
                             //BordDll.WriteDOData_1();
                         }
                         
@@ -474,7 +499,10 @@ namespace PRO190726
             this.lbStart.Enabled = false;
             this.lbEnd.Enabled = true;
             m_IsExpermentEnd = false;
+            m_StartTime = DateTime.Now;
+            this.line1.Clear();
             GetTotalExpTime();
+            this.line1.GetHorizAxis.SetMinMax(DateTime.Now, DateTime.Now.AddSeconds(120));
             m_dataPath = ProDefine.g_MyProject.ProjectName + "_" + DateTime.Now.ToString("yyyymmddhhmmss") + ".data";
             m_AlarmDataPath = ProDefine.g_MyProject.ProjectName + "_" + DateTime.Now.ToString("yyyymmddhhmmss") + ".Alarmdata";
             if (m_WriteThread != null)
@@ -487,6 +515,8 @@ namespace PRO190726
             }
             timer1.Enabled = true;
             timer2.Enabled = true;
+            timer3.Enabled = true;
+            timer4.Enabled = true;
             
         }
 
@@ -528,8 +558,11 @@ namespace PRO190726
             {
             	
             }
+            timer3.Enabled = false;
+            timer4.Enabled = false;
             timer1.Enabled = false;
             timer2.Enabled = false;
+            
         }
 
         private void lbEnd_MouseEnter(object sender, EventArgs e)
@@ -581,7 +614,7 @@ namespace PRO190726
             }
             return menu;
         }
-
+        private List<YBSetuse> m_NowSelecedChannelList = new List<YBSetuse>();
         private void OnItemClick(object sender, EventArgs e)
         {
             DXMenuItem item = sender as DXMenuItem;
@@ -596,12 +629,21 @@ namespace PRO190726
                 {
                     this.m_ButtonList[iindex - 1].Visible = true;
                     this.m_ButtonList[iindex - 1].Text = ybc.YBList[iindex - 1].GNFunction;
+                    YBSetuse cs = new YBSetuse();
+                    cs.ChannelType = ybc.YBList[iindex - 1].ChannelType;
+                    cs.ChannelID = ybc.YBList[iindex - 1].ChannelID;
+                    cs.GNFunction = ybc.YBList[iindex - 1].GNFunction;
+                    m_NowSelecedChannelList.Add(cs);
                 }
                 else {
                     this.m_ButtonList[iindex - 1].Visible = false;
                 }
                 iindex++;
             }
+            m_NowYB = item.Caption;
+            m_NowGNFunction = this.m_ButtonList[0].Text;
+            this.tChart2.Header.Text = m_NowYB + "--" + m_NowGNFunction;
+            this.line1.Clear();
             
         }
 
@@ -612,7 +654,6 @@ namespace PRO190726
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            
             SetData();
         }
 
@@ -636,12 +677,159 @@ namespace PRO190726
                     m_IsExpermentEnd = true;
                     timer1.Enabled = false;
                     timer2.Enabled = false;
+                    timer3.Enabled = false;
+                    timer4.Enabled = false;
                     lbStart.Enabled = true;
                     lbEnd.Enabled = false;
                     
                 }
                 
             }
+        }
+        private string m_NowGNFunction = "";
+        private string m_NowYB = "";
+        private void AnimateSeries(Steema.TeeChart.TChart chart,YBData ydata)
+        {
+           
+            double newX, newY;
+
+            chart.AutoRepaint = false;
+
+            /// <summary>
+            /// 绘画坐标点超过100个时将实时更新X时间坐标
+            /// </summary>
+            while (this.line1.Count > 100)
+            {
+                this.line1.Delete(0);
+                line1.GetHorizAxis.SetMinMax(DateTime.Now.AddSeconds(-50), DateTime.Now.AddSeconds(60));
+            }
+
+            newX = DateTime.Now.ToOADate();
+            if (ydata.flVot == null)
+            {
+                newY = 0;
+            }
+            else
+            {
+                newY = (double)ydata.flVot;
+            }
+            
+            line1.Add(newX, newY);
+
+            chart.AutoRepaint = true;
+            chart.Refresh();
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
+        {
+            YBData ydata = m_DataList.Where(m => m.ChannType == m_NowChannleType && m.ChannID == m_NowChannel).SingleOrDefault();
+            AnimateSeries(tChart2,ydata);
+        }
+        private string m_LastYB = "";
+        private string m_LastGnFunction = "";
+        private int m_NowChannel = -1;
+        private string m_NowChannleType = "";
+        private void GNFunctionSelect(Object o, EventArgs e)
+        {
+            SimpleButton spb = (SimpleButton)o;
+            this.line1.GetHorizAxis.SetMinMax(DateTime.Now, DateTime.Now.AddSeconds(120));
+            m_NowGNFunction = spb.Text;
+            this.line1.Clear();
+            this.tChart2.Header.Text = m_NowYB + "---" + m_NowGNFunction;
+            GetNowSelectYBInfo();
+        }
+
+        private void GetNowSelectYBInfo()
+        {
+            try
+            {
+                YBChannelInfo ybc = ProDefine.g_YBsetting.Where(m => m.YBName == m_NowYB).SingleOrDefault();
+                foreach (var info in ybc.YBList)
+                {
+                    if (info.GNFunction == m_NowGNFunction)
+                    {
+                        m_NowChannel = info.ChannelID;
+                        m_NowChannleType = info.ChannelType;
+                        return;
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
+        }
+
+        private void timer4_Tick(object sender, EventArgs e)
+        {
+            SetDataAlarm();
+        }
+
+        private delegate void SetDataAlarmDelegate();
+        private void SetDataAlarm()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new SetDataAlarmDelegate(SetDataAlarm));
+            }
+            else
+            {
+                lock (m_AlarmShowLock)
+                {
+                    if (m_AlarmList.Count > 0)
+                    {
+                        foreach (var info in m_AlarmListShow)
+                        {
+                            listBox1.Items.Add(info.YBName + "--" + info.GNFunction + "--报警值：" + info.flVot + "--报警信息：" + info.DataInfo + "--报警时间：" + info.DTTime);
+                        }
+                    }
+                }
+               
+            }
+        }
+
+        private void frmExperment_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                if (this.m_ReadThread != null)
+                {
+                    m_ReadThread.Abort();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                m_ReadThread = null;
+            }
+            try
+            {
+                if (this.m_WriteThread != null)
+                {
+                    m_WriteThread.Abort();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                m_WriteThread = null;
+            }
+            if (m_MemeryFile!= null)
+            {
+                m_MemeryFile.DisposeMemoryMapFile();
+                m_MemeryFile = null;
+            }
+             
+
+            if (m_AlarmList != null)
+            {
+                m_AlarmList.Clear();
+                m_AlarmList = null;
+            }
+            if (m_DataList != null)
+            {
+                m_DataList.Clear();
+                m_DataList = null;
+            }
+
         }
     }
 }

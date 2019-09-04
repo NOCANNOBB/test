@@ -18,9 +18,11 @@ namespace PRO190726
         public frmDataAalrmSet()
         {
             InitializeComponent();
-            InitUI();
             m_Pro = new DoProjectInfo();
             m_Pro.GetYBSetSignel();
+            m_Pro.GetAlarm();
+            InitUI();
+            
         }
         DoProjectInfo m_Pro;
 
@@ -53,6 +55,7 @@ namespace PRO190726
 
             AddIndex = this.dataGridView1.Columns.Count - 1;
             InitData(this.dataGridView1);
+            //GetAlarmInfo();
             
         }
         private int AddIndex = 0;
@@ -531,7 +534,12 @@ namespace PRO190726
 
         private void lbSave2_Click(object sender, EventArgs e)
         {
+            m_Pro.SaveAlarm();
+        }
 
+        private void GetAlarmInfo()
+        {
+            m_Pro.GetAlarm();
         }
 
     }
