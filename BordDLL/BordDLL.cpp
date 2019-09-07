@@ -83,26 +83,18 @@ bool DoInit(){
 
 void GetAIDataFromBord(int Bordi,double* BordBuffer){
 	if(g_pBaseAI == NULL || BordBuffer == NULL){return;}
+	//if(g_pBaseAI == NULL){return;}
 	g_pBaseAI->ReadOneDC(Bordi, BordBuffer);
 	
 }
 
-void WriteDOData(ULONG ulChan, BOOL boolVlaue){
+void WriteDOData(ULONG ulChan, byte boolVlaue){
 	if(g_pBaseAI == NULL){return;}
 	g_pBaseDO->WriteDO(ulChan, boolVlaue);
 }
 
-void WriteDOData_1(ULONG ulChan, byte boolVlaue[]){
-	if(g_pBaseDO == NULL){return;}
-	g_pBaseDO->WriteDO(ulChan, boolVlaue);
-}
 
-void ReadDOData(ULONG ulChan, BOOL* boolVlaue){
-	if(g_pBaseDO == NULL){return;}
-	g_pBaseDO->ReadDO(ulChan, boolVlaue);
-}
-
-void ReadDOData_1(ULONG ulChan, byte boolVlaue[]){
+void ReadDOData(ULONG ulChan, byte* boolVlaue){
 	if(g_pBaseDO == NULL){return;}
 	g_pBaseDO->ReadDO(ulChan, boolVlaue);
 }
@@ -117,6 +109,16 @@ void WriteAOData(ULONG ulChan,double dfFreq){
 	if(g_pBaseAO == NULL){return;}
 	g_pBaseAO->WriteAO(ulChan, dfFreq);
 
+}
+
+void GetDataFromBord(ULONG ulChan,double* dfVla,int ReadSize, int* retReadSize){
+	if(g_pBaseAO == NULL || dfVla == NULL || retReadSize == NULL){return;}
+	g_pBaseAI->GetDataFromBord(ulChan,dfVla,ReadSize,retReadSize);
+}
+
+void SetRate(int RateValue,int PerRead){
+	if(g_pBaseAO == NULL){return;}
+	g_pBaseAI->SetDataRate(RateValue,PerRead);
 }
 
 void Release(){

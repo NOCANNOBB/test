@@ -29,21 +29,21 @@ namespace ConsoleTest
 
         static void Main(string[] args)
         {
-            int[] arrayarr = { 11,3,998,5455,1,152,900};
-            int min = arrayarr[0];
-            for (int i = 0; i < arrayarr.Length - 1; i++ )
+            int k = 0;
+            BordDll.DoInit();
+            while (k <= 10)
             {
-                for (int j = 0; j < arrayarr.Length -1 - i;  j++)
-                {
-                    if (arrayarr[j] > arrayarr[j + 1])
-                    {
-                        min = arrayarr[j];
-                        arrayarr[j] = arrayarr[j + 1];
-                        arrayarr[j + 1] = min;
-                    }
-                }
-                
+                double dfValue = 0;
+                double dfValue2 = 12.1;
+               // dfValue[0] = 0;
+               // BordDll.WriteAOData(0, dfValue2);
+                BordDll.WriteDOData(0, (byte)1);
+                //double dValue = Marshal.PtrToStructure(dfValue,typeof(double));
+                Console.WriteLine(dfValue.ToString());
+                Thread.Sleep(1000);
+                k++;
             }
+
             Console.ReadKey();
         }
 

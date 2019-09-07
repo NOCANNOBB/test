@@ -18,6 +18,8 @@ public:
 public:
 	// 这里返回的是电压值，单位是V
 	virtual BOOL ReadOneDC(ULONG ulChan, double* dfVolt) ;
+	virtual void SetDataRate(int RateValue,int PerRead);
+	virtual void GetDataFromBord(ULONG ulChan,double* pBuffer, int ReadSize, int* retReadSize);
 
 public:
 	BOOL Push_IBaseAI(IBaseAI* pIBaseAI)

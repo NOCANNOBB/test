@@ -3,11 +3,13 @@ LIBRARY  "BordDLL"
 EXPORTS
     DoInit
 	StartChannel
+	SetRate
 	GetAIDataFromBord
+	GetDataFromBord
 	WriteDOData
-	WriteDOData_1
+	
 	ReadDOData
-	ReadDOData_1
+	
 	GetCNTData
 	WriteAOData
 	Release

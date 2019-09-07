@@ -128,7 +128,7 @@ namespace PRO190726
             }
             foreach (var info in ProDefine.g_ChannelInfo)
             {
-                BordDll.StartChannel((ulong)info.channelNumber);
+                BordDll.StartChannel((uint)info.channelNumber);
             }
             return true;
         }
@@ -200,10 +200,10 @@ namespace PRO190726
                             switch (info_i.ChannelType)
                             {
                                 case "AI":
-                                    BordDll.GetAIDataFromBord((ulong)info_i.ChannelID, ref flVolt);
+                                    BordDll.GetAIDataFromBord(info_i.ChannelID, ref flVolt);
                                     break;
                                 case "CNT":
-                                    BordDll.GetCNTData((ulong)info_i.ChannelID, ref flVolt, ref dfDuty);
+                                    BordDll.GetCNTData((uint)info_i.ChannelID, ref flVolt, ref dfDuty);
                                     break;
                             }
                             YBData ydata = new YBData();
@@ -421,14 +421,21 @@ namespace PRO190726
                         if (info_i.ChannelType == "AO")
                         {
                             double WriteValue = GetWriteValue(eclipstime, info.YBName, info_i.GNFunction,info_i.ChannelID, info_i.ChannelType);
-                            BordDll.WriteAOData((ulong)info_i.ChannelID,ref WriteValue);
+                            BordDll.WriteAOData((uint)info_i.ChannelID,WriteValue);
                         }
                         else if (info_i.ChannelType == "DO")
                         {
                             double WriteValue = GetWriteValue(eclipstime, info.YBName, info_i.GNFunction, info_i.ChannelID, info_i.ChannelType);
-                            byte[] tpByte = new byte[1];
-                            tpByte[0] = (byte)WriteValue;
-                            BordDll.WriteDOData_1((ulong)info_i.ChannelID, tpByte);
+
+
+                            if ((WriteValue != 0) || (WriteValue != 1))
+                            {
+                                WriteValue = 0;
+                            }
+
+                            byte tpByte = 0;
+                            tpByte = (byte)WriteValue;
+                            BordDll.WriteDOData((uint)info_i.ChannelID, tpByte);
                             //BordDll.WriteDOData_1();
                         }
                         
@@ -643,6 +650,16 @@ namespace PRO190726
             m_NowYB = item.Caption;
             m_NowGNFunction = this.m_ButtonList[0].Text;
             this.tChart2.Header.Text = m_NowYB + "--" + m_NowGNFunction;
+            YBChannelInfo yb = ProDefine.g_YBsetting.Where(m => m.YBName == m_NowYB).SingleOrDefault();
+            foreach (var info in ybc.YBList)
+            {
+                if (info.GNFunction == m_NowGNFunction)
+                {
+                    m_NowChannel = info.ChannelID;
+                    m_NowChannleType = info.ChannelType;
+                    return;
+                }
+            }
             this.line1.Clear();
             
         }
@@ -722,8 +739,12 @@ namespace PRO190726
 
         private void timer3_Tick(object sender, EventArgs e)
         {
-            YBData ydata = m_DataList.Where(m => m.ChannType == m_NowChannleType && m.ChannID == m_NowChannel).SingleOrDefault();
-            AnimateSeries(tChart2,ydata);
+            lock (m_lock)
+            {
+                YBData ydata = m_DataList.Where(m => m.ChannType == m_NowChannleType && m.ChannID == m_NowChannel).SingleOrDefault();
+                AnimateSeries(tChart2, ydata);
+            }
+            
         }
         private string m_LastYB = "";
         private string m_LastGnFunction = "";

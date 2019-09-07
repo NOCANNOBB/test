@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lb_Close = new System.Windows.Forms.Label();
             this.lb_Small = new System.Windows.Forms.Label();
             this.lb_Max = new System.Windows.Forms.Label();
@@ -47,6 +48,7 @@
             this.优化实验方案ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.实验检测ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.通道设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.样本通道配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.输出信号配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.标准数据与故障报警设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.实验ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,13 +68,12 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbTypeShow = new System.Windows.Forms.Label();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.打开项目ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.删除项目ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.保存项目ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.样本通道配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -88,7 +89,7 @@
             this.lb_Close.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Close.AutoSize = true;
             this.lb_Close.BackColor = System.Drawing.SystemColors.Highlight;
-            this.lb_Close.Location = new System.Drawing.Point(1337, 6);
+            this.lb_Close.Location = new System.Drawing.Point(1015, 6);
             this.lb_Close.Name = "lb_Close";
             this.lb_Close.Size = new System.Drawing.Size(23, 12);
             this.lb_Close.TabIndex = 1;
@@ -102,7 +103,7 @@
             this.lb_Small.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Small.AutoSize = true;
             this.lb_Small.BackColor = System.Drawing.SystemColors.Highlight;
-            this.lb_Small.Location = new System.Drawing.Point(1269, 6);
+            this.lb_Small.Location = new System.Drawing.Point(947, 6);
             this.lb_Small.Name = "lb_Small";
             this.lb_Small.Size = new System.Drawing.Size(23, 12);
             this.lb_Small.TabIndex = 2;
@@ -116,7 +117,7 @@
             this.lb_Max.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_Max.AutoSize = true;
             this.lb_Max.BackColor = System.Drawing.SystemColors.Highlight;
-            this.lb_Max.Location = new System.Drawing.Point(1303, 6);
+            this.lb_Max.Location = new System.Drawing.Point(981, 6);
             this.lb_Max.Name = "lb_Max";
             this.lb_Max.Size = new System.Drawing.Size(23, 12);
             this.lb_Max.TabIndex = 3;
@@ -139,7 +140,7 @@
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(2, 57);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(588, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(496, 25);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -160,7 +161,7 @@
             // 
             this.新建项目ToolStripMenuItem.BackColor = System.Drawing.Color.Azure;
             this.新建项目ToolStripMenuItem.Name = "新建项目ToolStripMenuItem";
-            this.新建项目ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.新建项目ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.新建项目ToolStripMenuItem.Text = "新建项目";
             this.新建项目ToolStripMenuItem.Click += new System.EventHandler(this.新建项目ToolStripMenuItem_Click);
             // 
@@ -168,7 +169,7 @@
             // 
             this.打开项目ToolStripMenuItem.BackColor = System.Drawing.Color.LightCyan;
             this.打开项目ToolStripMenuItem.Name = "打开项目ToolStripMenuItem";
-            this.打开项目ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.打开项目ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.打开项目ToolStripMenuItem.Text = "打开项目";
             this.打开项目ToolStripMenuItem.Click += new System.EventHandler(this.打开项目ToolStripMenuItem_Click);
             // 
@@ -176,7 +177,7 @@
             // 
             this.删除项目ToolStripMenuItem.BackColor = System.Drawing.Color.Azure;
             this.删除项目ToolStripMenuItem.Name = "删除项目ToolStripMenuItem";
-            this.删除项目ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.删除项目ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.删除项目ToolStripMenuItem.Text = "删除项目";
             this.删除项目ToolStripMenuItem.Click += new System.EventHandler(this.删除项目ToolStripMenuItem_Click);
             // 
@@ -184,14 +185,14 @@
             // 
             this.保存ToolStripMenuItem.BackColor = System.Drawing.Color.LightCyan;
             this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.保存ToolStripMenuItem.Text = "保存";
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.BackColor = System.Drawing.Color.Azure;
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             // 
             // 方案设计及优化ToolStripMenuItem
@@ -268,6 +269,13 @@
             this.通道设置ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.通道设置ToolStripMenuItem.Text = "通道设置";
             this.通道设置ToolStripMenuItem.Click += new System.EventHandler(this.通道设置ToolStripMenuItem_Click);
+            // 
+            // 样本通道配置ToolStripMenuItem
+            // 
+            this.样本通道配置ToolStripMenuItem.Name = "样本通道配置ToolStripMenuItem";
+            this.样本通道配置ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.样本通道配置ToolStripMenuItem.Text = "样本通道配置";
+            this.样本通道配置ToolStripMenuItem.Click += new System.EventHandler(this.样本通道配置ToolStripMenuItem_Click);
             // 
             // 输出信号配置ToolStripMenuItem
             // 
@@ -378,7 +386,7 @@
             this.panel2.BackColor = System.Drawing.Color.Teal;
             this.panel2.Location = new System.Drawing.Point(213, 123);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(937, 615);
+            this.panel2.Size = new System.Drawing.Size(615, 615);
             this.panel2.TabIndex = 6;
             // 
             // lbDataTitle
@@ -394,7 +402,7 @@
             // 
             this.listView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView2.Location = new System.Drawing.Point(1154, 110);
+            this.listView2.Location = new System.Drawing.Point(832, 110);
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(211, 633);
             this.listView2.TabIndex = 8;
@@ -405,7 +413,7 @@
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.panel3.BackColor = System.Drawing.Color.Azure;
             this.panel3.Controls.Add(this.lbDataTitle);
-            this.panel3.Location = new System.Drawing.Point(1154, 60);
+            this.panel3.Location = new System.Drawing.Point(832, 60);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 30);
             this.panel3.TabIndex = 9;
@@ -417,7 +425,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 746);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1366, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1044, 22);
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -472,7 +480,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.LightCyan;
             this.pictureBox2.Location = new System.Drawing.Point(212, 113);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(937, 10);
+            this.pictureBox2.Size = new System.Drawing.Size(615, 10);
             this.pictureBox2.TabIndex = 12;
             this.pictureBox2.TabStop = false;
             // 
@@ -483,23 +491,16 @@
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Highlight;
             this.pictureBox1.Location = new System.Drawing.Point(2, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1363, 54);
+            this.pictureBox1.Size = new System.Drawing.Size(1041, 54);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // 样本通道配置ToolStripMenuItem
-            // 
-            this.样本通道配置ToolStripMenuItem.Name = "样本通道配置ToolStripMenuItem";
-            this.样本通道配置ToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.样本通道配置ToolStripMenuItem.Text = "样本通道配置";
-            this.样本通道配置ToolStripMenuItem.Click += new System.EventHandler(this.样本通道配置ToolStripMenuItem_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
-            this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.ClientSize = new System.Drawing.Size(1044, 768);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.lbTypeShow);
             this.Controls.Add(this.statusStrip1);
@@ -515,6 +516,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);

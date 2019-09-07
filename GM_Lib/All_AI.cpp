@@ -126,3 +126,26 @@ BOOL CAI_All::ReadOneDC(ULONG ulChan, double* dfVolt)
 
 	return bRet;
 }
+void CAI_All::GetDataFromBord(ULONG ulChan,double* pBuffer, int ReadSize, int* retReadSize){
+	ULONG ulChCount = 0;
+	ULONG ulChCountBK; 
+	for (ULONG i=0; i<m_dqIBaseClass.size(); i++)
+	{
+		ulChCountBK = ulChCount;
+		ulChCount += m_dqIBaseClass[i]->GetChCount();
+		if (ulChan < ulChCount)
+		{
+			ulChan = ulChan - ulChCountBK;
+			m_dqIBaseClass[i]->GetDataFromBord(ulChan,pBuffer,ReadSize,retReadSize);
+			break;
+		}
+	}
+}
+
+void CAI_All::SetDataRate(int RateValue,int PerRead){
+	
+	for (ULONG i=0; i<m_dqIBaseClass.size(); i++)
+	{
+		m_dqIBaseClass[i]->SetDataRate(RateValue,PerRead);
+	}
+}

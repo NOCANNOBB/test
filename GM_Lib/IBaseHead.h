@@ -47,6 +47,7 @@ public:
 	virtual BOOL Stop(ULONG ulChan=0) = NULL;
 	
 	virtual void SetErrorLog(ILogInfo* log) = NULL;
+	
 };
 //--------------------------------------------------------------
 // AD基础类
@@ -55,6 +56,8 @@ class IBaseAI : public IBaseCard
 public:
 	// 这里返回的是电压值，单位是V
 	virtual BOOL ReadOneDC(ULONG ulChan, double* dfVolt) = NULL;
+	virtual void SetDataRate(int SleepTime, int PerRead) = NULL;
+	virtual void GetDataFromBord(ULONG ulChan,double* pBuffer, int ReadSize, int* retReadSize) = NULL;
 };
 // 输出直流
 class IBaseOutDC : public IBaseCard
@@ -71,12 +74,10 @@ public:
 class IBaseDO : public IBaseCard
 {
 public:
-	// 这里输入的是电压值，单位是V
-	virtual BOOL WriteDO(ULONG ulChan, BOOL boolVlaue) = NULL;
-	virtual BOOL ReadDO(ULONG ulChan,BOOL* boolValue) = NULL;
 
-	virtual BOOL WriteDO(ULONG ulChan, byte boolVlaue[]) = NULL;
-	virtual BOOL ReadDO(ULONG ulChan,byte boolValue[]) = NULL;
+
+	virtual BOOL WriteDO(ULONG ulChan, byte boolVlaue) = NULL;
+	virtual BOOL ReadDO(ULONG ulChan,byte* boolValue) = NULL;
 };
 
 

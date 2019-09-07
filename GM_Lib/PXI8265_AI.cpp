@@ -22,10 +22,37 @@ using namespace std;
 CPXI8265_AI::CPXI8265_AI()
 {
 	m_pIErrLog = NULL;
-
-	
+	m_DataRate = 1;
+	InitializeCriticalSection(&m_ValueListSEC);
 	m_bIsStart			= FALSE;
 	m_bCreateSuccess	= FALSE;
+	PDEV_AI psDevAI;
+
+	m_ReadVec.reserve(CHAN_COUNT);
+	m_VecInsertIndex.reserve(CHAN_COUNT);
+	m_VecOutIndex.reserve(CHAN_COUNT);
+	for (ULONG cardNum=0; cardNum<CARD_COUNT; cardNum++)
+	{
+		psDevAI = &m_sDevAI[cardNum];
+
+		for (ULONG i=0; i<SEG_MAX; i++)
+		{
+			psDevAI->sArrSegAI[i].arrayLen	= (PXI8265_SINGLE_LEN+10)*CHAN_COUNT;
+			psDevAI->sArrSegAI[i].readArray = new LONG [psDevAI->sArrSegAI[i].arrayLen];
+			psDevAI->vcVolt.resize(CHAN_COUNT);			
+			psDevAI->vcVoltRMS.resize(CHAN_COUNT);
+			psDevAI->pClass = this;
+
+		}
+	}
+	for (int i = 0; i < CHAN_COUNT; i++)
+	{
+		vector<double> dvec;
+		dvec.reserve(MAX_ARRAY_SIZE);
+		m_ReadVec.push_back(dvec);
+		m_VecOutIndex.push_back(0);
+		m_VecInsertIndex.push_back(0);
+	}
 }
 
 CPXI8265_AI::~CPXI8265_AI()
@@ -33,17 +60,20 @@ CPXI8265_AI::~CPXI8265_AI()
 	Release();
 	PDEV_AI psDevAI;
 
-	for (ULONG cardNum=0; cardNum<PXI8265_CARD_COUNT; cardNum++)
+	for (ULONG cardNum=0; cardNum<CARD_COUNT; cardNum++)
 	{
 		psDevAI = &m_sDevAI[cardNum];
 
-		for (ULONG i=0; i<PXI8265_SEG_MAX; i++)
+		for (ULONG i=0; i<SEG_MAX; i++)
 		{
 			delete[] psDevAI->sArrSegAI[i].readArray;
 			psDevAI->sArrSegAI[i].readArray = NULL;
 			psDevAI->sArrSegAI[i].arrayLen	= 0;
 		}
+
+		
 	}
+	DeleteCriticalSection(&m_ValueListSEC);
 }
 // 由小到大排序
 bool CompareLess(CPXI8265_AI::DEV_AI& __left, CPXI8265_AI::DEV_AI& __right)
@@ -51,19 +81,27 @@ bool CompareLess(CPXI8265_AI::DEV_AI& __left, CPXI8265_AI::DEV_AI& __right)
 	return (__left.cardSlotID < __right.cardSlotID);
 }
 
+
+void CPXI8265_AI::SetDataRate(int RateValue,int PerRead){
+	m_DataRate = RateValue;
+}
+
 BOOL CPXI8265_AI::Create(void)
 {
 	m_sDevAI[0].hDev = m_hDevice;
+	m_bCreateSuccess = TRUE;
 	return TRUE;
 }
 
 BOOL CPXI8265_AI::Release(void)
 {
+	Stop();
 	return TRUE;
 }
 
 BOOL CPXI8265_AI::LoadParam(void)
 {
+	//m_bCreateSuccess = TRUE;
 	_IsWarningRet("LoadParam");
 
 	return TRUE;
@@ -75,14 +113,14 @@ BOOL CPXI8265_AI::Init(void)
 
 	LONG			lResult;
 	PDEV_AI			psDevAI;
-	for (ULONG cardNum=0; cardNum<PXI8265_CARD_COUNT; cardNum++)
+	for (ULONG cardNum=0; cardNum<CARD_COUNT; cardNum++)
 	{
 		psDevAI = &m_sDevAI[cardNum];
 
 		lResult = PXI8265_AI_InitChan(
 							psDevAI->hDev,
 							0,
-							PXI8265_CHAN_COUNT - 1,
+							CHAN_COUNT - 1,
 							PXI8265_AI_B_5_V,
 							PXI8265_AI_RSE);
 		if (_IsErrChk(lResult,0)) goto errorExit;
@@ -104,7 +142,7 @@ errorExit:
 
 int CPXI8265_AI::GetChCount(void)
 {
-	return (PXI8265_CARD_COUNT * PXI8265_CHAN_COUNT);
+	return (CARD_COUNT * CHAN_COUNT);
 }
 
 BOOL CPXI8265_AI::Start(ULONG ulChan)
@@ -113,7 +151,7 @@ BOOL CPXI8265_AI::Start(ULONG ulChan)
 
 	if (m_bIsStart) return TRUE;
 
-	for (ULONG cardNum=0; cardNum<PXI8265_CARD_COUNT; cardNum++)
+	for (ULONG cardNum=0; cardNum<CARD_COUNT; cardNum++)
 	{
 		m_sDevAI[cardNum].lastSegIndex		= -1;
 
@@ -130,7 +168,7 @@ BOOL CPXI8265_AI::Stop(ULONG ulChan)
 {
 	_IsWarningRet("Stop");
 
-	for (ULONG cardNum=0; cardNum<PXI8265_CARD_COUNT; cardNum++)
+	for (ULONG cardNum=0; cardNum<CARD_COUNT; cardNum++)
 	{
 		m_sDevAI[cardNum].bThreadRun = FALSE;
 		ExReleaseThread(m_sDevAI[cardNum].hThreadProcessing,	1000);
@@ -154,9 +192,9 @@ BOOL CPXI8265_AI::ReadOneDC(ULONG ulChan, double* dfAD)
 	}
 
 	// 获得卡号
-	ULONG cardNum = ulChan / PXI8265_CHAN_COUNT;
+	ULONG cardNum = ulChan / CHAN_COUNT;
 	// 获得卡对应的通道号
-	ULONG cardChan = ulChan % PXI8265_CHAN_COUNT;
+	ULONG cardChan = ulChan % CHAN_COUNT;
 
 	*dfAD = m_sDevAI[cardNum].vcVolt[cardChan];
 
@@ -175,14 +213,79 @@ BOOL CPXI8265_AI::ReadOneRMS(ULONG ulChan, double* dfAD)
 	}
 
 	// 获得卡号
-	ULONG cardNum = ulChan / PXI8265_CHAN_COUNT;
+	ULONG cardNum = ulChan / CHAN_COUNT;
 	// 获得卡对应的通道号
-	ULONG cardChan = ulChan % PXI8265_CHAN_COUNT;
+	ULONG cardChan = ulChan % CHAN_COUNT;
 
 	*dfAD = m_sDevAI[cardNum].vcVoltRMS[cardChan];
 
 	return TRUE;
 }
+
+
+void CPXI8265_AI::GetDataFromBord(ULONG ulChan,double* pBuffer, int ReadSize, int* retReadSize){
+	__try
+	{
+		EnterCriticalSection(&m_ValueListSEC);
+		GetData(ulChan,pBuffer,ReadSize,retReadSize);
+	}
+	__finally{
+		LeaveCriticalSection(&m_ValueListSEC);
+	}
+}
+
+void CPXI8265_AI::GetData(ULONG ulChan,double* pBuffer, int ReadSize, int* retReadSize)
+{
+	//_IsWarningRet("GetDataFromBord");
+	//__try{
+	//EnterCriticalSection(&m_ValueListSEC);
+	try
+	{
+		if ((m_VecOutIndex[ulChan] + ReadSize) <= m_VecInsertIndex[ulChan])
+		{
+			std::copy(m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan],m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan] + ReadSize,pBuffer);
+			m_VecOutIndex[ulChan] += ReadSize;
+			*retReadSize = ReadSize;
+		}
+		else if ((m_VecOutIndex[ulChan] + ReadSize) <= MAX_ARRAY_SIZE)
+		{
+			std::copy(m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan],m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan] + ReadSize,pBuffer);
+			m_VecOutIndex[ulChan] += ReadSize;
+			*retReadSize = ReadSize;
+		}
+		else if ((m_VecOutIndex[ulChan] + ReadSize) > MAX_ARRAY_SIZE)
+		{
+			std::copy(m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan],m_ReadVec[ulChan].end(),pBuffer);
+			
+			int EreseToRead = ReadSize - (MAX_ARRAY_SIZE - m_VecOutIndex[ulChan]);
+			int buffAdd = MAX_ARRAY_SIZE - m_VecOutIndex[ulChan];
+			std::copy(m_ReadVec[ulChan].begin(),m_ReadVec[ulChan].begin() + EreseToRead,pBuffer + buffAdd);
+			pBuffer = pBuffer - ReadSize;//使指针回到起点
+			
+			m_VecOutIndex[ulChan] += EreseToRead;
+			*retReadSize = ReadSize;
+		}
+
+	}
+	catch (CMemoryException* e)
+	{
+		
+	}
+	catch (CFileException* e)
+	{
+	}
+	catch (CException* e)
+	{
+	}
+	
+	//}
+	//__finally{
+	//	LeaveCriticalSection(&m_ValueListSEC);
+	//}
+
+
+}
+
 //////////////////////////////////////////////////////////////////////////
 BOOL CPXI8265_AI::_IsErrChk(LONG err, ULONG ulCard)
 {
@@ -253,7 +356,31 @@ UINT __stdcall CPXI8265_AI::_ThreadReadAI(PVOID pData)
 
 		psReadAI->singleLen		= perChanRead;
 		psDevAI->lastSegIndex	= ulSegIndex;
-		ulSegIndex = (ulSegIndex + 1) % PXI8265_SEG_MAX;
+		ulSegIndex = (ulSegIndex + 1) % SEG_MAX;
+
+		for (ULONG ulChan = 0; ulChan < CHAN_COUNT; ulChan ++)
+		{
+			double* dfResult = new double[psReadAI->singleLen];
+			
+			ULONG ulTmp;
+			//&psReadAI->readArray[ulChan*psReadAI->singleLen];
+			//dfResult =(double)(psReadAI->readArray[ulChan*psReadAI->singleLen + psReadAI->singleLen - 1]);
+			PXI8265_AI_ConvLsbToVolt(PXI8265_AI_B_10_V,
+				&psReadAI->readArray[ulChan*psReadAI->singleLen], psReadAI->singleLen,
+				dfResult, psReadAI->singleLen, &ulTmp);
+			__try{
+				//dfResult = *(&psReadAI->readArray[ulChan*psReadAI->singleLen] + (psReadAI->singleLen - 1));
+				EnterCriticalSection(&(pClass->m_ValueListSEC));
+				pClass->InsertAChannelValue((int)ulChan,dfResult,ulTmp);
+			}
+			__finally{
+				delete[] dfResult;
+				dfResult = NULL;
+				LeaveCriticalSection(&(pClass->m_ValueListSEC));
+			}
+		}
+		Sleep(1000 / (pClass->m_DataRate / PXI8265_SINGLE_LEN));
+		
 	}
 
 	PXI8265_AI_Stop(psDevAI->hDev);
@@ -350,6 +477,85 @@ double	CPXI8265_AI::_GetArrayRMS(LONG readArray[], ULONG arrayLen)
 	return dfFilteRMS;
 }
 
+
+void CPXI8265_AI::InsertAChannelValue(int iChannel,double* dValue,int ValueCount){
+	try
+	{
+		
+		if (m_ReadVec[iChannel].size() + ValueCount < MAX_ARRAY_SIZE)
+		{
+			for (int i = 0; i < ValueCount; i++)
+			{
+				double dfValue = *(dValue + i);
+				m_ReadVec[iChannel].push_back(dfValue);
+				m_VecInsertIndex[iChannel]++;
+			}
+		}
+		else if (m_ReadVec[iChannel].size() < MAX_ARRAY_SIZE)
+		{
+			int Erease = MAX_ARRAY_SIZE - m_VecInsertIndex[iChannel];
+			for (int i = 0; i < Erease; i++)
+			{
+				double dfValue = *(dValue + i);
+				m_ReadVec[iChannel].push_back(dfValue);
+				m_VecInsertIndex[iChannel]++;
+			}
+			m_VecInsertIndex[iChannel] = 0;
+			for (int i = Erease; i < ValueCount; i++)
+			{
+				m_ReadVec[iChannel].at(m_VecInsertIndex[iChannel]) = *(dValue + i);
+				m_VecInsertIndex[iChannel]++;
+			}
+		}
+		else if (m_VecInsertIndex[iChannel] + ValueCount < MAX_ARRAY_SIZE)
+		{
+			while(m_VecOutIndex[iChannel] > m_VecInsertIndex[iChannel])
+			{
+				Sleep(1);
+			}
+			for (int i = 0; i <ValueCount; i++)
+			{
+				m_ReadVec[iChannel].at(m_VecInsertIndex[iChannel]) = *(dValue + i);
+				m_VecInsertIndex[iChannel]++;
+			}
+			if (m_VecInsertIndex[iChannel] >= MAX_ARRAY_SIZE)
+			{
+				m_VecInsertIndex[iChannel] = 0;
+			}
+
+		}
+		else{
+			int EreasValue = MAX_ARRAY_SIZE - m_VecInsertIndex[iChannel];
+			for (int i = 0; i < EreasValue; i++)
+			{
+				m_ReadVec[iChannel].at(m_VecInsertIndex[iChannel]) = *(dValue + i);
+				m_VecInsertIndex[iChannel]++;
+			}
+			m_VecInsertIndex[iChannel] = 0;
+			for (int i = EreasValue; i < ValueCount; i++)
+			{
+				m_ReadVec[iChannel].at(m_VecInsertIndex[iChannel]) = *(dValue + i);
+				m_VecInsertIndex[iChannel]++;
+			}
+			if (m_VecInsertIndex[iChannel] >= MAX_ARRAY_SIZE)
+			{
+				m_VecInsertIndex[iChannel] = 0;
+			}
+		}
+	}
+	catch (CMemoryException* e)
+	{
+		
+	}
+	catch (CFileException* e)
+	{
+	}
+	catch (CException* e)
+	{
+	}
+	
+}
+
 UINT __stdcall CPXI8265_AI::_ThreadProcessing(PVOID pData)
 {
 	PDEV_AI				psDevAI		= (PDEV_AI)pData;
@@ -370,10 +576,12 @@ UINT __stdcall CPXI8265_AI::_ThreadProcessing(PVOID pData)
 
 		psReadAI	= &psDevAI->sArrSegAI[psDevAI->lastSegIndex];
 
-		for (ULONG chanNum=0; chanNum<PXI8265_CHAN_COUNT; chanNum++)
+		for (ULONG chanNum=0; chanNum<CHAN_COUNT; chanNum++)
 		{
 			psDevAI->vcVolt[chanNum]	= pClass->_GetArrayVolt(&psReadAI->readArray[chanNum*psReadAI->singleLen], psReadAI->singleLen);
+			
 		}
+		//pClass->InsertAChannelValue()
 		Sleep(1);
 	}
 

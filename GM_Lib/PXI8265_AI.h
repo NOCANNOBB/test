@@ -10,10 +10,6 @@
 #include "IBaseHead.h"
 #include "vector"
 
-#define PXI8265_CARD_COUNT		(1)
-#define PXI8265_CHAN_COUNT		(48)
-#define PXI8265_SEG_MAX			(16)
-
 
 
 class CLogFile_PXI8265 
@@ -48,8 +44,21 @@ public:
 class CPXI8265_AI : public IBaseAI  
 {
 public:
+
+	enum 
+	{
+		CARD_COUNT		= (1),
+		CHAN_COUNT		= (48),
+		SEG_MAX			= (16),
+		MAX_ARRAY_SIZE = 1024,a
+	};
+
+
+public:
 	virtual BOOL ReadOneDC(ULONG ulChan, double* dfAD);
 	virtual BOOL ReadOneRMS(ULONG ulChan, double* dfAD);
+	virtual void SetDataRate(int RateValue,int PerRead);
+	virtual void GetDataFromBord(ULONG ulChan,double* pBuffer, int ReadSize, int* retReadSize);
 public:
 	virtual BOOL Create(void);
 	virtual BOOL Release(void);
@@ -74,7 +83,7 @@ private:
 	{
 		return !m_bCreateSuccess;
 	};
-
+	void GetData(ULONG ulChan,double* pBuffer, int ReadSize, int* retReadSize);
 	void	_WriteLog(LPCSTR lpszInfo, ...);
 	BOOL	_IsErrChk(LONG err, ULONG ulCard);
 	ULONG	_FilteArray(LONG readArray[], ULONG arrayLen);
@@ -82,6 +91,16 @@ private:
 	double	_GetArrayVolt(LONG readArray[], ULONG arrayLen);
 	// 获得有效值
 	double	_GetArrayRMS(LONG readArray[], ULONG arrayLen);
+
+	std::vector<std::vector<double>>	m_ReadVec;
+
+	std::vector<int> m_VecInsertIndex;
+	std::vector<int> m_VecOutIndex;
+	void InsertAChannelValue(int iChannel,double* dValue,int ValueCount);
+
+	int m_DataRate;
+	CRITICAL_SECTION m_ValueListSEC;
+
 private:
 	HANDLE			m_hDevice;
 	BOOL		m_bCreateSuccess;
@@ -105,14 +124,14 @@ private:
 		HANDLE				hThreadProcessing;	// 处理线程
 		ULONG				cardLgcID;
 		ULONG				cardSlotID;
-		READ_AI_INFO		sArrSegAI[PXI8265_SEG_MAX];
+		READ_AI_INFO		sArrSegAI[SEG_MAX];
 		LONG				lastSegIndex;
 		CPXI8265_AI*		pClass;
 		std::vector<double>	vcVolt;
 		std::vector<double>	vcVoltRMS;
 	}DEV_AI, *PDEV_AI;
 
-	DEV_AI			m_sDevAI[PXI8265_CARD_COUNT];
+	DEV_AI			m_sDevAI[CARD_COUNT];
 	
 	friend bool CompareLess(DEV_AI& __left, DEV_AI& __right);
 };
