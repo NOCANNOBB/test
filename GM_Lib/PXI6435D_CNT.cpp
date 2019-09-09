@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PXI6435D_CNT.h"
 #include "CardLib/PXI6435D.h"
+#include "UserDef.h"
 
 PXI6435D_CNT::PXI6435D_CNT(void)
 {
@@ -10,14 +11,29 @@ PXI6435D_CNT::PXI6435D_CNT(void)
 	m_hThread = INVALID_HANDLE_VALUE;
 	m_bCreateSuccess	= FALSE;
 	PDEV_CNT psDevAO;
+	PCHAN_CNT psChanCNT;
+	InitializeCriticalSection(&m_ValueListSEC);
+	m_ReadCntVec.reserve(PXI6435D_MAX_CHAN_CNT);
 
 	for (ULONG cardNum=0; cardNum<PXI6435D_CARD_COUNT; cardNum++)
 	{
 		psDevAO = &m_sDevAO[cardNum];
+		
 		psDevAO->cardLgcID = cardNum;
-
+		psDevAO->pClass = this;
 		InitHandle(psDevAO ->hDev);
+		for (ULONG chanNum = 0; chanNum < PXI6435D_MAX_CHAN_CNT; chanNum++)
+		{
+			psChanCNT = &m_sCHANCNT[chanNum];
+			psChanCNT->pClass = this;
+			psChanCNT->ulChan = chanNum;
+			psChanCNT->bThreadRun = FALSE;
+			psChanCNT->hDev = psDevAO ->hDev;
+
+		}
 	}
+
+	
 
 	InitHandle(m_hMutex);
 }
@@ -25,11 +41,8 @@ PXI6435D_CNT::PXI6435D_CNT(void)
 
 PXI6435D_CNT::~PXI6435D_CNT(void)
 {
-	if (m_hDevice != INVALID_HANDLE_VALUE)
-	{
-		Release();
-		m_hDevice = INVALID_HANDLE_VALUE;
-	}
+	Release();
+	DeleteCriticalSection(&m_ValueListSEC);
 }
 
 
@@ -123,6 +136,15 @@ BOOL PXI6435D_CNT::Release()
 	DelEvent(m_hMutex);
 
 	Stop(0);
+	for (ULONG cardNum=0; cardNum<PXI6435D_CARD_COUNT; cardNum++){
+		for (ULONG chanNUM = 0; chanNUM < PXI6435D_MAX_CHAN_CNT; chanNUM++)
+		{
+			m_sCHANCNT[chanNUM].bThreadRun = FALSE;
+			ExReleaseThread(m_sCHANCNT[cardNum].hThreadReadCNT,		1000);
+		}
+	}
+	
+
 	PDEV_CNT			psDevAO;
 
 	for (ULONG cardNum=0; cardNum<PXI6435D_CARD_COUNT; cardNum++)
@@ -135,6 +157,8 @@ BOOL PXI6435D_CNT::Release()
 			InitHandle(psDevAO->hDev);
 		}
 	}
+
+	
 
 	m_bCreateSuccess	= FALSE;
 	return TRUE;
@@ -153,32 +177,110 @@ BOOL PXI6435D_CNT::Init()
 
 BOOL PXI6435D_CNT::Start(ULONG ulChan)
 {
-	_IsWarningRet("Release");
+	_IsWarningRet("Start");
 
 	PDEV_CNT		psDevAO;
 	ULONG cardNum = ulChan / PXI6435D_CARD_COUNT;
 	ULONG chanNum = ulChan % PXI6435D_MAX_CHAN_CNT;
 	
-	psDevAO = &m_sDevAO[cardNum];
-
-	
-	LONG result = PXI6435D_CNT_InFreqChan(psDevAO->hDev, ulChan, PXI6435D_MIN_VALUE, PXI6435D_MAX_VALUE, PXI6435D_EDGE_VALUE, PXI6435D_MASETIME_VALUE);
-	if (_IsErrChk(result,0)) return FALSE;
-
-
-	result = PXI6435D_CNT_Start(psDevAO->hDev, ulChan);
-	if (_IsErrChk(result,0))
+	//psDevAO = &m_sDevAO[cardNum];
+	for (ULONG cardNum = 0; cardNum < PXI6435D_CARD_COUNT;cardNum++)
 	{
-		_WriteLog("PXI6435D_CNT ch %d³õÊ¼»¯Ê§°Ü!", ulChan);
+		for (ULONG chanNum=0; chanNum<PXI6435D_MAX_CHAN_CNT; chanNum++)
+		{
+			m_sCHANCNT[chanNum].hDev = m_sDevAO[cardNum].hDev;
+			m_sCHANCNT[chanNum].hThreadReadCNT = ExCreateThread(_ThreadReadCNT,&m_sCHANCNT[chanNum]);
+			
+		}
+	}
+	
 
-		return FALSE;
+	m_bIsStart = TRUE;
+	return TRUE;
+}
+
+
+void PXI6435D_CNT::InserValueToList(double dfValue,ULONG ulChan){
+	if (m_ReadCntVec.size() <= ulChan)
+	{
+		m_ReadCntVec.push_back(dfValue);
+	}
+	else
+	{
+		m_ReadCntVec.at(ulChan) = dfValue;
+	}
+}
+
+double PXI6435D_CNT::GetRandomValue(){
+	srand(time(0));
+	return rand();
+}
+
+
+UINT __stdcall PXI6435D_CNT::_ThreadReadCNT(PVOID pData)
+{
+	PCHAN_CNT				psCHAN		= (PCHAN_CNT)pData;
+	PXI6435D_CNT*		pClass		= psCHAN->pClass;
+	//READ_AI_INFO*		sArrSegAI	= psDevAI->sArrSegAI;
+	LONG result = PXI6435D_CNT_InFreqChan(psCHAN->hDev, psCHAN->ulChan, PXI6435D_MIN_VALUE, PXI6435D_MAX_VALUE, PXI6435D_EDGE_VALUE, PXI6435D_MASETIME_VALUE);
+
+	result = PXI6435D_CNT_Start(psCHAN->hDev, psCHAN->ulChan);
+	psCHAN->bThreadRun = TRUE;
+	BOOL IsRead = FALSE;
+	while (psCHAN->bThreadRun)
+	{
+		double dfFreq = 0;
+		double dfDutycycle = 0;
+		if (IsRead)
+		{
+			LONG result = PXI6435D_CNT_InFreqChan(psCHAN->hDev, psCHAN->ulChan, PXI6435D_MIN_VALUE, PXI6435D_MAX_VALUE, PXI6435D_EDGE_VALUE, PXI6435D_MASETIME_VALUE);
+
+			result = PXI6435D_CNT_Start(psCHAN->hDev, psCHAN->ulChan);
+		}
+		IsRead = FALSE;
+		LONG result =  PXI6435D_CNT_ReadF64(psCHAN->hDev, psCHAN->ulChan, &dfFreq, &dfDutycycle, 0.1);
+		dfFreq =pClass->GetRandomValue();
+		if (result == PXI6435D_WarningTimeOut)
+		{
+			IsRead = TRUE;
+			PXI6435D_CNT_Stop(psCHAN->hDev,psCHAN->ulChan);
+			__try{
+				EnterCriticalSection(&(pClass->m_ValueListSEC));
+				pClass->InserValueToList(dfFreq,psCHAN->ulChan);
+			}
+			__finally{
+				LeaveCriticalSection(&(pClass->m_ValueListSEC));
+			}
+			PXI6435D_CNT_Stop(psCHAN->hDev,psCHAN->ulChan);
+		}
+		if (dfFreq != 0)
+		{
+			IsRead = TRUE;
+			__try{
+				EnterCriticalSection(&(pClass->m_ValueListSEC));
+				pClass->InserValueToList(dfFreq,psCHAN->ulChan);
+			}
+			__finally{
+				LeaveCriticalSection(&(pClass->m_ValueListSEC));
+			}
+			PXI6435D_CNT_Stop(psCHAN->hDev,psCHAN->ulChan);
+		}
+
+		//Sleep(1000 / (pClass->m_DataRate / PXI8265_SINGLE_LEN));
+		Sleep(1);
+
 	}
 
-	return TRUE;
+	
+
+	return 0;
 }
 
 BOOL PXI6435D_CNT::Stop(ULONG ulChan)
 {
+
+	m_bIsStart = FALSE;
+
 	return TRUE;
 }
 
@@ -189,24 +291,21 @@ int PXI6435D_CNT::GetChCount()
 }
 
 BOOL PXI6435D_CNT::GetdfFreqAnddfdfDutyCycle(ULONG ulChan, double* dfFreq,double* dfdfDutyCycle){
-
-	_IsWarningRet("GetdfFreqAnddfdfDutyCycle");
-
-	PDEV_CNT		psDevAO;
-		ULONG cardNum = ulChan / PXI6435D_CARD_COUNT;
-		ULONG chanNum = ulChan % PXI6435D_MAX_CHAN_CNT;
-
-	psDevAO = &m_sDevAO[cardNum];
-
-	LONG result =  PXI6435D_CNT_ReadF64(psDevAO->hDev, ulChan, dfFreq, dfdfDutyCycle, 0.1);
-
-	if (result == PXI6435D_WarningTimeOut)
-	{
-
-		_WriteLog("PXI6435D_WarningTimeOut!", ulChan);
-		return FALSE;
+	__try{
+		
+		EnterCriticalSection(&m_ValueListSEC);
+		if (m_ReadCntVec.size() > ulChan)
+		{
+			*dfFreq = m_ReadCntVec.at(ulChan);
+		}
+		else{
+			*dfFreq = 0;
+		}
+		
 	}
-
+	__finally{
+		LeaveCriticalSection(&m_ValueListSEC);
+	}
 	return TRUE;
 
 }

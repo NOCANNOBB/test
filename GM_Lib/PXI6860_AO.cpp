@@ -184,9 +184,9 @@ BOOL CPXI6860_AO::WriteAO(ULONG ulChan, double dfVolt)
 	PDEV_AO	psDevAO = &m_sDevAO[cardNum];
 
 
-	PXI6860_AO_Write(psDevAO->hDev, cardChan, dfVolt);
-
-	return TRUE;
+	LONG retValue = PXI6860_AO_Write(psDevAO->hDev, cardChan, dfVolt);
+	BOOL ret = !_IsErrChk(retValue,cardNum);
+	return ret;
 }
 //////////////////////////////////////////////////////////////////////////
 BOOL CPXI6860_AO::_IsErrChk(LONG err, ULONG ulCard)

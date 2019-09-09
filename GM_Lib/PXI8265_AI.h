@@ -50,7 +50,7 @@ public:
 		CARD_COUNT		= (1),
 		CHAN_COUNT		= (48),
 		SEG_MAX			= (16),
-		MAX_ARRAY_SIZE = 1024,a
+		MAX_ARRAY_SIZE = 1024,
 	};
 
 
@@ -99,6 +99,7 @@ private:
 	void InsertAChannelValue(int iChannel,double* dValue,int ValueCount);
 
 	int m_DataRate;
+	int m_PerRead;
 	CRITICAL_SECTION m_ValueListSEC;
 
 private:

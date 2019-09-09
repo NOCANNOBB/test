@@ -67,8 +67,12 @@ public:
 
 	virtual void SetHandle(HANDLE hDevice){m_hDevice = hDevice;}
 private:
+    static UINT __stdcall _ThreadReadCNT(PVOID pData);
+	double GetRandomValue();
+	void InserValueToList(double dfValue,ULONG ulChan);
 	BOOL		m_bCreateSuccess;
 	HANDLE		m_hMutex;
+	BOOL		m_bIsStart;
 	BOOL	_IsDevEmpty() // 设备是否为空
 	{
 		return !m_bCreateSuccess;
@@ -79,6 +83,8 @@ private:
 public:
 	BOOL GetdfFreqAnddfdfDutyCycle(ULONG ulChan, double* dfFreq,double* dfdfDutyCycle = NULL);
 private:
+	CRITICAL_SECTION m_ValueListSEC;
+	std::vector<double> m_ReadCntVec;
 	HANDLE			m_hDevice;
 	ULONG			m_ulPhysicalID; // 设备的物理ID
 	ULONG			m_ulLogicID;	// 设备的逻辑ID
@@ -95,9 +101,25 @@ private:
 		HANDLE				hDev;
 		ULONG				cardLgcID;
 		ULONG				cardSlotID;
+
+		BOOL				bThreadRun;
+		PXI6435D_CNT*		pClass;
+		HANDLE				hThreadReadAI;		// 读取AI数据线程
 	}DEV_CNT, *PDEV_CNT;
 
 	DEV_CNT	m_sDevAO[PXI6435D_CARD_COUNT];
+
+
+	typedef struct _CHANNEL_CNT
+	{
+		ULONG ulChan;
+		HANDLE				hDev;
+		BOOL				bThreadRun;
+		PXI6435D_CNT*		pClass;
+		HANDLE				hThreadReadCNT;		// 读取AI数据线程
+	}CHAN_CNT,*PCHAN_CNT;
+	CHAN_CNT m_sCHANCNT[PXI6435D_MAX_CHAN_CNT * PXI6435D_CARD_COUNT];
+
 	friend bool CompareLess(DEV_CNT& __left, DEV_CNT& __right);
 };
 

@@ -197,9 +197,9 @@ BOOL PXI6416_DO::ReadDO(ULONG ulChan, byte* boolValue){
 
 	BOOL bRet = _IsErrChk(PXI6416_DO_Read(psDevAO->hDev, psDevAO->arrayDO, PXI6416_MAX_CHAN_DO), 0);
 
-	if (bRet)
+	if (!bRet)
 	{
-		*boolValue = m_byteDO[chanNum];
+		*boolValue =  psDevAO->arrayDO[chanNum];
 	}
 
 	return bRet;

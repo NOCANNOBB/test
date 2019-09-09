@@ -17,7 +17,7 @@ using namespace std;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-#define PXI8265_SINGLE_LEN		(100)
+#define PXI8265_SINGLE_LEN		(1000)
 
 CPXI8265_AI::CPXI8265_AI()
 {
@@ -84,6 +84,7 @@ bool CompareLess(CPXI8265_AI::DEV_AI& __left, CPXI8265_AI::DEV_AI& __right)
 
 void CPXI8265_AI::SetDataRate(int RateValue,int PerRead){
 	m_DataRate = RateValue;
+	m_PerRead = PerRead;
 }
 
 BOOL CPXI8265_AI::Create(void)
@@ -241,30 +242,44 @@ void CPXI8265_AI::GetData(ULONG ulChan,double* pBuffer, int ReadSize, int* retRe
 	//EnterCriticalSection(&m_ValueListSEC);
 	try
 	{
-		if ((m_VecOutIndex[ulChan] + ReadSize) <= m_VecInsertIndex[ulChan])
+		if (m_ReadVec[ulChan].size() > 0)
 		{
-			std::copy(m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan],m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan] + ReadSize,pBuffer);
-			m_VecOutIndex[ulChan] += ReadSize;
-			*retReadSize = ReadSize;
+			if (m_ReadVec[ulChan].size() >= ReadSize)
+			{
+				std::copy(m_ReadVec[ulChan].begin(),m_ReadVec[ulChan].begin() + ReadSize,pBuffer);
+				*retReadSize = ReadSize;
+			}
+			else
+			{
+				std::copy(m_ReadVec[ulChan].begin(),m_ReadVec[ulChan].end(),pBuffer);
+				*retReadSize = m_ReadVec[ulChan].size();
+			}
 		}
-		else if ((m_VecOutIndex[ulChan] + ReadSize) <= MAX_ARRAY_SIZE)
-		{
-			std::copy(m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan],m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan] + ReadSize,pBuffer);
-			m_VecOutIndex[ulChan] += ReadSize;
-			*retReadSize = ReadSize;
-		}
-		else if ((m_VecOutIndex[ulChan] + ReadSize) > MAX_ARRAY_SIZE)
-		{
-			std::copy(m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan],m_ReadVec[ulChan].end(),pBuffer);
-			
-			int EreseToRead = ReadSize - (MAX_ARRAY_SIZE - m_VecOutIndex[ulChan]);
-			int buffAdd = MAX_ARRAY_SIZE - m_VecOutIndex[ulChan];
-			std::copy(m_ReadVec[ulChan].begin(),m_ReadVec[ulChan].begin() + EreseToRead,pBuffer + buffAdd);
-			pBuffer = pBuffer - ReadSize;//使指针回到起点
-			
-			m_VecOutIndex[ulChan] += EreseToRead;
-			*retReadSize = ReadSize;
-		}
+
+		//if ((m_VecOutIndex[ulChan] + ReadSize) <= m_VecInsertIndex[ulChan])
+		//{
+		//	std::copy(m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan],m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan] + ReadSize,pBuffer);
+		//	m_VecOutIndex[ulChan] += ReadSize;
+		//	*retReadSize = ReadSize;
+		//}
+		//else if ((m_VecOutIndex[ulChan] + ReadSize) <= MAX_ARRAY_SIZE)
+		//{
+		//	std::copy(m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan],m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan] + ReadSize,pBuffer);
+		//	m_VecOutIndex[ulChan] += ReadSize;
+		//	*retReadSize = ReadSize;
+		//}
+		//else if ((m_VecOutIndex[ulChan] + ReadSize) > MAX_ARRAY_SIZE)
+		//{
+		//	std::copy(m_ReadVec[ulChan].begin() + m_VecOutIndex[ulChan],m_ReadVec[ulChan].end(),pBuffer);
+		//	
+		//	int EreseToRead = ReadSize - (MAX_ARRAY_SIZE - m_VecOutIndex[ulChan]);
+		//	int buffAdd = MAX_ARRAY_SIZE - m_VecOutIndex[ulChan];
+		//	std::copy(m_ReadVec[ulChan].begin(),m_ReadVec[ulChan].begin() + EreseToRead,pBuffer + buffAdd);
+		//	pBuffer = pBuffer - ReadSize;//使指针回到起点
+		//	
+		//	m_VecOutIndex[ulChan] += EreseToRead;
+		//	*retReadSize = ReadSize;
+		//}
 
 	}
 	catch (CMemoryException* e)
@@ -379,7 +394,8 @@ UINT __stdcall CPXI8265_AI::_ThreadReadAI(PVOID pData)
 				LeaveCriticalSection(&(pClass->m_ValueListSEC));
 			}
 		}
-		Sleep(1000 / (pClass->m_DataRate / PXI8265_SINGLE_LEN));
+		//Sleep(1000 / (pClass->m_DataRate / PXI8265_SINGLE_LEN));
+		Sleep(1);
 		
 	}
 
@@ -481,8 +497,23 @@ double	CPXI8265_AI::_GetArrayRMS(LONG readArray[], ULONG arrayLen)
 void CPXI8265_AI::InsertAChannelValue(int iChannel,double* dValue,int ValueCount){
 	try
 	{
+		if ((m_ReadVec[iChannel].size() + ValueCount) < MAX_ARRAY_SIZE)
+		{
+			for (int i = 0; i < ValueCount; i++)
+			{
+				double dfValue = *(dValue + i);
+				m_ReadVec[iChannel].push_back(dfValue);
+			}
+		}
+		else{
+			for (int i = 0; i < ValueCount; i++)
+			{
+				double dfValue = *(dValue + i);
+				m_ReadVec[iChannel].at(i) =(dfValue);
+			}
+		}
 		
-		if (m_ReadVec[iChannel].size() + ValueCount < MAX_ARRAY_SIZE)
+		/*if (m_ReadVec[iChannel].size() + ValueCount < MAX_ARRAY_SIZE)
 		{
 			for (int i = 0; i < ValueCount; i++)
 			{
@@ -509,9 +540,9 @@ void CPXI8265_AI::InsertAChannelValue(int iChannel,double* dValue,int ValueCount
 		}
 		else if (m_VecInsertIndex[iChannel] + ValueCount < MAX_ARRAY_SIZE)
 		{
-			while(m_VecOutIndex[iChannel] > m_VecInsertIndex[iChannel])
+			if(m_VecOutIndex[iChannel] > m_VecInsertIndex[iChannel])
 			{
-				Sleep(1);
+				return;
 			}
 			for (int i = 0; i <ValueCount; i++)
 			{
@@ -541,7 +572,7 @@ void CPXI8265_AI::InsertAChannelValue(int iChannel,double* dValue,int ValueCount
 			{
 				m_VecInsertIndex[iChannel] = 0;
 			}
-		}
+		}*/
 	}
 	catch (CMemoryException* e)
 	{

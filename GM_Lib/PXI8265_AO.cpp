@@ -35,6 +35,7 @@ CPXI8265_AO::CPXI8265_AO()
 
 		
 	}
+	InitHandle(m_hDevice);
 	m_bCreateSuccess	= FALSE;
 }
 
@@ -137,10 +138,11 @@ BOOL CPXI8265_AO::WriteAO(ULONG ulChan, double dfVolt)
 
 	PDEV_AO	psDevAO = &m_sDevAO[cardNum];
 
+	LONG retValue =PXI8265_AO_Write(m_hDevice, cardChan, 1,TRUE,&dfVolt,1,10);
+	BOOL ret = !_IsErrChk(retValue,cardNum);
+	return ret;
 
-	PXI8265_AO_Write(psDevAO->hDev, cardChan, 1,TRUE,&dfVolt,1,10);
-
-	return TRUE;
+	//return TRUE;
 }
 //////////////////////////////////////////////////////////////////////////
 BOOL CPXI8265_AO::_IsErrChk(LONG err, ULONG ulCard)

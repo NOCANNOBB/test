@@ -41,10 +41,11 @@ public:
 	~CPXI8265_AO(void);
 	enum 
 	{
-		MAX_CHAN_AO = 1, 
+		MAX_CHAN_AO = 2, 
 		CARD_COUNT	= 1,
 		VAL_MIN		= -10,
 		VAL_MAX		= 10,
+		SEG_MAX = 16,
 	};
 public:
 	virtual BOOL Create();

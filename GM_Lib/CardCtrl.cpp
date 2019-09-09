@@ -83,9 +83,11 @@ IBaseOutAO* CCardCtrlATPLib::GetBaseOutAO(void){
 	if (m_aoALL == NULL)
 	{
 		New_PointClass(m_aoALL, CAO_ALL);
-		New_PointClass(m_pXI6860_AO,CPXI6860_AO)
+		New_PointClass(m_pXI6860_AO,CPXI6860_AO);
+		New_PointClass(m_pCPXI8265_Total,CPXI8265_Total);
 
 		m_aoALL->Push_IBaseAO(static_cast<IBaseOutAO*>(m_pXI6860_AO));
+		m_aoALL->Push_IBaseAO(static_cast<IBaseOutAO*>(m_pCPXI8265_Total));
 	}
 
 	return static_cast<IBaseOutAO*>(m_aoALL);
