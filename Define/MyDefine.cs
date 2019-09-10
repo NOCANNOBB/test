@@ -36,6 +36,11 @@ namespace Define
 
         public static List<YBAlarmSet> g_YBAlarm = new List<YBAlarmSet>();
 
+
+        public static List<ChannelInfos> g_ChannelInfos = new List<ChannelInfos>();
+
+        public static List<FucntionChannelInfo> g_FunctionChannel = new List<FucntionChannelInfo>();
+
         public static uint ClearBit(uint value, int BitInDWORD)
         {
             value = (uint)(value & (~(0x1 << BitInDWORD)));

@@ -137,8 +137,8 @@ namespace DLLStruct
         public string GNFcontion { get; set; }
         public string AlarmH { get; set; }
         public string AlarmL { get; set; }
-        public string AlarmData { get; set; }
-        public string AlarmAbs { get; set; }
+        public string AlarmDataAbs { get; set; }
+        public string AlarmTimeAbs { get; set; }
     }
 
     public struct YBData
@@ -163,4 +163,38 @@ namespace DLLStruct
         public string ChanleType{get;set;}
         public int ChannelID{get;set;}
     }
+
+
+    public class ChannelInfos
+    {
+        public string IndexStr { get; set; }
+
+        public string FucntionName { get; set; }
+
+        public string FunctionType { get; set; }
+
+        public string XianHao { get; set; }
+
+        public string Duanzi { get; set; }
+
+        public int Hz { get; set; }
+
+        public int PerCount { get; set; }
+
+        public bool IsFunctionSelect { get; set; }
+    }
+
+    public class FucntionChannelInfo
+    {
+        public string IndexStr { get; set; }
+
+        public string FunctionName { get; set; }
+
+        public int ChannelNumber { get; set; }
+
+        public int YBNumber { get; set; }
+
+        public byte InfoType { get; set; }//0 DA 1 AD
+    }
+
 }

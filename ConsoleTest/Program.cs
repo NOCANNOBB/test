@@ -29,21 +29,25 @@ namespace ConsoleTest
 
         static void Main(string[] args)
         {
-            int k = 0;
-            BordDll.DoInit();
-            while (k <= 10)
+            for (int i = 0; i < 10; i++ )
             {
-                double dfValue = 0;
-                double dfValue2 = 12.1;
-               // dfValue[0] = 0;
-               // BordDll.WriteAOData(0, dfValue2);
-                BordDll.WriteDOData(0, (byte)1);
-                //double dValue = Marshal.PtrToStructure(dfValue,typeof(double));
-                Console.WriteLine(dfValue.ToString());
-                Thread.Sleep(1000);
-                k++;
+                aaa a = new aaa();
+                a.k = i;
+                if ((i < 8)&&(i > 3))
+                {
+                    a.kk = i.ToString() + "kkk";
+                }
+                else
+                a.kk =  i.ToString();
+                mylist.Add(a);
             }
 
+            List<aaa> tp = mylist.Where(m => m.kk.Contains("kkk")).ToList();
+
+            foreach (var info in tp)
+            {
+                info.kk = "asd";
+            }
             Console.ReadKey();
         }
 

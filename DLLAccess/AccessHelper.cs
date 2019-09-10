@@ -124,23 +124,26 @@ namespace DLLAccess
                 if (tbName == "ChannelInfo")
                 {
                     colums.Insert(0, "GUIDSTR");//
-                    colums.Insert(1, "FunctionName");// 
-                    colums.Insert(2, "Duanzi");
-                    colums.Insert(3, "Xianhao");
-                    colums.Insert(4, "hzZQ");
-                    colums.Insert(5, "PerReadNumber");//
-                  
-                    colums.Insert(6, "ChannelType");
-                    
-                    colums.Insert(7, "channelNumber");
+                    colums.Insert(1, "IndexStr");// 
+                    colums.Insert(2, "FucntionName");
+                    colums.Insert(3, "FunctionType");
+                    colums.Insert(4, "XianHao");
+                    colums.Insert(5, "Duanzi");//
+
+                    colums.Insert(6, "Hz");
+
+                    colums.Insert(7, "PerCount");
+                    colums.Insert(8, "IsFunctionSelect");
                 }
                 if (tbName == "YBChannelInfo")//样本通道分配
                 {
                     colums.Insert(0, "GUIDSTR");//
-                    colums.Insert(1, "YBName");// 
-                    colums.Insert(2, "GNFunction");
-                    colums.Insert(3, "ChannelID");
-                    colums.Insert(4, "ChannelType");
+                    colums.Insert(1, "IndexStr");// 
+                    colums.Insert(2, "FunctionName");
+                 
+                    colums.Insert(3, "ChannelNumber");
+                    colums.Insert(4, "YBNumber");
+                    colums.Insert(5, "InfoType");
                 }
                 if (tbName == "YBSetSignle")//样本通道分配
                 {
@@ -170,7 +173,7 @@ namespace DLLAccess
                     colums.Insert(3, "AlarmL");
                     colums.Insert(4, "AlarmData");
                     colums.Insert(5, "AlarmAbs");
-                    colums.Insert(6, "YBList");
+                    colums.Insert(6, "AlarmTimeAbs");
                 }
 
 

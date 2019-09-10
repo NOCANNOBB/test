@@ -49,19 +49,20 @@ namespace PRO190726
             try
             {
                 m_Pro.GetChannelSetInfo();
-                int RowCount = ProDefine.g_ChannelInfo.Count;
+                m_Pro.GetYBChannelInfo();
+                int RowCount = ProDefine.g_ChannelInfos.Count;
                 int ColNum = 7;
                 for (int i = 0; i < RowCount; i++)
                 {
-                    ChannelSetInfo csi = ProDefine.g_ChannelInfo[i];
+                    ChannelInfos csi = ProDefine.g_ChannelInfos[i];
                     int kindex = this.dataGridView1.Rows.Add();
-                    this.dataGridView1.Rows[kindex].Cells[0].Value = csi.FunctionName;
-                    this.dataGridView1.Rows[kindex].Cells[1].Value = csi.Duanzi;
-                    this.dataGridView1.Rows[kindex].Cells[2].Value = csi.Xianhao;
-                    this.dataGridView1.Rows[kindex].Cells[3].Value = csi.hzZQ;
-                    this.dataGridView1.Rows[kindex].Cells[4].Value = csi.PerReadNumber;
-                    this.dataGridView1.Rows[kindex].Cells[5].Value = csi.ChannelType;
-                    this.dataGridView1.Rows[kindex].Cells[6].Value = csi.channelNumber;
+                    this.dataGridView1.Rows[kindex].Cells[0].Value = csi.IsFunctionSelect;
+                    this.dataGridView1.Rows[kindex].Cells[1].Value = csi.FucntionName;
+                    this.dataGridView1.Rows[kindex].Cells[2].Value = csi.FunctionType;
+                    this.dataGridView1.Rows[kindex].Cells[3].Value = csi.XianHao;
+                    this.dataGridView1.Rows[kindex].Cells[4].Value = csi.Duanzi;
+                    this.dataGridView1.Rows[kindex].Cells[5].Value = csi.Hz;
+                    this.dataGridView1.Rows[kindex].Cells[6].Value = csi.PerCount;
 
                 }
             }
@@ -74,6 +75,7 @@ namespace PRO190726
 
         private void lbIn_Click(object sender, EventArgs e)
         {
+            
             try
             {
                 OpenFileDialog file = new OpenFileDialog();
@@ -83,13 +85,28 @@ namespace PRO190726
                     this.dataGridView1.Rows.Clear();
                     string FileName = file.FileName;
 
-                    List<string> GetContentStr = ExcelHelper.ReadFromExcelFile(FileName);
-
+                    List<string> GetContentStr = ExcelHelper.ReadFromExcelFile(FileName,"总表");
+                    List<string> GetDAContent = ExcelHelper.ReadFromExcelFile(FileName, "DA表");
+                    List<string> GetADContent = ExcelHelper.ReadFromExcelFile(FileName, "AD表");
                     if (GetContentStr.Count == 0)
                     {
-                        MessageBox.Show("获取到数据内容为空");
+                        MessageBox.Show("获取到数据格式不正确");
                         return;
                     }
+                    if (GetDAContent.Count == 0)
+                    {
+                        MessageBox.Show("获取到数据格式不正确");
+                        return;
+                    }
+                    if (GetADContent.Count == 0)
+                    {
+                        MessageBox.Show("获取到数据格式不正确");
+                        return;
+                    }
+                    ProDefine.g_FunctionChannel.Clear();
+                    InserFunctionChannel(GetContentStr);
+                    InsertDAADInfo(GetDAContent,0);
+                    InsertDAADInfo(GetADContent, 1);
 
                     int RowCount = GetContentStr.Count;
                     int ColNum = GetContentStr[0].Split(',').Count();
@@ -98,7 +115,8 @@ namespace PRO190726
                     for (int i = 1; i < RowCount; i++)
                     {
                         int kindex = this.dataGridView1.Rows.Add();
-                        for (int k = 0; k < ColNum; k++)
+                        this.dataGridView1.Rows[kindex].Cells[0].Value = true;
+                        for (int k = 1; k < ColNum; k++)
                         {
                             this.dataGridView1.Rows[kindex].Cells[k].Value = GetContentStr[i].Split(',')[k];
                         }
@@ -108,6 +126,61 @@ namespace PRO190726
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void InserFunctionChannel(List<string> ContentStr)
+        {
+            try
+            {
+                ProDefine.g_ChannelInfos.Clear();
+                int RowCount = ContentStr.Count;
+                int ColNum = ContentStr[0].Split(',').Count();
+
+                for (int i = 1; i < RowCount; i++)
+                {
+                    ChannelInfos CI = new ChannelInfos();
+
+                    CI.IndexStr = ContentStr[i].Split(',')[0];
+                    CI.FucntionName = ContentStr[i].Split(',')[1];
+                    CI.FunctionType = ContentStr[i].Split(',')[2];
+                    CI.XianHao = ContentStr[i].Split(',')[3];
+                    CI.Duanzi = ContentStr[i].Split(',')[4];
+                    CI.Hz = Convert.ToInt32( ContentStr[i].Split(',')[5]);
+                    CI.PerCount = Convert.ToInt32(ContentStr[i].Split(',')[6]);
+                    CI.IsFunctionSelect = true;
+                    ProDefine.g_ChannelInfos.Add(CI);
+                }
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
+        }
+
+        private void InsertDAADInfo(List<string> ContentStr,byte strType)
+        {
+            try
+            {
+                
+                int RowCount = ContentStr.Count;
+                int ColNum = ContentStr[0].Split(',').Count();
+
+                for (int i = 1; i < RowCount; i++)
+                {
+                    FucntionChannelInfo FC = new FucntionChannelInfo();
+
+                    FC.IndexStr = ContentStr[i].Split(',')[0];
+                    FC.FunctionName = ContentStr[i].Split(',')[1];
+                    FC.ChannelNumber = Convert.ToInt32(ContentStr[i].Split(',')[2]);
+                    FC.YBNumber = Convert.ToInt32(ContentStr[i].Split(',')[3]);
+                    FC.InfoType = strType;
+                    ProDefine.g_FunctionChannel.Add(FC);
+                }
+            }
+            catch (System.Exception ex)
+            {
+            	
             }
         }
 
@@ -127,7 +200,7 @@ namespace PRO190726
                     string[] StrArr = new string[this.dataGridView1.Rows.Count];
                     string CaptionString = "";
 
-                    for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
+                    for (int i = 1; i < this.dataGridView1.Columns.Count; i++)
                     {
 
                         CaptionString += this.dataGridView1.Columns[i].HeaderText + ",";
@@ -138,7 +211,7 @@ namespace PRO190726
                     for (int k = 0; k < this.dataGridView1.Rows.Count -1; k++)
                     {
                         string RowsString = "";
-                        for (int i = 0; i < this.dataGridView1.Columns.Count; i++)
+                        for (int i = 1; i < this.dataGridView1.Columns.Count; i++)
                         {
 
                             if (this.dataGridView1.Rows[k].Cells[i].Value == null)
@@ -156,7 +229,10 @@ namespace PRO190726
                         RowsString = RowsString.Substring(0, RowsString.Length - 1);
                         StrArr[k + 1] = RowsString;
                     }
-                    ExcelHelper.WriteToExcel(SaveFileName, StrArr);
+                    List<string> DAList = new List<string>();
+                    List<string> ADList = new List<string>();
+                    GetADContent(ref DAList,ref ADList);
+                    ExcelHelper.WriteToExcel(SaveFileName, StrArr,ADList.ToArray(),DAList.ToArray());
                     MessageBox.Show("导出文件成功！", "导出文件");
                 }
             }
@@ -166,92 +242,42 @@ namespace PRO190726
             }
         }
 
+
+        public void GetADContent(ref List<string> DAList,ref List<string> ADList)
+        {
+            string CaptiontStr = "索引,命名,通道,样本号";
+            DAList.Add(CaptiontStr);
+            ADList.Add(CaptiontStr);
+            foreach (var info in ProDefine.g_FunctionChannel)
+            {
+                string ValueStre = "";
+                if (info.InfoType == 0)
+                {
+                    ValueStre = info.IndexStr + "," + info.FunctionName + "," + info.ChannelNumber + "," + info.YBNumber;
+                    DAList.Add(ValueStre);
+                }
+                else
+                {
+                    ValueStre = info.IndexStr + "," + info.FunctionName + "," + info.ChannelNumber + "," + info.YBNumber;
+                    ADList.Add(ValueStre);
+                }
+            }
+        }
+
         private void lbSave_Click(object sender, EventArgs e)
         {
             try
             {
-                ProDefine.g_ChannelInfo.Clear();
-                int YBNumber = Convert.ToInt32(ProDefine.g_SMExpermentParam.YBNumber);
-                int iCount = this.dataGridView1.Rows.Count - 1;
+                int Rowcount = this.dataGridView1.Rows.Count - 1;
 
-                if ((iCount % YBNumber) != 0)
+                for (int i = 0; i < Rowcount; i++ )
                 {
-                    MessageBox.Show("通道数需为样本数的整数倍");
-                    return;
+                    ProDefine.g_ChannelInfos[i].IsFunctionSelect = (bool)this.dataGridView1.Rows[i].Cells[0].Value;
+                    ProDefine.g_ChannelInfos[i].FucntionName = this.dataGridView1.Rows[i].Cells[1].Value.ToString();
+                    ChangeFunctionName(ProDefine.g_ChannelInfos[i].IndexStr,ProDefine.g_ChannelInfos[i].FucntionName);
                 }
 
-                int cloCount = this.dataGridView1.Columns.Count;
-                bool IsFindNull = false;
-                for (int i = 0; i < iCount; i++)
-                {
-                    string FunctionName = "";
-                    string CardNumber = "";
-                    string channelNumber = "";
-                    string sValueType = "";
-                    string ChannelType = "";
-                    string sCardindex = "";
-                    string sHz = "";
-                    string PerGetNumber = "";
-                    string StrDUANzi = "";
-                    string XHStr = "";
-                    for (int k = 0; k < cloCount; k++)
-                    {
-                        object CellValue = this.dataGridView1.Rows[i].Cells[k].Value;
-                        if (CellValue == null)
-                        {
-                            IsFindNull = true;
-                            continue;
-                        }
-
-                        if (k == 0)
-                        {
-                            FunctionName = CellValue.ToString();
-                        }
-                        else if (k == 1)
-                        {
-                            StrDUANzi = CellValue.ToString();
-                        }
-                        else if (k == 2)
-                        {
-                            XHStr = CellValue.ToString();
-                        }
-                        else if (k == 3)
-                        {
-                            sHz = CellValue.ToString();
-                        }
-                        else if (k == 4)
-                        {
-                            PerGetNumber = CellValue.ToString();
-                        }
-                        else if (k == 5)
-                        {
-                            ChannelType = CellValue.ToString();
-                        }
-                        else if (k == 6)
-                        {
-                            channelNumber = CellValue.ToString();
-                        }
-
-                    }
-
-                    ChannelSetInfo csInfo = new ChannelSetInfo();
-                    
-                    csInfo.channelNumber = Convert.ToInt32(channelNumber);
-                    csInfo.ChannelType = ChannelType;
-                    csInfo.FunctionName = FunctionName;
-                    csInfo.Duanzi = StrDUANzi;
-                    csInfo.m_ProGuid = ProDefine.g_MyProject.GUID;
-                    csInfo.hzZQ = Convert.ToInt32(sHz);
-                    csInfo.PerReadNumber = Convert.ToInt32(PerGetNumber);
-                    csInfo.Xianhao = XHStr;
-                    ProDefine.g_ChannelInfo.Add(csInfo);
-                    SaveConfigInfo();
-                }
-                if (IsFindNull)
-                {
-
-                    MessageBox.Show("存在内容为空的项，请检查");
-                }
+                SaveConfigInfo();
                 MessageBox.Show("保存完成");
             }
             catch (System.Exception ex)
@@ -261,13 +287,21 @@ namespace PRO190726
             
         }
 
-       
+        private void ChangeFunctionName(string IndexStr, string NewFunctionName)
+        {
+            List<FucntionChannelInfo> func = ProDefine.g_FunctionChannel.Where(m => m.IndexStr == IndexStr).ToList();
+            foreach (var info in func)
+            {
+                info.FunctionName = NewFunctionName;
+            }
+        }
 
         private void SaveConfigInfo()
         {
             try
             {
                 m_Pro.SaveChannelSetInfo();
+                m_Pro.SaveYBChannelInfo();
             }
             catch (System.Exception ex)
             {

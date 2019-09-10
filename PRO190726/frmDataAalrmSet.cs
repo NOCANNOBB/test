@@ -19,7 +19,7 @@ namespace PRO190726
         {
             InitializeComponent();
             m_Pro = new DoProjectInfo();
-            m_Pro.GetYBSetSignel();
+            m_Pro.GetYBSetSignelOut();
             m_Pro.GetAlarm();
             InitUI();
             
@@ -44,10 +44,6 @@ namespace PRO190726
             this.lbSave2.Font = new Font("FontAwesome", 12);
             this.lbSave2.ForeColor = Color.White;
 
-
-            this.lbYBSelect1.Text = "\uf2da  样本选择";
-            this.lbYBSelect1.Font = new Font("FontAwesome", 12);
-            this.lbYBSelect1.ForeColor = Color.White;
 
             this.lbYBSelect.Text = "\uf2da  样本选择";
             this.lbYBSelect.Font = new Font("FontAwesome", 12);
@@ -154,12 +150,12 @@ namespace PRO190726
 
         private void lbYBSelect1_MouseEnter(object sender, EventArgs e)
         {
-            this.lbYBSelect1.ForeColor = Color.Violet;
+           
         }
 
         private void lbYBSelect1_MouseLeave(object sender, EventArgs e)
         {
-            this.lbYBSelect1.ForeColor = Color.White;
+            
         }
 
         private void lbSave2_MouseEnter(object sender, EventArgs e)
@@ -189,6 +185,28 @@ namespace PRO190726
 
         private void lbSave_Click(object sender, EventArgs e)
         {
+            int tCount = this.dataGridView1.Rows.Count - 1;
+
+            int GNCount = tCount / 2;
+
+            for (int i = 0; i < GNCount; i++)
+            {
+                string GNFunction = GetGNFunctionList(i);
+                int SetType = GetTypeOfSignle(i);
+
+                List<int> TimeList;
+                List<double> VaLueList = GetValuesList(i, out TimeList);
+
+                YBSingleSetInput YBSS = new YBSingleSetInput();
+
+                YBSS.GNFunction = GNFunction;
+                YBSS.m_TimeList = TimeList;
+                YBSS.m_ValueList = VaLueList;
+
+                YBSS.SetType = SetType;
+
+                ProDefine.g_YBSetSignleOut.Add(YBSS);
+            }
             m_Pro.SaveYBSetSignelOut();
         }
 
@@ -204,117 +222,111 @@ namespace PRO190726
         List<int> m_YB = new List<int>();
         private void textBox1_Click(object sender, EventArgs e)
         {
-            this.textBox1.Text = "";
-            int ybNumber = Convert.ToInt32(ProDefine.g_SMExpermentParam.YBNumber);
+           
+        }
 
-
-            frmYBSelect frmyb = new frmYBSelect();
-            frmyb.YBNumber = ybNumber;
-            frmyb.ShowDialog();
-            if (frmyb.DialogResult == System.Windows.Forms.DialogResult.OK)
+        private void SetValueAndTime(int rindex, List<int> TimeList, List<double> ValueList)
+        {
+            try
             {
-                m_YB = frmyb.returnList;
-                foreach (var info in m_YB)
+                for (int i = 0; i < TimeList.Count; i++)
                 {
-                    this.textBox1.Text += "样本" + (info + 1).ToString() + ",";
+                    if (rindex == 1)
+                    {
+                        DataGridViewTextBoxColumn acCode = new DataGridViewTextBoxColumn();
+                        acCode.Name = "acCode";
+                        acCode.DataPropertyName = "acCode";
+                        acCode.HeaderText = "";
+                        this.dataGridView1.Columns.Insert(this.dataGridView1.Columns.Count - 1, acCode);
+                    }
+                    this.dataGridView1.Rows[rindex - 1].Cells[i + 2].Value = TimeList[i].ToString();
+                    this.dataGridView1.Rows[rindex].Cells[i + 2].Value = ValueList[i].ToString();
                 }
-                InitData(this.dataGridView1);
 
             }
-            else
+            catch (System.Exception ex)
             {
-                this.textBox1.Text = "样本选择";
+
             }
         }
 
         private void InitData(DataGridView dgv)
         {
-           dgv.Rows.Clear();
+            this.dataGridView1.Rows.Clear();
 
-           if (dgv.Columns.Count > 3)
+            if (ProDefine.g_YBSetSignleOut.Count > 0)
             {
-                for (int i = 2; i <= dgv.Columns.Count - 1; )
+                int kinde = 0;
+                foreach (var info in ProDefine.g_YBSetSignleOut)
                 {
-                    if (dgv.Columns.Count <= 3)
-                    {
-                        break;
-                    }
-                    dgv.Columns.RemoveAt(i);
 
-                }
-            }
+                    int Rindex = this.dataGridView1.Rows.Add();
+                    Rindex = this.dataGridView1.Rows.Add();
 
-           AddIndex = dgv.Columns.Count - 1;
-            if (ProDefine.g_YBSetSignleOut.Count == 0)
-            {
-                foreach (var info in ProDefine.g_YBsetting)
-                {
-                    if (this.textBox1.Text.Contains(info.YBName))
-                    {
-                        foreach (var info_i in info.YBList)
-                        {
-                            if (!info_i.ChannelType.Contains("O"))
-                            {
-                                int kAddIndex = dgv.Rows.Add();
-                                kAddIndex = dgv.Rows.Add();
-                                dgv.Rows[kAddIndex].Cells[0].Value = info_i.GNFunction;
-                            }
-                        }
-                        break;
-                    }
+                    this.dataGridView1.Rows[Rindex].Cells[0].Value = info.GNFunction;
+                    this.dataGridView1.Rows[Rindex].Cells[1].Value = this.comboBox1.Items[info.SetType].ToString();
+                    SetValueAndTime(Rindex, info.m_TimeList, info.m_ValueList);
 
                 }
             }
             else
             {
-                foreach (var info in ProDefine.g_YBsetting)
+                List<string> aList = new List<string>();
+
+                foreach (var info in ProDefine.g_ChannelInfos)
                 {
-                    if (this.textBox1.Text.Contains(info.YBName))
+                    if ((info.FunctionType == "AO") || (info.FunctionType == "DO"))
                     {
-                        foreach (var info_i in info.YBList)
-                        {
-                            if (!info_i.ChannelType.Contains("O"))
-                            {
-                                int kAddIndex = dgv.Rows.Add();
-                                kAddIndex = dgv.Rows.Add();
-                                dgv.Rows[kAddIndex].Cells[0].Value = info_i.GNFunction;
-                            }
-                        }
-                        break;
+                        aList.Add(info.FucntionName);
                     }
+                }
+                foreach (var info in aList)
+                {
+                    int Rindex = this.dataGridView1.Rows.Add();
+                    Rindex = this.dataGridView1.Rows.Add();
 
+                    this.dataGridView1.Rows[Rindex].Cells[0].Value = info;
                 }
             }
 
+            this.dataGridView2.Rows.Clear();
+
+            if (ProDefine.g_YBAlarm.Count > 0)
+            {
+                foreach (var info in ProDefine.g_YBAlarm)
+                {
+                    int Rindex = this.dataGridView2.Rows.Add();
+                    this.dataGridView2.Rows[Rindex].Cells[0].Value = info.GNFcontion;
+                    this.dataGridView2.Rows[Rindex].Cells[1].Value = info.AlarmH;
+                    this.dataGridView2.Rows[Rindex].Cells[2].Value = info.AlarmL;
+                    this.dataGridView2.Rows[Rindex].Cells[3].Value = info.AlarmDataAbs;
+                    this.dataGridView2.Rows[Rindex].Cells[4].Value = info.AlarmTimeAbs;
+                }
+            }
+            else
+            {
+                List<string> aList = new List<string>();
+
+                foreach (var info in ProDefine.g_ChannelInfos)
+                {
+                    if ((info.FunctionType == "AI") || (info.FunctionType == "CNT"))
+                    {
+                        aList.Add(info.FucntionName);
+                    }
+                }
+                foreach (var info in aList)
+                {
+                    int Rindex = this.dataGridView2.Rows.Add();
+                 
+
+                    this.dataGridView2.Rows[Rindex].Cells[0].Value = info;
+                }
+            }
+            
 
         }
 
-        private List<string> GetYBList()
-        {
-            try
-            {
-                List<string> returnList = new List<string>();
-
-                string Txt = this.textBox1.Text.Trim();
-                if ((Txt == "") || (Txt == "样本选择"))
-                {
-                    return null;
-                }
-                string[] YBArr = Txt.Split(',');
-
-
-                foreach (var info in YBArr)
-                {
-                    IsYBIsSet(info);
-                    returnList.Add(info);
-                }
-                return returnList;
-            }
-            catch (System.Exception ex)
-            {
-                return null;
-            }
-        }
+       
 
         private bool IsYBIsSet(string YBName)
         {
@@ -339,30 +351,9 @@ namespace PRO190726
 
         private void label2_Click(object sender, EventArgs e)
         {
-            List<string> YBList = GetYBList();
+            
 
-            int tCount = this.dataGridView1.Rows.Count - 1;
-
-            int GNCount = tCount / 2;
-
-            for (int i = 0; i < GNCount; i++)
-            {
-                string GNFunction = GetGNFunctionList(i);
-                int SetType = GetTypeOfSignle(i);
-
-                List<int> TimeList;
-                List<double> VaLueList = GetValuesList(i, out TimeList);
-
-                YBSingleSetInput YBSS = new YBSingleSetInput();
-
-                YBSS.GNFunction = GNFunction;
-                YBSS.m_TimeList = TimeList;
-                YBSS.m_ValueList = VaLueList;
-                YBSS.m_YBList = YBList;
-                YBSS.SetType = SetType;
-
-                ProDefine.g_YBSetSignleOut.Add(YBSS);
-            }
+            
         }
 
         private string GetGNFunctionList(int k)
@@ -455,22 +446,7 @@ namespace PRO190726
         {
             try
             {
-                foreach (var info in ProDefine.g_YBsetting)
-                {
-                    if (this.textBox1.Text.Contains(info.YBName))
-                    {
-                        foreach (var info_i in info.YBList)
-                        {
-                            if (!info_i.ChannelType.Contains("O"))
-                            {
-                                int kAddIndex = this.dataGridView2.Rows.Add();
-                                this.dataGridView2.Rows[kAddIndex].Cells[0].Value = info_i.GNFunction;
-                            }
-                        }
-                        break;
-                    }
-
-                }
+                
             }
             catch (System.Exception ex)
             {
@@ -479,33 +455,16 @@ namespace PRO190726
         }
         private void textBox2_Click(object sender, EventArgs e)
         {
-            this.textBox1.Text = "";
-            int ybNumber = Convert.ToInt32(ProDefine.g_SMExpermentParam.YBNumber);
-
-
-            frmYBSelect frmyb = new frmYBSelect();
-            frmyb.YBNumber = ybNumber;
-            frmyb.ShowDialog();
-            if (frmyb.DialogResult == System.Windows.Forms.DialogResult.OK)
-            {
-                m_YB = frmyb.returnList;
-                foreach (var info in m_YB)
-                {
-                    this.textBox1.Text += "样本" + (info + 1).ToString() + ",";
-                }
-                InitData2();
-
-            }
-            else
-            {
-                this.textBox1.Text = "样本选择";
-            }
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-            List<string> YBList = GetYBList();
+           
+        }
 
+        private void lbSave2_Click(object sender, EventArgs e)
+        {
             int tCount = this.dataGridView2.Rows.Count - 1;
 
 
@@ -519,21 +478,17 @@ namespace PRO190726
 
                 string AlarmData = this.dataGridView2.Rows[i].Cells[3].Value.ToString();
                 string AlarmAbs = this.dataGridView2.Rows[i].Cells[4].Value.ToString();
+               // string AlarmTimeAbs = this.dataGridView2.Rows[i].Cells[5].Value.ToString();
 
                 YBAlarmSet ybs = new YBAlarmSet();
-                ybs.AlarmAbs = AlarmAbs;
-                ybs.AlarmData = AlarmData;
+                ybs.AlarmTimeAbs = AlarmAbs;
+                ybs.AlarmDataAbs = AlarmData;
                 ybs.AlarmH = AlarmH;
                 ybs.AlarmL = AlarmL;
                 ybs.GNFcontion = GNFunction;
-                ybs.m_YBList = YBList;
-
+                //ybs.AlarmAbsTime = AlarmTimeAbs;
                 ProDefine.g_YBAlarm.Add(ybs);
             }
-        }
-
-        private void lbSave2_Click(object sender, EventArgs e)
-        {
             m_Pro.SaveAlarm();
         }
 

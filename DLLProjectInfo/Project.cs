@@ -331,26 +331,34 @@ namespace DLLProjectInfo
 
         public void SaveChannelSetInfo()
         {
-            string SQL = "select * from " + ChannelSetDBName + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
-
-            DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
-
-            if (dt != null)
+            try
             {
-                if (dt.Rows.Count > 0)
-                {
-                    SQL = "delete from " + ChannelSetDBName + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
-                    AccessHelper.ExcuteSql(SQL);
+                string SQL = "select * from " + ChannelSetDBName + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
 
-                }
-                foreach (var info in ProDefine.g_ChannelInfo)
-                {
-                    SQL = "insert into " + ChannelSetDBName + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.FunctionName + "','" + info.Duanzi + "','"
-                        + info.Xianhao + "','" + info.hzZQ + "','" + info.PerReadNumber + "','" + info.ChannelType + "','" + info.channelNumber + "')";
-                    AccessHelper.ExcuteSql(SQL);
+                DataTable dt = AccessHelper.GetDataTableFromDB(SQL);
 
+                if (dt != null)
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        SQL = "delete from " + ChannelSetDBName + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
+                        AccessHelper.ExcuteSql(SQL);
+
+                    }
+                    foreach (var info in ProDefine.g_ChannelInfos)
+                    {
+                        SQL = "insert into " + ChannelSetDBName + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.IndexStr + "','" + info.FucntionName + "','"
+                            + info.FunctionType + "','" + info.XianHao + "','" + info.Duanzi + "','" + info.Hz.ToString() + "','" + info.PerCount.ToString() + "','" + info.IsFunctionSelect.ToString() + "')";
+                        AccessHelper.ExcuteSql(SQL);
+
+                    }
                 }
             }
+            catch (System.Exception ex)
+            {
+            	
+            }
+            
         }
 
         public void GetChannelSetInfo()
@@ -364,19 +372,19 @@ namespace DLLProjectInfo
                 {
                     if (dt.Rows.Count > 0)
                     {
-                        ProDefine.g_ChannelInfo.Clear();
+                        ProDefine.g_ChannelInfos.Clear();
                         for (int i = 0; i < dt.Rows.Count; i++ )
                         {
-                            ChannelSetInfo csi = new ChannelSetInfo();
-                            csi.channelNumber = Convert.ToInt32(dt.Rows[i][7].ToString());
-                            csi.ChannelType = dt.Rows[i][6].ToString();
-                            csi.PerReadNumber = Convert.ToInt32(dt.Rows[i][5].ToString());
-                            csi.hzZQ = Convert.ToInt32(dt.Rows[i][4].ToString());
-                            csi.Xianhao = dt.Rows[i][3].ToString();
-                            csi.Duanzi = dt.Rows[i][2].ToString();
-                            csi.FunctionName = dt.Rows[i][1].ToString();
-                            csi.m_ProGuid = Guid.Parse(dt.Rows[i][0].ToString());
-                            ProDefine.g_ChannelInfo.Add(csi);
+                            ChannelInfos csi = new ChannelInfos();
+                            csi.IndexStr = dt.Rows[i][1].ToString();
+                            csi.FucntionName =  dt.Rows[i][2].ToString();
+                            csi.FunctionType =  dt.Rows[i][3].ToString();
+                            csi.XianHao = dt.Rows[i][4].ToString();
+                            csi.Duanzi =  dt.Rows[i][5].ToString();
+                            csi.Hz =  Convert.ToInt32(dt.Rows[i][6].ToString());
+                            csi.PerCount = Convert.ToInt32(dt.Rows[i][7].ToString());
+                            csi.IsFunctionSelect = Convert.ToBoolean(dt.Rows[i][8].ToString());
+                            ProDefine.g_ChannelInfos.Add(csi);
                         }
                     }
 
@@ -402,21 +410,14 @@ namespace DLLProjectInfo
                         SQL = "delete from " + YBChannelInfo + " where GUIDSTR='" + ProDefine.g_SMExpermentParam.GUID.ToString() + "'";
                         AccessHelper.ExcuteSql(SQL);
                     }
-                    foreach (var info in ProDefine.g_YBsetting)
+                    foreach (var info in ProDefine.g_FunctionChannel)
                     {
                         /*SQL = "insert into " + ChannelSetDBName + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.FunctionName + "','" + info.Duanzi + "','"
                             + info.Xianhao + "','" + info.hzZQ + "','" + info.PerReadNumber + "','" + info.ChannelType + "','" + info.channelNumber + "')";
                         AccessHelper.ExcuteSql(SQL);*/
-
-                        string YBName = info.YBName;
-                        string ChannelID = "";
-                        string GNFunction = "";
-                        string ChannelType = "";
-
-                        foreach (var info_i in info.YBList)
                         {
-                            SQL = "insert into " + YBChannelInfo + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + YBName + "','" + info_i.GNFunction + "','"
-                            + info_i.ChannelID.ToString() + "','" + info_i.ChannelType + "')";
+                            SQL = "insert into " + YBChannelInfo + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.IndexStr + "','" + info.FunctionName + "','"
+                            + info.ChannelNumber.ToString() + "','" + info.YBNumber.ToString() + "','" + info.InfoType + "')";
                             AccessHelper.ExcuteSql(SQL);
                         }
 
@@ -440,41 +441,17 @@ namespace DLLProjectInfo
                 {
                     if (dt.Rows.Count > 0)
                     {
-                        string LastYBName = "";
-                        YBChannelInfo ybc = null;
+                       
                         for (int i = 0; i < dt.Rows.Count; i++ )
                         {
-                            string YBName = dt.Rows[i][1].ToString();
-                            string GNFunction = dt.Rows[i][2].ToString();
-                            string ChannelID = dt.Rows[i][3].ToString();
-                            string ChannelType = dt.Rows[i][4].ToString();
-                            
-                            if (LastYBName !=YBName)
-                            {
-                                LastYBName = YBName;
-                                ybc = new YBChannelInfo();
-                                ybc.YBName = YBName;
-                                ybc.YBList = new List<YBSetuse>();
-                                YBSetuse ybs = new YBSetuse();
-                                ybs.GNFunction = GNFunction;
-                                ybs.ChannelType = ChannelType;
-                                ybs.ChannelID = Convert.ToInt32(ChannelID);
-                                ybc.YBList.Add(ybs);
-                                ProDefine.g_YBsetting.Add(ybc);
-                            }
-                            else
-                            {
-                                LastYBName = YBName;
-                                if (ybc != null)
-                                {
-                                    YBSetuse ybs = new YBSetuse();
-                                    ybs.GNFunction = GNFunction;
-                                    ybs.ChannelType = ChannelType;
-                                    ybs.ChannelID = Convert.ToInt32(ChannelID);
-                                    ybc.YBList.Add(ybs);
-                                }
-                            }
-                            
+                            FucntionChannelInfo fc = new FucntionChannelInfo();
+                            fc.IndexStr = dt.Rows[i][1].ToString();
+                            fc.FunctionName = dt.Rows[i][2].ToString();
+                            fc.ChannelNumber = Convert.ToInt32(dt.Rows[i][3].ToString());
+                            fc.YBNumber = Convert.ToInt32(dt.Rows[i][4].ToString());
+                            fc.InfoType = Convert.ToByte(dt.Rows[i][5].ToString());
+                            ProDefine.g_FunctionChannel.Add(fc);
+
                         }
 
                     }
@@ -512,17 +489,13 @@ namespace DLLProjectInfo
                         {
                             ValueStr = ValueStr + kkk.ToString() + ",";
                         }
-                        foreach (var kkk in info.m_YBList)
-                        {
-                            YbStr = YbStr + kkk.ToString() + ",";
-                        }
-
+                        
                         Timestr = Timestr.Substring(0, Timestr.Length - 1);
                         ValueStr = ValueStr.Substring(0, ValueStr.Length - 1);
-                        YbStr = YbStr.Substring(0, YbStr.Length - 1);
+                        
 
                         SQL = "insert into " + YBSetSignle + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.GNFunction + "','" + Timestr + "','"
-                            + ValueStr + "','" + YbStr + "','" + info.SetType.ToString() + "')";
+                            + ValueStr + "','','" + info.SetType.ToString() + "')";
                         AccessHelper.ExcuteSql(SQL);
                     }
                 }
@@ -609,17 +582,13 @@ namespace DLLProjectInfo
                         {
                             ValueStr = ValueStr + kkk.ToString() + ",";
                         }
-                        foreach (var kkk in info.m_YBList)
-                        {
-                            YbStr = YbStr + kkk.ToString() + ",";
-                        }
-
+                        
                         Timestr = Timestr.Substring(0, Timestr.Length - 1);
                         ValueStr = ValueStr.Substring(0, ValueStr.Length - 1);
-                        YbStr = YbStr.Substring(0, YbStr.Length - 1);
+                        
 
                         SQL = "insert into " + YBSetOutSignle + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.GNFunction + "','" + Timestr + "','"
-                            + ValueStr + "','" + YbStr + "','" + info.SetType.ToString() + "')";
+                            + ValueStr + "','','" + info.SetType.ToString() + "')";
                         AccessHelper.ExcuteSql(SQL);
                     }
                 }
@@ -666,8 +635,7 @@ namespace DLLProjectInfo
                             ybs.GNFunction = GN;
                             ybs.m_TimeList = lTimeList;
                             ybs.m_ValueList = lValueList;
-                            ybs.m_YBList = new List<string>();
-                            ybs.m_YBList.AddRange(YBList.Split(','));
+                          
                             ybs.SetType = Convert.ToInt32(Settype);
                             ProDefine.g_YBSetSignleOut.Add(ybs);
                         }
@@ -699,16 +667,12 @@ namespace DLLProjectInfo
                         string ValueStr = "";
                         string YbStr = "";
                         
-                        foreach (var kkk in info.m_YBList)
-                        {
-                            YbStr = YbStr + kkk.ToString() + ",";
-                        }
-
                         
-                        YbStr = YbStr.Substring(0, YbStr.Length - 1);
+
+                       
 
                         SQL = "insert into " + YBSetAlarm + " Values('" + ProDefine.g_SMExpermentParam.GUID.ToString() + "','" + info.GNFcontion + "','" + info.AlarmH + "','"
-                            + info.AlarmL + "','" + info.AlarmData + "','" + info.AlarmAbs + "','"+ YbStr+ "')";
+                            + info.AlarmL + "','" + info.AlarmDataAbs + "','" + info.AlarmTimeAbs + "','')";
                         AccessHelper.ExcuteSql(SQL);
                     }
                 }
@@ -742,8 +706,8 @@ namespace DLLProjectInfo
                             string YBList = dt.Rows[i][6].ToString();
                             YBAlarmSet ybs = new YBAlarmSet();
                             ybs.GNFcontion = GN;
-                            ybs.AlarmAbs = AlarmAbs;
-                            ybs.AlarmData = AlarmData;
+                            ybs.AlarmTimeAbs = AlarmAbs;
+                            ybs.AlarmDataAbs = AlarmData;
                             ybs.AlarmH = AlarmH;
                             ybs.AlarmL = AlarmL;
                             

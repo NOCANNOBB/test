@@ -177,11 +177,11 @@
     <Compile Include="frmKKXYZ.Designer.cs">
       <DependentUpon>frmKKXYZ.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmOutputSet.cs">
+    <Compile Include="frmInputSet.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmOutputSet.Designer.cs">
-      <DependentUpon>frmOutputSet.cs</DependentUpon>
+    <Compile Include="frmInputSet.Designer.cs">
+      <DependentUpon>frmInputSet.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTHData.cs">
       <SubType>Form</SubType>
@@ -287,8 +287,8 @@
     <EmbeddedResource Include="frmKKXYZ.resx">
       <DependentUpon>frmKKXYZ.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmOutputSet.resx">
-      <DependentUpon>frmOutputSet.cs</DependentUpon>
+    <EmbeddedResource Include="frmInputSet.resx">
+      <DependentUpon>frmInputSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSMData.resx">
       <DependentUpon>frmSMData.cs</DependentUpon>

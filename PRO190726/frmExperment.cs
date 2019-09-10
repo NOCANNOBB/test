@@ -94,6 +94,7 @@ namespace PRO190726
         }
 
         private int m_ExpermentStep = 0;
+        private int m_lastExpermentStep = 0;
 
         private int GetNowStepExpermentTime()//获取当前步骤实验总时间
         {
@@ -105,16 +106,17 @@ namespace PRO190726
             return NowTotalTime;
         }
 
-        private List<YBChannelInfo> GetStepChannelList()//获取当前步骤通道
+        private List<FucntionChannelInfo> GetStepChannelList()//获取当前步骤通道
         {
-            List<YBChannelInfo> returnList = new List<YBChannelInfo>();
+            List<FucntionChannelInfo> returnList = new List<FucntionChannelInfo>();
 
             int YBStart = GetNowStepYBStart();
             int YBEnd = GetNowStepYBEnd();
 
             for (int i = YBStart; i <= YBEnd; i++)
             {
-                returnList.Add(ProDefine.g_YBsetting.Where(m => m.YBName == ("样本" + i.ToString())).SingleOrDefault());
+
+                returnList.AddRange(ProDefine.g_FunctionChannel.Where(m => m.ChannelNumber == i).ToList());
             }
             return returnList;
             
@@ -134,13 +136,14 @@ namespace PRO190726
         }
 
 
-        private int GetChannelHz(int ChannelID,string ChannelType)
+        private int GetChannelHz(int ChannelID,string FunctionName,ref int PerRead)
         {
             int Hz = 0;
-            ChannelSetInfo cs = ProDefine.g_ChannelInfo.Where(m => m.channelNumber == ChannelID && m.ChannelType == ChannelType).SingleOrDefault();
+            ChannelInfos cs = ProDefine.g_ChannelInfos.Where(m => m.FucntionName == FunctionName).SingleOrDefault();
             if (cs != null)
             {
-                Hz = cs.hzZQ / cs.PerReadNumber;
+                Hz = cs.Hz;
+                PerRead = cs.PerCount;
             }
             return Hz;
         }
@@ -181,61 +184,119 @@ namespace PRO190726
             
         }
 
+        private string GetNowChannelType(string GNFunction)
+        {
+            try
+            {
+                ChannelInfos ci = ProDefine.g_ChannelInfos.Where(m => m.FucntionName == GNFunction).SingleOrDefault();
+                if (ci != null)
+                {
+                    return ci.FunctionType;
+                }
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
+            return "";
+        }
+
         private void ReadData(int EclipsTime)
         {
             try
             {
-                List<YBChannelInfo> chList = GetStepChannelList();
+                List<FucntionChannelInfo> chList = GetStepChannelList();
 
                 foreach (var info in chList)
                 {
-                    foreach (var info_i in info.YBList)
+                    int PerRread1 = 5;
+                    //foreach (var info_i in info.YBList)
                     {
-                        int Hz = GetChannelHz(info_i.ChannelID,info_i.ChannelType);
+                        int Hz = GetChannelHz(info.ChannelNumber, info.FunctionName, ref PerRread1);
+                        string ChannelType = GetNowChannelType(info.FunctionName);
                         double flVolt = 0;
                         double dfFreq =0;
                         double dfDuty = 0;
+                        
                         if ((EclipsTime % Hz) == 0)
                         {
-                            switch (info_i.ChannelType)
+                            switch (ChannelType)
                             {
                                 case "AI":
-                                    BordDll.GetAIDataFromBord(info_i.ChannelID, ref flVolt);
+                                    int retRead = 0;
+                                    double[] bBuffer = new double[PerRread1];
+                                    BordDll.GetDataFromBord(info.ChannelNumber, bBuffer,PerRread1,ref retRead);
+
+                                    for (int i = 0; i < retRead; i++ )
+                                    {
+                                        YBData ydata = new YBData();
+                                        ydata.ChannID = info.ChannelNumber;
+                                        ydata.ChannType = ChannelType;
+                                        ydata.DTTime = EclipsTime;
+                                        ydata.flVot = bBuffer[i];
+                                        ydata.YBName = info.YBNumber.ToString();
+                                        ydata.GNFunction = info.FunctionName;
+
+                                        int returnValue = JudageAlarmData(EclipsTime, info.YBNumber, info.FunctionName, flVolt);
+                                        ydata.DataInfo = returnValue;
+                                        InsertDataToList(ydata);
+                                        if (returnValue == 0)
+                                        {
+                                            lock (m_diskLock)
+                                            {
+                                                m_YBDataList.Add(ydata);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            lock (m_AlarmDiskLock)
+                                            {
+                                                m_AlarmList.Add(ydata);
+                                            }
+                                            lock (m_AlarmShowLock)
+                                            {
+                                                m_AlarmListShow.Add(ydata);
+                                            }
+
+                                        }
+                                    }
+
                                     break;
                                 case "CNT":
-                                    BordDll.GetCNTData((uint)info_i.ChannelID, ref flVolt, ref dfDuty);
+                                    BordDll.GetCNTData((uint)info.ChannelNumber, ref flVolt, ref dfDuty);
+                                        YBData ydataCNT = new YBData();
+                                        ydataCNT.ChannID = info.ChannelNumber;
+                                        ydataCNT.ChannType = ChannelType;
+                                        ydataCNT.DTTime = EclipsTime;
+                                        ydataCNT.flVot = flVolt;
+                                        ydataCNT.YBName = info.YBNumber.ToString();
+                                        ydataCNT.GNFunction = info.FunctionName;
+
+                                        int returnValueCNT = JudageAlarmData(EclipsTime, info.YBNumber, info.FunctionName, flVolt);
+                                        ydataCNT.DataInfo = returnValueCNT;
+                                        InsertDataToList(ydataCNT);
+                                        if (returnValueCNT == 0)
+                                        {
+                                            lock (m_diskLock)
+                                            {
+                                                m_YBDataList.Add(ydataCNT);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            lock (m_AlarmDiskLock)
+                                            {
+                                                m_AlarmList.Add(ydataCNT);
+                                            }
+                                            lock (m_AlarmShowLock)
+                                            {
+                                                m_AlarmListShow.Add(ydataCNT);
+                                            }
+
+                                        }
                                     break;
                             }
-                            YBData ydata = new YBData();
-                            ydata.ChannID = info_i.ChannelID;
-                            ydata.ChannType = info_i.ChannelType;
-                            ydata.DTTime = EclipsTime;
-                            ydata.flVot = flVolt;
-                            ydata.YBName = info.YBName;
-                            ydata.GNFunction = info_i.GNFunction;
-
-                            int returnValue = JudageAlarmData(EclipsTime, info.YBName, info_i.GNFunction, flVolt);
-                            ydata.DataInfo = returnValue;
-                            InsertDataToList(ydata);
-                            if (returnValue == 0)
-                            {
-                                lock (m_diskLock)
-                                {
-                                    m_YBDataList.Add(ydata);
-                                }
-                            }
-                            else
-                            {
-                                lock (m_AlarmDiskLock)
-                                {
-                                    m_AlarmList.Add(ydata);
-                                }
-                                lock (m_AlarmShowLock)
-                                {
-                                    m_AlarmListShow.Add(ydata);
-                                }
-
-                            }
+                            
                         }
 
                         
@@ -251,13 +312,13 @@ namespace PRO190726
         }
         private List<YBData> m_AlarmList = new List<YBData>();
         private List<YBData> m_AlarmListShow = new List<YBData>();
-        private int JudageAlarmData(int EclipsTime,string YBName,string GNFucntion,double flVolt)
+        private int JudageAlarmData(int EclipsTime,int YBNumber,string GNFucntion,double flVolt)
         {
             try
             {
                 //获取当前时间段对应的数据，如果数据在范围内，为正常数据，范围外，判断是否在上下限值如果超出判定为报警值，如果报警时间，在报警时间误差范围内，不做报警
-                YBAlarmSet ybAlarm = ProDefine.g_YBAlarm.Where(m => m.m_YBList.Contains(YBName) == true && m.GNFcontion == GNFucntion).SingleOrDefault();
-                YBSingleSetInput YBs = ProDefine.g_YBSetSignle.Where(m => m.m_YBList.Contains(YBName) == true && m.GNFunction == GNFucntion).SingleOrDefault();
+                YBAlarmSet ybAlarm = ProDefine.g_YBAlarm.Where(m =>m.GNFcontion == GNFucntion).SingleOrDefault();
+                YBSingleSetInput YBs = ProDefine.g_YBSetSignle.Where(m => m.GNFunction == GNFucntion).SingleOrDefault();
 
                 if ((YBs != null) &&(ybAlarm != null))
                 {
@@ -266,13 +327,13 @@ namespace PRO190726
                     //if (YBs.SetType == 0)
                     {
                         lowValue = HightValue = YBs.m_ValueList[0];
-                        if (flVolt > (Convert.ToDouble(ybAlarm.AlarmH) + Convert.ToDouble(ybAlarm.AlarmAbs)))
+                        if (flVolt > (Convert.ToDouble(ybAlarm.AlarmH) + Convert.ToDouble(ybAlarm.AlarmDataAbs)))
                         {
-                            return 1;
+                            return 1;//超高报警
                         }
-                        else if (flVolt < (Convert.ToDouble(ybAlarm.AlarmL) - Convert.ToDouble(ybAlarm.AlarmAbs)))
+                        else if (flVolt < (Convert.ToDouble(ybAlarm.AlarmL) - Convert.ToDouble(ybAlarm.AlarmDataAbs)))
                         {
-                            return 2;
+                            return 2;//超低报警
                         }
                         else{
                             return 0;
@@ -280,9 +341,9 @@ namespace PRO190726
                     }
                     
                 }
-                if (ybAlarm == null)
+                //if (ybAlarm == null)
                 {
-                    if (YBs.SetType == 0)
+                    if (YBs.SetType == 0)//恒定信号
                     {
                         if (flVolt != YBs.m_ValueList[0])
                         {
@@ -293,9 +354,10 @@ namespace PRO190726
                             return 0;
                         }
                     }
-                    else if ((YBs.SetType == 1) ||(YBs.SetType == 2))
+                    else if ((YBs.SetType == 1) ||(YBs.SetType == 2))//循环信号 变化信号
                     {
                         int SumTimeValue = 0;
+                        /*取得对应时间对应的值范围*/
                         for (int i = 0; i < YBs.m_TimeList.Count; i++ )
                         {
                             if (YBs.m_TimeList[i] == -1)
@@ -389,6 +451,7 @@ namespace PRO190726
                 }
                 else
                 {
+                    m_lastExpermentStep = m_ExpermentStep;
                     m_ExpermentStep++;
                 }
                 ReadData(EclipsTime);
@@ -412,20 +475,21 @@ namespace PRO190726
         {
             try
             {
-                 List<YBChannelInfo> chList = GetStepChannelList();
-
+                List<FucntionChannelInfo> chList = GetStepChannelList();
+                
                 foreach (var info in chList)
                 {
-                    foreach (var info_i in info.YBList)
+                    string ChannelType = GetNowChannelType(info.FunctionName);
+                    //foreach (var info_i in info)
                     {
-                        if (info_i.ChannelType == "AO")
+                        if (ChannelType == "AO")
                         {
-                            double WriteValue = GetWriteValue(eclipstime, info.YBName, info_i.GNFunction,info_i.ChannelID, info_i.ChannelType);
-                            BordDll.WriteAOData((uint)info_i.ChannelID,WriteValue);
+                            double WriteValue = GetWriteValue(eclipstime, info.YBNumber, info.FunctionName, info.ChannelNumber, ChannelType);
+                            BordDll.WriteAOData((uint)info.ChannelNumber,WriteValue);
                         }
-                        else if (info_i.ChannelType == "DO")
+                        else if (ChannelType == "DO")
                         {
-                            double WriteValue = GetWriteValue(eclipstime, info.YBName, info_i.GNFunction, info_i.ChannelID, info_i.ChannelType);
+                            double WriteValue = GetWriteValue(eclipstime, info.YBNumber, info.FunctionName, info.ChannelNumber, ChannelType);
 
 
                             if ((WriteValue != 0) || (WriteValue != 1))
@@ -435,7 +499,7 @@ namespace PRO190726
 
                             byte tpByte = 0;
                             tpByte = (byte)WriteValue;
-                            BordDll.WriteDOData((uint)info_i.ChannelID, tpByte);
+                            BordDll.WriteDOData((uint)info.ChannelNumber, tpByte);
                             //BordDll.WriteDOData_1();
                         }
                         
@@ -451,11 +515,11 @@ namespace PRO190726
            
         }
 
-        private double GetWriteValue(int EclipsTime, string YbName,string GNFunction,int ChannelID,string channelType)
+        private double GetWriteValue(int EclipsTime, int YBNumber,string GNFunction,int ChannelID,string channelType)
         {
             try
             {
-                YBSingleSetInput YBs = ProDefine.g_YBSetSignleOut.Where(m => m.m_YBList.Contains(YbName) == true && m.GNFunction == GNFunction).SingleOrDefault();
+                YBSingleSetInput YBs = ProDefine.g_YBSetSignleOut.Where(m => m.GNFunction == GNFunction).SingleOrDefault();
                 if (YBs != null)
                 {
                     if (YBs.SetType == 0)
@@ -608,6 +672,15 @@ namespace PRO190726
                 foreach (var info in m_ButtonList) {
                     info.Visible = false;
                 }
+                int Rindex = 0;
+                foreach (var info in ProDefine.g_ChannelInfos)
+                {
+                    if ((info.FunctionType == "AI") || (info.FunctionType == "CNT"))
+                    {
+                        m_ButtonList[Rindex].Text = info.FucntionName;
+                        m_ButtonList[Rindex].Visible = true;
+                    }
+                }
             }
             catch { }
         }
@@ -627,39 +700,19 @@ namespace PRO190726
             DXMenuItem item = sender as DXMenuItem;
             string YBName = item.Caption;
 
-            YBChannelInfo ybc = ProDefine.g_YBsetting.Where(m => m.YBName == YBName).SingleOrDefault();
-
-            int tCount = ybc.YBList.Count;
+         
+            
             int iindex = 1;
-            foreach (var info in this.m_ButtonList) {
-                if (iindex <= tCount)
-                {
-                    this.m_ButtonList[iindex - 1].Visible = true;
-                    this.m_ButtonList[iindex - 1].Text = ybc.YBList[iindex - 1].GNFunction;
-                    YBSetuse cs = new YBSetuse();
-                    cs.ChannelType = ybc.YBList[iindex - 1].ChannelType;
-                    cs.ChannelID = ybc.YBList[iindex - 1].ChannelID;
-                    cs.GNFunction = ybc.YBList[iindex - 1].GNFunction;
-                    m_NowSelecedChannelList.Add(cs);
-                }
-                else {
-                    this.m_ButtonList[iindex - 1].Visible = false;
-                }
-                iindex++;
-            }
+            
             m_NowYB = item.Caption;
             m_NowGNFunction = this.m_ButtonList[0].Text;
             this.tChart2.Header.Text = m_NowYB + "--" + m_NowGNFunction;
-            YBChannelInfo yb = ProDefine.g_YBsetting.Where(m => m.YBName == m_NowYB).SingleOrDefault();
-            foreach (var info in ybc.YBList)
-            {
-                if (info.GNFunction == m_NowGNFunction)
-                {
-                    m_NowChannel = info.ChannelID;
-                    m_NowChannleType = info.ChannelType;
-                    return;
-                }
-            }
+            ChannelInfos yb = ProDefine.g_ChannelInfos.Where(m => m.FucntionName == m_NowGNFunction).SingleOrDefault();
+
+            FucntionChannelInfo fc = ProDefine.g_FunctionChannel.Where(m => m.FunctionName == m_NowGNFunction && m.YBNumber == Convert.ToInt32(m_NowYB.Substring(2,m_NowYB.Length - 2))).SingleOrDefault();
+
+            m_NowChannel = fc.ChannelNumber;
+            m_NowChannleType = yb.FunctionType;
             this.line1.Clear();
             
         }
@@ -764,16 +817,12 @@ namespace PRO190726
         {
             try
             {
-                YBChannelInfo ybc = ProDefine.g_YBsetting.Where(m => m.YBName == m_NowYB).SingleOrDefault();
-                foreach (var info in ybc.YBList)
-                {
-                    if (info.GNFunction == m_NowGNFunction)
-                    {
-                        m_NowChannel = info.ChannelID;
-                        m_NowChannleType = info.ChannelType;
-                        return;
-                    }
-                }
+                ChannelInfos yb = ProDefine.g_ChannelInfos.Where(m => m.FucntionName == m_NowGNFunction).SingleOrDefault();
+
+                FucntionChannelInfo fc = ProDefine.g_FunctionChannel.Where(m => m.FunctionName == m_NowGNFunction && m.YBNumber == Convert.ToInt32(m_NowYB.Substring(2, m_NowYB.Length - 2))).SingleOrDefault();
+
+                m_NowChannel = fc.ChannelNumber;
+                m_NowChannleType = yb.FunctionType;
             }
             catch (System.Exception ex)
             {

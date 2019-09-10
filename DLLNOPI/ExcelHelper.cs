@@ -15,7 +15,7 @@ namespace DLLNOPI
 {
     public class ExcelHelper
     {
-        public static List<string> ReadFromExcelFile(string filePath)
+        public static List<string> ReadFromExcelFile(string filePath,string SheetName)
         {
             List<string> myReturnList = new List<string>();
             IWorkbook wk = null;
@@ -36,7 +36,7 @@ namespace DLLNOPI
 
                 fs.Close();
                 //读取当前表数据
-                ISheet sheet = wk.GetSheetAt(0);
+                ISheet sheet = wk.GetSheet(SheetName);
 
                 IRow row = sheet.GetRow(0);  //读取当前行数据
                 //LastRowNum 是当前表的总行数-1（注意）
@@ -113,9 +113,17 @@ namespace DLLNOPI
         }
 
 
-        public static void WriteToExcel(string filePath, string[] ContentArr)
+        public static void WriteToExcel(string filePath, string[] ContentArr,string[] ADContent = null,string[] DAContent = null)
         {
             if (ContentArr == null || ContentArr.Count() == 0) {
+                return;
+            }
+            if (ADContent != null && ADContent.Count() == 0)
+            {
+                return;
+            }
+            if (DAContent != null && DAContent.Count() == 0)
+            {
                 return;
             }
 
@@ -163,9 +171,9 @@ namespace DLLNOPI
             dateStyle.DataFormat = dataFormatCustom.GetFormat("yyyy-MM-dd HH:mm:ss");
 
             //创建一个表单
-            ISheet sheet = wb.CreateSheet("Sheet0");
+            ISheet sheet = wb.CreateSheet("总表");
             //设置列宽
-            int[] columnWidth = { 20, 20, 20, 20,20 };
+            int[] columnWidth = { 20, 20, 20, 20,20,20,20 };
             for (int i = 0; i < columnWidth.Length; i++)
             {
                 //设置列宽度，256*字符数，因为单位是1/256个字符
@@ -200,7 +208,75 @@ namespace DLLNOPI
 
             //合并单元格，如果要合并的单元格中都有数据，只会保留左上角的
             //CellRangeAddress(0, 2, 0, 0)，合并0-2行，0-0列的单元格
+            ISheet sheet2 = wb.CreateSheet("DA表");
+            int[] columnWidth1 = { 20, 20, 20, 20};
+            for (int i = 0; i < columnWidth1.Length; i++)
+            {
+                //设置列宽度，256*字符数，因为单位是1/256个字符
+                sheet2.SetColumnWidth(i, 256 * columnWidth1[i]);
+            }
+
+            //测试数据
+            rowCount = DAContent.Count(); columnCount = (DAContent[0].Split(',')).Count();
+
+            
+            for (int i = 0; i < rowCount; i++)
+            {
+                row = sheet2.CreateRow(i);//创建第i行
+                for (int j = 0; j < columnCount; j++)
+                {
+                    cell = row.CreateCell(j);//创建第j列
+                    //cell.CellStyle = j % 2 == 0 ? style1 : style2;
+                    //根据数据类型设置不同类型的cell
+                    string obj = DAContent[i].Split(',')[j];
+                    cell.SetCellValue(obj);
+                    //如果是日期，则设置日期显示的格式
+                    if (obj.GetType() == typeof(DateTime))
+                    {
+                        cell.CellStyle = dateStyle;
+                    }
+                    //如果要根据内容自动调整列宽，需要先setCellValue再调用
+                    //sheet.AutoSizeColumn(j);
+                }
+            }
+
+            ISheet sheet3 = wb.CreateSheet("AD表");
+            int[] columnWidth2 = { 20, 20, 20, 20 };
+            for (int i = 0; i < columnWidth2.Length; i++)
+            {
+                //设置列宽度，256*字符数，因为单位是1/256个字符
+                sheet3.SetColumnWidth(i, 256 * columnWidth2[i]);
+            }
+
+            //测试数据
+            rowCount = ADContent.Count(); columnCount = (ADContent[0].Split(',')).Count();
+
+
+            for (int i = 0; i < rowCount; i++)
+            {
+                row = sheet3.CreateRow(i);//创建第i行
+                for (int j = 0; j < columnCount; j++)
+                {
+                    cell = row.CreateCell(j);//创建第j列
+                    //cell.CellStyle = j % 2 == 0 ? style1 : style2;
+                    //根据数据类型设置不同类型的cell
+                    string obj = ADContent[i].Split(',')[j];
+                    cell.SetCellValue(obj);
+                    //如果是日期，则设置日期显示的格式
+                    if (obj.GetType() == typeof(DateTime))
+                    {
+                        cell.CellStyle = dateStyle;
+                    }
+                    //如果要根据内容自动调整列宽，需要先setCellValue再调用
+                    //sheet.AutoSizeColumn(j);
+                }
+            }
+
+            //合并单元格，如果要合并的单元格中都有数据，只会保留左上角的
+            //CellRangeAddress(0, 2, 0, 0)，合并0-2行，0-0列的单元格
            
+
+
             try
             {
                 FileStream fs = File.OpenWrite(filePath);

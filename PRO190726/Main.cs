@@ -301,7 +301,7 @@ namespace PRO190726
         private frmYHExperienceTH frmYHTH = null;
         private frmChannelSet frmCHS = null;
 
-        private frmOutputSet frmOutputs = null;
+        private frmInputSet frmOutputs = null;
         private frmDataAalrmSet frmDataAlarmSet = null;
         private frmExperment frmExp = null;
 
@@ -591,7 +591,7 @@ namespace PRO190726
                 frmOutputs.Dispose();
                 frmOutputs = null;
             }
-            frmOutputs = new frmOutputSet();
+            frmOutputs = new frmInputSet();
             ShowForm(frmOutputs);
             this.lbTypeShow.Text = "\uf06e 实验检测--输出信号配置";
         }

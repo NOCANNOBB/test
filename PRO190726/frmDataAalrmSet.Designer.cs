@@ -32,8 +32,6 @@
             this.rabAlarmData = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.lbYBSelect = new System.Windows.Forms.Label();
             this.lbSave = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -44,16 +42,13 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewImageColumn();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.lbSave2 = new System.Windows.Forms.Label();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lbYBSelect1 = new System.Windows.Forms.Label();
-            this.lbSave2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -101,38 +96,16 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.lbYBSelect);
             this.panel1.Controls.Add(this.lbSave);
             this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.dataGridView1);
-            this.panel1.Location = new System.Drawing.Point(49, 126);
+            this.panel1.Location = new System.Drawing.Point(50, 126);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(936, 507);
             this.panel1.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(376, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 12);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "保存当前样本设置";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox1.Location = new System.Drawing.Point(119, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(241, 21);
-            this.textBox1.TabIndex = 14;
-            this.textBox1.Text = "样本选择";
-            this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
             // 
             // lbYBSelect
             // 
@@ -234,35 +207,12 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.textBox2);
             this.panel2.Controls.Add(this.dataGridView2);
-            this.panel2.Controls.Add(this.lbYBSelect1);
             this.panel2.Controls.Add(this.lbSave2);
             this.panel2.Location = new System.Drawing.Point(49, 126);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(936, 507);
             this.panel2.TabIndex = 14;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(358, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 12);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "保存当前样本设置";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Font = new System.Drawing.Font("FontAwesome", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox2.Location = new System.Drawing.Point(101, 12);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(241, 21);
-            this.textBox2.TabIndex = 16;
-            this.textBox2.Text = "样本选择";
-            this.textBox2.Click += new System.EventHandler(this.textBox2_Click);
             // 
             // dataGridView2
             // 
@@ -280,9 +230,21 @@
             this.dataGridView2.Size = new System.Drawing.Size(544, 378);
             this.dataGridView2.TabIndex = 14;
             // 
+            // lbSave2
+            // 
+            this.lbSave2.AutoSize = true;
+            this.lbSave2.Location = new System.Drawing.Point(681, 19);
+            this.lbSave2.Name = "lbSave2";
+            this.lbSave2.Size = new System.Drawing.Size(29, 12);
+            this.lbSave2.TabIndex = 9;
+            this.lbSave2.Text = "保存";
+            this.lbSave2.Click += new System.EventHandler(this.lbSave2_Click);
+            this.lbSave2.MouseEnter += new System.EventHandler(this.lbSave2_MouseEnter);
+            this.lbSave2.MouseLeave += new System.EventHandler(this.lbSave2_MouseLeave);
+            // 
             // Column4
             // 
-            this.Column4.HeaderText = "样本输出信号";
+            this.Column4.HeaderText = "样本输入信号";
             this.Column4.Name = "Column4";
             // 
             // Column5
@@ -304,31 +266,6 @@
             // 
             this.Column8.HeaderText = "报警时间误差";
             this.Column8.Name = "Column8";
-            // 
-            // lbYBSelect1
-            // 
-            this.lbYBSelect1.AutoSize = true;
-            this.lbYBSelect1.Font = new System.Drawing.Font("FontAwesome", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbYBSelect1.ForeColor = System.Drawing.Color.LightCyan;
-            this.lbYBSelect1.Location = new System.Drawing.Point(14, 12);
-            this.lbYBSelect1.Name = "lbYBSelect1";
-            this.lbYBSelect1.Size = new System.Drawing.Size(72, 16);
-            this.lbYBSelect1.TabIndex = 13;
-            this.lbYBSelect1.Text = "样本选择";
-            this.lbYBSelect1.MouseEnter += new System.EventHandler(this.lbYBSelect1_MouseEnter);
-            this.lbYBSelect1.MouseLeave += new System.EventHandler(this.lbYBSelect1_MouseLeave);
-            // 
-            // lbSave2
-            // 
-            this.lbSave2.AutoSize = true;
-            this.lbSave2.Location = new System.Drawing.Point(678, 16);
-            this.lbSave2.Name = "lbSave2";
-            this.lbSave2.Size = new System.Drawing.Size(29, 12);
-            this.lbSave2.TabIndex = 9;
-            this.lbSave2.Text = "保存";
-            this.lbSave2.Click += new System.EventHandler(this.lbSave2_Click);
-            this.lbSave2.MouseEnter += new System.EventHandler(this.lbSave2_MouseEnter);
-            this.lbSave2.MouseLeave += new System.EventHandler(this.lbSave2_MouseLeave);
             // 
             // frmDataAalrmSet
             // 
@@ -373,7 +310,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewImageColumn Column3;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label lbYBSelect1;
         private System.Windows.Forms.Label lbSave2;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
@@ -381,10 +317,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
 
     }
 }

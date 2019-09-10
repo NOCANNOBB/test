@@ -219,7 +219,7 @@ namespace PRO190726
                     this.dataGridView1.Rows.Clear();
                     string FileName = file.FileName;
 
-                    List<string> GetContentStr = ExcelHelper.ReadFromExcelFile(FileName);
+                    List<string> GetContentStr = ExcelHelper.ReadFromExcelFile(FileName,"sheet0");
 
                     if (GetContentStr.Count == 0)
                     {

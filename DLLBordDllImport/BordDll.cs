@@ -36,7 +36,7 @@ namespace DLLBordDllImport
 
 
         [DllImport("BordDLL.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void GetDataFromBord(int Bordi,ref double BordBuffer);
+        public static extern void GetDataFromBord(int Bordi, double[] BordBuffer,int ReadSize, ref int retReadSize);
 
         [DllImport("BordDLL.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Release();
